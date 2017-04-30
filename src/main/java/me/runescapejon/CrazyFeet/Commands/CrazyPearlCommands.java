@@ -1,6 +1,7 @@
 package me.runescapejon.CrazyFeet.Commands;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -17,7 +18,10 @@ public class CrazyPearlCommands implements CommandExecutor  {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cPearl = CrazyFeet.CrazyPearl;
 
-		if (src instanceof Player) {
+		Optional<Player> target = args.<Player>getOne("target");
+		Optional<String> targets = args.<String>getOne("targets");
+
+		if (!target.isPresent() && !targets.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazypearl")) {
 				if(cPearl.contains(player)) {
@@ -29,6 +33,21 @@ public class CrazyPearlCommands implements CommandExecutor  {
 					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA, " You have enabled your Pearl particles"));
 					return CommandResult.success();
 				}
+			}
+		}
+		else if (target.isPresent() && src.hasPermission("CrazyFeet.crazypearlother")) {
+			Player targ = target.get();
+
+			if (cPearl.contains(targ)) {
+				cPearl.remove(targ);
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyPearl!"));
+				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyPearl has been disabled!"));
+				return CommandResult.success();
+			} else {
+				cPearl.add(targ);
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyPearl!"));
+				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyPearl!"));
+				return CommandResult.success();
 			}
 		}
 		return CommandResult.success();

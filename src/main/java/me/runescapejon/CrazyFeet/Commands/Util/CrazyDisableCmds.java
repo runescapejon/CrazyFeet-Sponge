@@ -113,7 +113,7 @@ public class CrazyDisableCmds implements CommandExecutor {
 						targ.sendMessage(Text.of(TextColors.YELLOW,
 								"All of your CrazyFeet modes have been cleared by ", sender.getName(), "!"));
 						sender.sendMessage(Text.of(TextColors.YELLOW,
-								"All of ", TextColors.AQUA, targ.getName(), "'s", TextColors.YELLOW, "CrazyFeet modes have been cleared!"));
+								"All of ", TextColors.AQUA, targ.getName(), "'s ", TextColors.YELLOW, "CrazyFeet modes have been cleared!"));
 					} else {
 						// return CommandResult.success();
 					}

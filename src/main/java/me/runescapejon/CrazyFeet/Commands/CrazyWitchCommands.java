@@ -1,6 +1,7 @@
 package me.runescapejon.CrazyFeet.Commands;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -17,7 +18,10 @@ public class CrazyWitchCommands implements CommandExecutor  {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cWitch = CrazyFeet.CrazyWitch;
 
-		if (src instanceof Player) {
+		Optional<Player> target = args.<Player>getOne("target");
+		Optional<String> targets = args.<String>getOne("targets");
+
+		if (!target.isPresent() && !targets.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazywitch")) {
 				if(cWitch.contains(player)) {
@@ -29,6 +33,21 @@ public class CrazyWitchCommands implements CommandExecutor  {
 					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA, " You have enabled your Witch particles"));
 					return CommandResult.success();
 				}
+			}
+		}
+		else if (target.isPresent() && src.hasPermission("CrazyFeet.crazywitchother")) {
+			Player targ = target.get();
+
+			if (cWitch.contains(targ)) {
+				cWitch.remove(targ);
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyWitch!"));
+				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyWitch has been disabled!"));
+				return CommandResult.success();
+			} else {
+				cWitch.add(targ);
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyWitch!"));
+				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyWitch!"));
+				return CommandResult.success();
 			}
 		}
 		return CommandResult.success();
