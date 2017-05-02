@@ -36,7 +36,7 @@ public class CrazyCheckCommands implements CommandExecutor {
 				// || player.hasPermission("CrazyFeet.crazyhearthead")
 				// || player.hasPermission("CrazyFeet.crazysmoke") ||
 				// player.hasPermission("CrazyFeet.crazymagic")
-					System.out.println("It's being called crazycheck");
+				//	System.out.println("It's being called crazycheck");
 				{
 					player.sendMessage(Text.of(TextColors.AQUA, "Your ", TextColors.YELLOW, "Active CrazyFeet modes", TextColors.GRAY, ":"));
 					if (cFire.contains(player)) {
@@ -87,7 +87,7 @@ public class CrazyCheckCommands implements CommandExecutor {
 						Player targ = target.get();
 						sender.sendMessage(Text.of(TextColors.YELLOW, targ.getName(), "'s", TextColors.AQUA,
 								" active CrazyFeet modes:"));
-						System.out.println("It's being called crazycheck other");
+					//	System.out.println("It's being called crazycheck other");
 						if (cFire.contains(targ)) {
 							sender.sendMessage(Text.of("- CrazyFire"));
 						} else {
