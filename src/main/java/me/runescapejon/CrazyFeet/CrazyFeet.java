@@ -1,5 +1,6 @@
 package me.runescapejon.CrazyFeet;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,12 +21,11 @@ import me.runescapejon.CrazyFeet.Commands.CrazyNoteCommands;
 import me.runescapejon.CrazyFeet.Commands.CrazyPearlCommands;
 import me.runescapejon.CrazyFeet.Commands.CrazySmokeCommands;
 import me.runescapejon.CrazyFeet.Commands.CrazyWitchCommands;
-import me.runescapejon.CrazyFeet.Commands.Auto.CrazyAutoFire;
-import me.runescapejon.CrazyFeet.Commands.Util.CrazyAutoFeetCommands;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyCheckCommands;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyDisableCmds;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetAdminCmd;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetCommands;
+import me.runescapejon.CrazyFeet.Listeners.CrazyFeetJoinListener;
 import me.runescapejon.CrazyFeet.Listeners.CrazyFeetListener;
 import me.runescapejon.CrazyFeet.Commands.Util.Files.CrazyAutoFireFile;
 
@@ -46,6 +46,7 @@ public class CrazyFeet {
 	public static ArrayList<Player> CrazyWitch;
 	public static ArrayList<Player> CrazyHeart;
 	public static CrazyAutoFireFile aFirePlayer;
+	private File autoFirePlayers;
 	//public static CrazyAutoSmokeFile aSmokeP;
 	//public static CrazyAutoPearlFile aPearlP;
 	//public static CrazyAutoMagicFile aMagicP;
@@ -53,6 +54,15 @@ public class CrazyFeet {
 	//public static CrazyAutoWitchFile aWitchP;
 	//public static CrazyAutoHeartFile aHeartP;
 
+	
+	
+	//rewriting this
+	/**
+	String folder = this.getDataFolder().getAbsolutePath();
+	(new File(folder)).mkdir();
+	*/
+	
+	
 	@Listener
 	public void onServerStart(GameStartedServerEvent event) {
 		CrazyFire = new ArrayList<Player>();
@@ -62,15 +72,16 @@ public class CrazyFeet {
 		CrazySmoke = new ArrayList<Player>();
 		CrazyPearl = new ArrayList<Player>();
 		CrazyWitch = new ArrayList<Player>();
-		
-		aFirePlayer.loadAutoFirePlayers();
 	}
 
+	
 	HashMap<List<String>, CommandSpec> subcommands = new HashMap<List<String>, CommandSpec>();
 
 	@Listener
 	public void onGameInitlization(GameInitializationEvent event) {
-
+		aFirePlayer.loadAutoFirePlayers();
+	//	autoFirePlayers = new File(folder+File.separator+"AutoFirePlayers.txt");
+		aFirePlayer = new CrazyAutoFireFile(autoFirePlayers);
 		// CrazyFeet Register
 		subcommands.put(Arrays.asList("admin"), CommandSpec.builder().description(Text.of("crazyfeet admin"))
 				.permission("crazyfeet.admin").executor(new CrazyFeetAdminCmd()).build());
@@ -81,6 +92,10 @@ public class CrazyFeet {
 		//CrazyFeetListener Registering Here
 		CrazyFeetListener listener = new CrazyFeetListener();
 		Sponge.getEventManager().registerListeners(this, listener);
+		
+		//CrazyFeetJoinListener Registering Here
+		CrazyFeetJoinListener joinlistener = new CrazyFeetJoinListener();
+		Sponge.getEventManager().registerListeners(this, joinlistener);
 
 		// CrazyFire <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyFireSpec = CommandSpec.builder().description(Text.of("crazyfire to enable/disable magic particles")) 
@@ -123,12 +138,12 @@ public class CrazyFeet {
 				.permission("CrazyFeet.crazywitch").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyWitchCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyWitchSpec, "crazywitch");
-		
+		/**
 		// Crazyautofeet Register
 		CommandSpec CrazyautofeetSpec = CommandSpec.builder().description(Text.of("Displays a help menu for Crazy-Auto"))
 				.permission("crazyfeet.autofeet").executor(new CrazyAutoFeetCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyautofeetSpec, "crazyautofeet");
-		
+		*/
 		//crazycheck <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyCheckSpec = CommandSpec.builder().description(Text.of("crazycheck your particles status - helpful to see what enabled"))
 				.permission("CrazyFeet.crazycheck").arguments(GenericArguments.firstParsing(GenericArguments.flags()
@@ -141,12 +156,15 @@ public class CrazyFeet {
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyDisableCmds()).build();
 		Sponge.getCommandManager().register(this, CrazyDisableSpec, "crazydisable");
 		
+		/**
 		//crazyautofire <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyAutoFireSpec = CommandSpec.builder().description(Text.of("crazyautofire enable/disable auto fire when you join")) 
 				.permission("CrazyFeet.crazyautofire").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyAutoFire()).build();
 		Sponge.getCommandManager().register(this, CrazyAutoFireSpec, "crazyautofire");
+	*/
 	}
+	
     public CrazyAutoFireFile getAFirePlayers() {
 		return aFirePlayer;
 	}
