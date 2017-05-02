@@ -1,6 +1,5 @@
 package me.runescapejon.CrazyFeet;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -46,7 +45,7 @@ public class CrazyFeet {
 	public static ArrayList<Player> CrazyWitch;
 	public static ArrayList<Player> CrazyHeart;
 	public static CrazyAutoFireFile aFirePlayer;
-	private File autoFirePlayers;
+	//private File autoFirePlayers;
 	//public static CrazyAutoSmokeFile aSmokeP;
 	//public static CrazyAutoPearlFile aPearlP;
 	//public static CrazyAutoMagicFile aMagicP;
@@ -79,13 +78,14 @@ public class CrazyFeet {
 
 	@Listener
 	public void onGameInitlization(GameInitializationEvent event) {
-		aFirePlayer.loadAutoFirePlayers();
+		//aFirePlayer.loadAutoFirePlayers();
 	//	autoFirePlayers = new File(folder+File.separator+"AutoFirePlayers.txt");
-		aFirePlayer = new CrazyAutoFireFile(autoFirePlayers);
+		//aFirePlayer = new CrazyAutoFireFile(autoFirePlayers);
 		// CrazyFeet Register
 		subcommands.put(Arrays.asList("admin"), CommandSpec.builder().description(Text.of("crazyfeet admin"))
 				.permission("crazyfeet.admin").executor(new CrazyFeetAdminCmd()).build());
-		CommandSpec CrazyFeetSpec = CommandSpec.builder().description(Text.of("crazyfeet")).permission("social.help")
+		
+		CommandSpec CrazyFeetSpec = CommandSpec.builder().description(Text.of("crazyfeet")).permission("crazyfeet.crazyfeet")
 				.executor(new CrazyFeetCommands()).children(subcommands).build();
 		Sponge.getCommandManager().register(this, CrazyFeetSpec, "crazyfeet");
 
@@ -99,43 +99,43 @@ public class CrazyFeet {
 
 		// CrazyFire <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyFireSpec = CommandSpec.builder().description(Text.of("crazyfire to enable/disable magic particles")) 
-				.permission("CrazyFeet.crazyfire").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazyfire").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyFireCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyFireSpec, "crazyfire");
 		
 		// Crazynote <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyNoteSpec = CommandSpec.builder().description(Text.of("crazymagic to enable/disable note particles")) 
-				.permission("CrazyFeet.crazynote").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazynote").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyNoteCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyNoteSpec, "crazynote");
 
 		// Crazymagic <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyMagicSpec = CommandSpec.builder().description(Text.of("crazymagic to enable/disable magic particles"))
-				.permission("CrazyFeet.crazymagic").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazymagic").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyMagicCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyMagicSpec, "crazymagic");
 	
 		// Crazyheart <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyHeartSpec = CommandSpec.builder().description(Text.of("crazymagic to enable/disable heart particles"))
-				.permission("CrazyFeet.crazyheart").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazyheart").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyHeartCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyHeartSpec, "crazyheart");
 		
 		// CrazySmoke <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazySmokeSpec = CommandSpec.builder().description(Text.of("crazymagic to enable/disable Smoke particles"))
-				.permission("CrazyFeet.crazysmoke").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazysmoke").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazySmokeCommands()).build();
 		Sponge.getCommandManager().register(this, CrazySmokeSpec, "crazysmoke");
 		
 		// CrazyPearl <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazypearlSpec = CommandSpec.builder().description(Text.of("crazymagic to enable/disable Pearl particles"))
-				.permission("CrazyFeet.crazypearl").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazypearl").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyPearlCommands()).build();
 		Sponge.getCommandManager().register(this, CrazypearlSpec, "crazypearl");
 		
 		// CrazyWitch <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyWitchSpec = CommandSpec.builder().description(Text.of("crazymagic to enable/disable Witch particles"))
-				.permission("CrazyFeet.crazywitch").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazywitch").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyWitchCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyWitchSpec, "crazywitch");
 		/**
@@ -146,13 +146,13 @@ public class CrazyFeet {
 		*/
 		//crazycheck <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyCheckSpec = CommandSpec.builder().description(Text.of("crazycheck your particles status - helpful to see what enabled"))
-				.permission("CrazyFeet.crazycheck").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazycheck").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyCheckCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyCheckSpec, "crazycheck");
 	
 		//crazydisable <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyDisableSpec = CommandSpec.builder().description(Text.of("crazydisable disable your/other particles all of them"))
-				.permission("CrazyFeet.crazydisable").arguments(GenericArguments.firstParsing(GenericArguments.flags()
+				.permission("crazyfeet.crazydisable").arguments(GenericArguments.firstParsing(GenericArguments.flags()
 						.buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets"))))))).executor(new CrazyDisableCmds()).build();
 		Sponge.getCommandManager().register(this, CrazyDisableSpec, "crazydisable");
 		

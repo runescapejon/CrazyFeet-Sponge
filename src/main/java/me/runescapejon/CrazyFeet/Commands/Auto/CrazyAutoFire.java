@@ -19,14 +19,14 @@ public class CrazyAutoFire implements CommandExecutor {
 
 	public CommandResult execute(CommandSource sender, CommandContext args) {
 		Optional<Player> target = args.<Player>getOne("target");
-		Optional<String> targets = args.<String>getOne("targets");
+		// Optional<String> targets = args.<String>getOne("targets");
 		// TODO: rewrite this what below xD
 		TextColor yellow = TextColors.YELLOW;
 		TextColor red = TextColors.RED;
 
 		// same here bukkit if(args.length < 1) {
 		// if(sender instanceof Player) {
-		if (!target.isPresent() && !targets.isPresent()) {
+		if (!target.isPresent()) {
 			Player player = (Player) sender;
 			if (player.hasPermission("CrazyFeet.crazyfire.autofire")) {
 				if (p.getAFirePlayers().contains(player.getName())) {

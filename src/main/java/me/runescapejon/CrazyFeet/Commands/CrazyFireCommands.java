@@ -16,13 +16,11 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyFireCommands implements CommandExecutor {
 
-	//@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cFire = CrazyFeet.CrazyFire;
 		Optional<Player> target = args.<Player>getOne("target");
-		Optional<String> targets = args.<String>getOne("targets");
 
-		if (!target.isPresent() && !targets.isPresent()) {
+		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazyfire")) {
 				if (cFire.contains(player)) {

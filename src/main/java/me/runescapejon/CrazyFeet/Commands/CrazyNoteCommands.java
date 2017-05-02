@@ -14,28 +14,28 @@ import org.spongepowered.api.text.format.TextColors;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
-public class CrazyNoteCommands implements CommandExecutor  {
+public class CrazyNoteCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cNote = CrazyFeet.Crazynote;
 
 		Optional<Player> target = args.<Player>getOne("target");
-		Optional<String> targets = args.<String>getOne("targets");
 
-		if (!target.isPresent() && !targets.isPresent()) {
+		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazynote")) {
-				if(cNote.contains(player)) {
+				if (cNote.contains(player)) {
 					cNote.remove(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), " You have disabled your Note Particles"));
+					player.sendMessage(
+							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Note Particles"));
 					return CommandResult.success();
 				} else {
 					cNote.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA, " You have enabled your Note particles"));
+					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
+							" You have enabled your Note particles"));
 					return CommandResult.success();
 				}
 			}
-		}
-		else if (target.isPresent() && src.hasPermission("CrazyFeet.crazynoteother")) {
+		} else if (target.isPresent() && src.hasPermission("CrazyFeet.crazynoteother")) {
 			Player targ = target.get();
 
 			if (cNote.contains(targ)) {

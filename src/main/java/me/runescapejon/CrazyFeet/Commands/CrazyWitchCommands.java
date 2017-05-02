@@ -14,28 +14,28 @@ import org.spongepowered.api.text.format.TextColors;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
-public class CrazyWitchCommands implements CommandExecutor  {
+public class CrazyWitchCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cWitch = CrazyFeet.CrazyWitch;
 
 		Optional<Player> target = args.<Player>getOne("target");
-		Optional<String> targets = args.<String>getOne("targets");
 
-		if (!target.isPresent() && !targets.isPresent()) {
+		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazywitch")) {
-				if(cWitch.contains(player)) {
+				if (cWitch.contains(player)) {
 					cWitch.remove(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), " You have disabled your Witch Particles"));
+					player.sendMessage(
+							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Witch Particles"));
 					return CommandResult.success();
 				} else {
 					cWitch.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA, " You have enabled your Witch particles"));
+					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
+							" You have enabled your Witch particles"));
 					return CommandResult.success();
 				}
 			}
-		}
-		else if (target.isPresent() && src.hasPermission("CrazyFeet.crazywitchother")) {
+		} else if (target.isPresent() && src.hasPermission("CrazyFeet.crazywitchother")) {
 			Player targ = target.get();
 
 			if (cWitch.contains(targ)) {

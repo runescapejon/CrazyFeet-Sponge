@@ -20,23 +20,23 @@ public class CrazyMagicCommands implements CommandExecutor {
 		final ArrayList<Player> cMagic = CrazyFeet.CrazyMagic;
 
 		Optional<Player> target = args.<Player>getOne("target");
-		Optional<String> targets = args.<String>getOne("targets");
 
-		if (!target.isPresent() && !targets.isPresent()) {
+		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazymagic")) {
-				if(cMagic.contains(player)) {
+				if (cMagic.contains(player)) {
 					cMagic.remove(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), " You have disabled your Magic Particles"));
+					player.sendMessage(
+							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Magic Particles"));
 					return CommandResult.success();
 				} else {
 					cMagic.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA, " You have enabled your magic particles"));
+					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
+							" You have enabled your magic particles"));
 					return CommandResult.success();
 				}
 			}
-		}
-		else if (target.isPresent() && src.hasPermission("CrazyFeet.crazymagicother")) {
+		} else if (target.isPresent() && src.hasPermission("CrazyFeet.crazymagicother")) {
 			Player targ = target.get();
 
 			if (cMagic.contains(targ)) {

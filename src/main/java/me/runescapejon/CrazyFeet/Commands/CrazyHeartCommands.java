@@ -20,18 +20,19 @@ public class CrazyHeartCommands implements CommandExecutor {
 		final ArrayList<Player> cHeart = CrazyFeet.CrazyHeart;
 
 		Optional<Player> target = args.<Player>getOne("target");
-		Optional<String> targets = args.<String>getOne("targets");
 
-		if (!target.isPresent() && !targets.isPresent()) {
+		if (!target.isPresent()) {
 			Player player = (Player) src;
-			if (player.hasPermission("CrazyFeet.crazymagic")) {
-				if(cHeart.contains(player)) {
+			if (player.hasPermission("CrazyFeet.crazyheart")) {
+				if (cHeart.contains(player)) {
 					cHeart.remove(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), " You have disabled your heart Particles"));
+					player.sendMessage(
+							Text.of(TextColors.GOLD, player.getName(), " You have disabled your heart Particles"));
 					return CommandResult.success();
 				} else {
 					cHeart.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA, " You have enabled your heart particles"));
+					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
+							" You have enabled your heart particles"));
 					return CommandResult.success();
 				}
 			}
