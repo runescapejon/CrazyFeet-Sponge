@@ -28,7 +28,7 @@ import me.runescapejon.CrazyFeet.Listeners.CrazyFeetJoinListener;
 import me.runescapejon.CrazyFeet.Listeners.CrazyFeetListener;
 import me.runescapejon.CrazyFeet.Commands.Util.Files.CrazyAutoFireFile;
 
-@Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", description = "CrazyFeet Ported over to Sponge", version = "1.3")
+@Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {"runescapejon"}, description = "CrazyFeet Ported over to Sponge", version = "1.4")
 public class CrazyFeet {
 	public static ArrayList<Player> CrazyFireHead;
 	public static ArrayList<Player> CrazyHeartHead;
