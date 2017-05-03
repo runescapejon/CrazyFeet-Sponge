@@ -36,6 +36,7 @@ public class CrazyFeetListener {
 		}
 	}
 
+	//this Music Note's colors are broken by Sponge api
 	@Listener
 	public void onCrazyNoteMove(MoveEntityEvent event, @First Player player) {
 
