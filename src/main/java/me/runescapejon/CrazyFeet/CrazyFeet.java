@@ -94,8 +94,8 @@ public class CrazyFeet {
 		Sponge.getEventManager().registerListeners(this, listener);
 		
 		//CrazyFeetJoinListener Registering Here
-		CrazyFeetJoinListener joinlistener = new CrazyFeetJoinListener();
-		Sponge.getEventManager().registerListeners(this, joinlistener);
+		//CrazyFeetJoinListener joinlistener = new CrazyFeetJoinListener();
+		//Sponge.getEventManager().registerListeners(this, joinlistener);
 
 		// CrazyFire <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyFireSpec = CommandSpec.builder().description(Text.of("crazyfire to enable/disable magic particles")) 
