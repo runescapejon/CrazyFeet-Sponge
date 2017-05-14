@@ -18,7 +18,7 @@ public class CrazyPearlCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cPearl = CrazyFeet.CrazyPearl;
 
-		Optional<Player> target = args.<Player>getOne("target");
+		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
@@ -35,7 +35,7 @@ public class CrazyPearlCommands implements CommandExecutor {
 					return CommandResult.success();
 				}
 			}
-		} else if (target.isPresent() && src.hasPermission("CrazyFeet.crazypearlother")) {
+		} else if (src.hasPermission("CrazyFeet.crazypearlother")) {
 			Player targ = target.get();
 
 			if (cPearl.contains(targ)) {

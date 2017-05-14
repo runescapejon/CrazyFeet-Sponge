@@ -18,7 +18,7 @@ public class CrazyFireCommands implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cFire = CrazyFeet.CrazyFire;
-		Optional<Player> target = args.<Player>getOne("target");
+		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
@@ -37,7 +37,7 @@ public class CrazyFireCommands implements CommandExecutor {
 			}
 		}
 
-		else if (target.isPresent() && src.hasPermission("CrazyFeet.crazyfireother")) {
+		else if (src.hasPermission("CrazyFeet.crazyfireother")) {
 			Player targ = target.get();
 
 			if (cFire.contains(targ)) {

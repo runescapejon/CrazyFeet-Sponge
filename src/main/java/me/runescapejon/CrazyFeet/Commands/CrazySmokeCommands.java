@@ -18,7 +18,7 @@ public class CrazySmokeCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cSmoke = CrazyFeet.CrazySmoke;
 
-		Optional<Player> target = args.<Player>getOne("target");
+		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
@@ -35,7 +35,7 @@ public class CrazySmokeCommands implements CommandExecutor {
 					return CommandResult.success();
 				}
 			}
-		} else if (target.isPresent() && src.hasPermission("CrazyFeet.crazysmokeother")) {
+		} else if (src.hasPermission("CrazyFeet.crazysmokeother")) {
 			Player targ = target.get();
 
 			if (cSmoke.contains(targ)) {

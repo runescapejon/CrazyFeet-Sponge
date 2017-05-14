@@ -15,11 +15,9 @@ public class CrazyFeetJoinListener {
 	public void onCrazyFireJoin(Join pJE) {
 		Player player = pJE.getTargetEntity();
 		if (CrazyAutoFireFile.cFPlayers.contains(player.getName())) {
-			CrazyFeet.CrazyFire.add(player);
+			CrazyFeet.crazyFire.add(player);
 			player.sendMessage(Text.of(TextColors.GREEN,
 					"You have joined the game with automatic CrazyFire. To disable this, type /crazyautofire"));
-		} else {
-			// doNothing
 		}
 	}
 }
