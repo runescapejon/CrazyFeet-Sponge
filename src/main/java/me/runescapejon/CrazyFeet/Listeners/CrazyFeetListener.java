@@ -15,10 +15,21 @@ public class CrazyFeetListener {
 	@Listener
 	public void onMove(MoveEntityEvent event, @First Player player) {
 
-		if (CrazyFeet.crazyFire.contains(player)) {
+		boolean fire = false, note = false, magic = false, smoke = false, heart = false, pearl = false, witch = false;
+
+		if (CrazyFeet.crazyFire.contains(player)) fire = true;
+		if (CrazyFeet.crazynote.contains(player)) note = true;
+		if (CrazyFeet.crazyMagic.contains(player)) magic = true;
+		if (CrazyFeet.crazySmoke.contains(player)) smoke = true;
+		if (CrazyFeet.crazyHeart.contains(player)) heart = true;
+		if (CrazyFeet.crazyPearl.contains(player)) pearl = true;
+		if (CrazyFeet.crazyWitch.contains(player)) witch = true;
+
+		if (fire) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.MOBSPAWNER_FLAMES).build(),
 					player.getLocation().getPosition().add(0, -1, 0));
-		} else if (CrazyFeet.crazynote.contains(player)) {
+		}
+		if (note) {
 			// here is aqua notes <3
 			player.spawnParticles(
 					ParticleEffect.builder().type(ParticleTypes.NOTE)
@@ -30,19 +41,24 @@ public class CrazyFeetListener {
 					ParticleEffect.builder().type(ParticleTypes.NOTE)
 							.option(ParticleOptions.COLOR, Color.ofRgb(255, 0, 0)).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
-		} else if (CrazyFeet.crazyMagic.contains(player)) {
+		}
+		if (magic) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.INSTANT_SPELL).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
-		} else if (CrazyFeet.crazySmoke.contains(player)) {
+		}
+		if (smoke) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.SMOKE).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
-		} else if (CrazyFeet.crazyHeart.contains(player)) {
+		}
+		if (heart) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.HEART).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
-		} else if (CrazyFeet.crazyPearl.contains(player)) {
+		}
+		if (pearl) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ENDER_TELEPORT).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
-		} else if (CrazyFeet.crazyWitch.contains(player)) {
+		}
+		if (witch) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.WITCH_SPELL).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
 		}
