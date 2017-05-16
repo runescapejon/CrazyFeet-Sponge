@@ -16,14 +16,13 @@ public class CrazyFeetListener {
 	public void onMove(MoveEntityEvent event, @First Player player) {
 
 		boolean fire = false, note = false, magic = false, smoke = false, heart = false, pearl = false, witch = false;
-
-		if (CrazyFeet.crazyFire.contains(player)) fire = true;
-		if (CrazyFeet.crazynote.contains(player)) note = true;
-		if (CrazyFeet.crazyMagic.contains(player)) magic = true;
-		if (CrazyFeet.crazySmoke.contains(player)) smoke = true;
-		if (CrazyFeet.crazyHeart.contains(player)) heart = true;
-		if (CrazyFeet.crazyPearl.contains(player)) pearl = true;
-		if (CrazyFeet.crazyWitch.contains(player)) witch = true;
+		fire = CrazyFeet.crazyFire.contains(player);
+		note = CrazyFeet.crazynote.contains(player);
+		magic = CrazyFeet.crazyMagic.contains(player);
+		smoke = CrazyFeet.crazySmoke.contains(player);
+		heart = CrazyFeet.crazyHeart.contains(player);
+		pearl = CrazyFeet.crazyPearl.contains(player);
+		witch = CrazyFeet.crazyWitch.contains(player);
 
 		if (fire) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.MOBSPAWNER_FLAMES).build(),
