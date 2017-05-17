@@ -16,7 +16,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyNoteCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cNote = CrazyFeet.Crazynote;
+		final ArrayList<Player> cNote = CrazyFeet.crazynote;
 
 		Optional<Player> target = args.getOne("target");
 

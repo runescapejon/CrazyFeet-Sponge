@@ -17,7 +17,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyFireCommands implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cFire = CrazyFeet.CrazyFire;
+		final ArrayList<Player> cFire = CrazyFeet.crazyFire;
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {

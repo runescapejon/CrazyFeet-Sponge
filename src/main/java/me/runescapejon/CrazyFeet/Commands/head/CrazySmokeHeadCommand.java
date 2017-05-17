@@ -1,4 +1,4 @@
-package me.runescapejon.CrazyFeet.Commands;
+package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -14,39 +14,39 @@ import org.spongepowered.api.text.format.TextColors;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
-public class CrazyWitchCommands implements CommandExecutor {
+public class CrazySmokeHeadCommand implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cWitch = CrazyFeet.crazyWitch;
+		final ArrayList<Player> cSmokeHead = CrazyFeet.crazySmokeHead;
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
-			if (player.hasPermission("CrazyFeet.crazywitch")) {
-				if (cWitch.contains(player)) {
-					cWitch.remove(player);
+			if (player.hasPermission("CrazyFeet.crazysmokehead")) {
+				if (cSmokeHead.contains(player)) {
+					cSmokeHead.remove(player);
 					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Witch Particles"));
+							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Smoke Particles on your head"));
 					return CommandResult.success();
 				} else {
-					cWitch.add(player);
+					cSmokeHead.add(player);
 					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your Witch particles"));
+							" You have enabled your Smoke particles on your head"));
 					return CommandResult.success();
 				}
 			}
-		} else if (src.hasPermission("CrazyFeet.crazywitchother")) {
+		} else if (src.hasPermission("CrazyFeet.crazysmokeheadother")) {
 			Player targ = target.get();
 
-			if (cWitch.contains(targ)) {
-				cWitch.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyWitch!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyWitch has been disabled!"));
+			if (cSmokeHead.contains(targ)) {
+				cSmokeHead.remove(targ);
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazySmokeHead!"));
+				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazySmokeHead has been disabled!"));
 				return CommandResult.success();
 			} else {
-				cWitch.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyWitch!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyWitch!"));
+				cSmokeHead.add(targ);
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazySmokeHead!"));
+				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazySmokeHead!"));
 				return CommandResult.success();
 			}
 		}

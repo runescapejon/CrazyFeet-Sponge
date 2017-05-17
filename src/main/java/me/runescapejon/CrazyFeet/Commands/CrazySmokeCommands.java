@@ -16,7 +16,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazySmokeCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cSmoke = CrazyFeet.CrazySmoke;
+		final ArrayList<Player> cSmoke = CrazyFeet.crazySmoke;
 
 		Optional<Player> target = args.getOne("target");
 

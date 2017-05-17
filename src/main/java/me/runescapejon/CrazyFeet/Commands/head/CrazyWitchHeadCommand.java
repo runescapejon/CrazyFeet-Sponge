@@ -1,4 +1,4 @@
-package me.runescapejon.CrazyFeet.Commands;
+package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -14,37 +14,37 @@ import org.spongepowered.api.text.format.TextColors;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
-public class CrazyWitchCommands implements CommandExecutor {
+public class CrazyWitchHeadCommand implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cWitch = CrazyFeet.crazyWitch;
+		final ArrayList<Player> cWitchHead = CrazyFeet.crazyWitchHead;
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
-			if (player.hasPermission("CrazyFeet.crazywitch")) {
-				if (cWitch.contains(player)) {
-					cWitch.remove(player);
+			if (player.hasPermission("CrazyFeet.crazywitchhead")) {
+				if (cWitchHead.contains(player)) {
+					cWitchHead.remove(player);
 					player.sendMessage(
 							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Witch Particles"));
 					return CommandResult.success();
 				} else {
-					cWitch.add(player);
+					cWitchHead.add(player);
 					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
 							" You have enabled your Witch particles"));
 					return CommandResult.success();
 				}
 			}
-		} else if (src.hasPermission("CrazyFeet.crazywitchother")) {
+		} else if (src.hasPermission("CrazyFeet.crazywitchheadother")) {
 			Player targ = target.get();
 
-			if (cWitch.contains(targ)) {
-				cWitch.remove(targ);
+			if (cWitchHead.contains(targ)) {
+				cWitchHead.remove(targ);
 				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyWitch!"));
 				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyWitch has been disabled!"));
 				return CommandResult.success();
 			} else {
-				cWitch.add(targ);
+				cWitchHead.add(targ);
 				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyWitch!"));
 				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyWitch!"));
 				return CommandResult.success();
