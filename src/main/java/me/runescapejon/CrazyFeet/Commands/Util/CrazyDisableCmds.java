@@ -16,15 +16,15 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyDisableCmds implements CommandExecutor {
 
 	public CommandResult execute(CommandSource sender, CommandContext args) {
-		Optional<Player> target = args.<Player>getOne("target");
+		Optional<Player> target = args.getOne("target");
 		
-		final ArrayList<Player> cFire = CrazyFeet.CrazyFire;
-		final ArrayList<Player> cSmoke = CrazyFeet.CrazySmoke;
-		final ArrayList<Player> cMagic = CrazyFeet.CrazyMagic;
-		final ArrayList<Player> cPearl = CrazyFeet.CrazyPearl;
-		final ArrayList<Player> cnote = CrazyFeet.Crazynote;
-		final ArrayList<Player> cHeart = CrazyFeet.CrazyHeart;
-		final ArrayList<Player> cWitch = CrazyFeet.CrazyWitch;
+		final ArrayList<Player> cFire = CrazyFeet.crazyFire;
+		final ArrayList<Player> cSmoke = CrazyFeet.crazySmoke;
+		final ArrayList<Player> cMagic = CrazyFeet.crazyMagic;
+		final ArrayList<Player> cPearl = CrazyFeet.crazyPearl;
+		final ArrayList<Player> cnote = CrazyFeet.crazynote;
+		final ArrayList<Player> cHeart = CrazyFeet.crazyHeart;
+		final ArrayList<Player> cWitch = CrazyFeet.crazyWitch;
 
 		if (!target.isPresent()) {
 			// if (sender instanceof Player) {
@@ -37,89 +37,56 @@ public class CrazyDisableCmds implements CommandExecutor {
 		   		 || player.hasPermission("crazyfeet.crazypearl")) {
 				if (cFire.contains(player)) {
 					cFire.remove(player);
-				} else {
-					// return CommandResult.success();
 				}
 				if (cSmoke.contains(player)) {
 					cSmoke.remove(player);
-				} else {
-					// return CommandResult.success();
 				}
 				if (cHeart.contains(player)) {
 					cHeart.remove(player);
-				} else {
-					// return CommandResult.success();
 				}
 				if (cWitch.contains(player)) {
 					cWitch.remove(player);
-				} else {
-					// return CommandResult.success();
 				}
 				if (cnote.contains(player)) {
 					cnote.remove(player);
-				} else {
-					// return CommandResult.success();
 				}
 				if (cMagic.contains(player)) {
 					cMagic.remove(player);
-				} else {
-					// return CommandResult.success();
 				}
 				if (cPearl.contains(player)) {
 					cPearl.remove(player);
-				} else {
-
 				}
 				player.sendMessage(Text.of(TextColors.AQUA, "All of your CrazyFeet modes have been cleared!"));
 			}
-		} else if (target.isPresent() && sender.hasPermission("crazyfeet.disableothers")) {
+		} else if (sender.hasPermission("crazyfeet.disableothers")) {
 			Player targ = target.get();
-			// debugged System.out.println("It's being called runescapejon!
-			// crazydisable other");
 			if (cFire.contains(targ)) {
 				cFire.remove(targ);
-			} else {
-				// return CommandResult.success();
 			}
 			if (cSmoke.contains(targ)) {
 				cSmoke.remove(targ);
-			} else {
-				// return CommandResult.success();
 			}
 			if (cMagic.contains(targ)) {
 				cMagic.remove(targ);
-			} else {
-				// return CommandResult.success();
 			}
 			if (cHeart.contains(targ)) {
 				cHeart.remove(targ);
-			} else {
-				// return CommandResult.success();
 			}
 			if (cWitch.contains(targ)) {
 				cWitch.remove(targ);
-			} else {
-				// return CommandResult.success();
 			}
 			if (cnote.contains(targ)) {
 				cnote.remove(targ);
-			} else {
-				// return CommandResult.success();
 			}
 			if (cPearl.contains(targ)) {
 				cPearl.remove(targ);
-			} else {
-				// return CommandResult.success();
 			}
 				targ.sendMessage(Text.of(TextColors.YELLOW, "All of your CrazyFeet modes have been cleared by ",
 						sender.getName(), "!"));
 				sender.sendMessage(Text.of(TextColors.YELLOW, "All of ", TextColors.AQUA, targ.getName(), "'s ",
 						TextColors.YELLOW, "CrazyFeet modes have been cleared!"));
-			} else {
-				// return CommandResult.success();
 			}
 		return CommandResult.success();
 
 		}
-		// return CommandResult.success();
 	}

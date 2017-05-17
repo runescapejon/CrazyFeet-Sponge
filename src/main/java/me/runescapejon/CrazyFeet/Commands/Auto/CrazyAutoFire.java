@@ -18,7 +18,7 @@ public class CrazyAutoFire implements CommandExecutor {
 	private CrazyFeet p;
 
 	public CommandResult execute(CommandSource sender, CommandContext args) {
-		Optional<Player> target = args.<Player>getOne("target");
+		Optional<Player> target = args.getOne("target");
 		// Optional<String> targets = args.<String>getOne("targets");
 		// TODO: rewrite this what below xD
 		TextColor yellow = TextColors.YELLOW;
@@ -44,26 +44,7 @@ public class CrazyAutoFire implements CommandExecutor {
 				}
 			}
 			// bukkit crap } else if(args.length == 1) {
-			else if (target.isPresent() && sender.hasPermission("CrazyFeet.crazyfire.autofireother")) {
-				Player targ = target.get();
-				if (p.getAFirePlayers().contains(targ.getName())) {
-					p.getAFirePlayers().remove(targ);
-					p.getAFirePlayers().saveAutoFirePlayers();
-					targ.sendMessage(Text.of(red + sender.getName() + yellow + " has enabled automatic " + red
-							+ "CrazyFire" + yellow + " on you when you join!"));
-					sender.sendMessage(Text.of(red + targ.getName() + yellow + " now has automatic " + red + "CrazyFire"
-							+ yellow + " when they join."));
-					return CommandResult.success();
-				} else {
-					p.getAFirePlayers().remove(targ);
-					p.getAFirePlayers().saveAutoFirePlayers();
-					targ.sendMessage(Text.of(red + sender.getName() + yellow + " has disabled automatic " + red
-							+ "CrazyFire" + yellow + " on you when you join!"));
-					sender.sendMessage(Text.of(red + targ.getName() + yellow + " no longer has automatic " + red
-							+ "CrazyFire" + yellow + " when they join."));
-					return CommandResult.success();
-				}
-			}
+
 		}
 		return CommandResult.success();
 	}

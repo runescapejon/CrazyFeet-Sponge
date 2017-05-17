@@ -18,7 +18,7 @@ public class CrazyNoteCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cNote = CrazyFeet.Crazynote;
 
-		Optional<Player> target = args.<Player>getOne("target");
+		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
@@ -35,7 +35,7 @@ public class CrazyNoteCommands implements CommandExecutor {
 					return CommandResult.success();
 				}
 			}
-		} else if (target.isPresent() && src.hasPermission("CrazyFeet.crazynoteother")) {
+		} else if (src.hasPermission("CrazyFeet.crazynoteother")) {
 			Player targ = target.get();
 
 			if (cNote.contains(targ)) {

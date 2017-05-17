@@ -16,15 +16,15 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyCheckCommands implements CommandExecutor {
 
 	public CommandResult execute(CommandSource sender, CommandContext args) {
-		Optional<Player> target = args.<Player>getOne("target");
-		Optional<String> targets = args.<String>getOne("targets");
-		final ArrayList<Player> cFire = CrazyFeet.CrazyFire;
-		final ArrayList<Player> cSmoke = CrazyFeet.CrazySmoke;
-		final ArrayList<Player> cMagic = CrazyFeet.CrazyMagic;
-		final ArrayList<Player> cPearl = CrazyFeet.CrazyPearl;
-		final ArrayList<Player> cnote = CrazyFeet.Crazynote;
-		final ArrayList<Player> cHeart = CrazyFeet.CrazyHeart;
-		final ArrayList<Player> cWitch = CrazyFeet.CrazyWitch;
+		Optional<Player> target = args.getOne("target");
+		Optional<String> targets = args.getOne("targets");
+		final ArrayList<Player> cFire = CrazyFeet.crazyFire;
+		final ArrayList<Player> cSmoke = CrazyFeet.crazySmoke;
+		final ArrayList<Player> cMagic = CrazyFeet.crazyMagic;
+		final ArrayList<Player> cPearl = CrazyFeet.crazyPearl;
+		final ArrayList<Player> cnote = CrazyFeet.crazynote;
+		final ArrayList<Player> cHeart = CrazyFeet.crazyHeart;
+		final ArrayList<Player> cWitch = CrazyFeet.crazyWitch;
 
 		if (!target.isPresent() && !targets.isPresent()) {
 			//if (sender instanceof Player) { had to disable this due to it's not detected /crazycheck others
@@ -41,38 +41,24 @@ public class CrazyCheckCommands implements CommandExecutor {
 					player.sendMessage(Text.of(TextColors.AQUA, "Your ", TextColors.YELLOW, "Active CrazyFeet modes", TextColors.GRAY, ":"));
 					if (cFire.contains(player)) {
 						player.sendMessage(Text.of("- CrazyFire"));
-					} else {
-						// return CommandResult.success();
 					}
 					if (cSmoke.contains(player)) {
 						player.sendMessage(Text.of("- CrazySmoke"));
-					} else {
-						// return CommandResult.success();
 					}
 					if (cHeart.contains(player)) {
 						player.sendMessage(Text.of("- CrazyHeart"));
-					} else {
-						// return CommandResult.success();
 					}
 					if (cMagic.contains(player)) {
 						player.sendMessage(Text.of("- CrazyMagic"));
-					} else {
-						// return CommandResult.success();
 					}
 					if (cWitch.contains(player)) {
 						player.sendMessage(Text.of("- CrazyWitch"));
-					} else {
-						// return CommandResult.success();
 					}
 					if (cnote.contains(player)) {
 						player.sendMessage(Text.of("- Crazynote"));
-					} else {
-						// return CommandResult.success();
 					}
 					if (cPearl.contains(player)) {
 						player.sendMessage(Text.of("- CrazyPearl"));
-					} else {
-						// return CommandResult.success();
 					}
 					if (!cFire.contains(player) && !cHeart.contains(player) && !cnote.contains(player)
 							&& !cWitch.contains(player) && !cSmoke.contains(player) && !cMagic.contains(player)
@@ -90,49 +76,32 @@ public class CrazyCheckCommands implements CommandExecutor {
 					//	System.out.println("It's being called crazycheck other");
 						if (cFire.contains(targ)) {
 							sender.sendMessage(Text.of("- CrazyFire"));
-						} else {
-							// return CommandResult.success();
 						}
 						if (cSmoke.contains(targ)) {
 							sender.sendMessage(Text.of("- CrazySmoke"));
-						} else {
-							// return CommandResult.success();
 						}
 						if (cMagic.contains(targ)) {
 							sender.sendMessage(Text.of("- CrazyMagic"));
-						} else {
-							// return CommandResult.success();
 						}
 						if (cWitch.contains(targ)) {
 							targ.sendMessage(Text.of("- CrazyWitch"));
-						} else {
-							// return CommandResult.success();
 						}
 						if (cnote.contains(targ)) {
 							sender.sendMessage(Text.of("- Crazynote"));
-						} else {
-							// return CommandResult.success();
 						}
 						if (cHeart.contains(targ)) {
 							sender.sendMessage(Text.of("- CrazyHeart"));
-						} else {
-							// return CommandResult.success();
 						}
 						if (cPearl.contains(targ)) {
 							sender.sendMessage(Text.of("- CrazyPearl"));
-						} else {
-							// return CommandResult.success();
 						}
 						if (!cFire.contains(targ) && !cSmoke.contains(targ) && !cnote.contains(targ)
 								&& !cWitch.contains(targ) && !cHeart.contains(targ) && !cMagic.contains(targ)
 								&& !cPearl.contains(targ)) {
 							sender.sendMessage(Text.of(TextColors.GOLD, targ.getName(), TextColors.GRAY,
 									" does not have any CrazyFeet modes currently activated."));
-						//	return CommandResult.success();
-						} else {
-							// return CommandResult.success();
+							//	return CommandResult.success();
 						}
-
 					}
 					//return CommandResult.success();
 		return CommandResult.success();

@@ -19,7 +19,7 @@ public class CrazyHeartCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<Player> cHeart = CrazyFeet.CrazyHeart;
 
-		Optional<Player> target = args.<Player>getOne("target");
+		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
@@ -38,7 +38,7 @@ public class CrazyHeartCommands implements CommandExecutor {
 			}
 		}
 
-		else if (target.isPresent() && src.hasPermission("CrazyFeet.crazyheartother")) {
+		else if (src.hasPermission("CrazyFeet.crazyheartother")) {
 			Player targ = target.get();
 
 			if (cHeart.contains(targ)) {

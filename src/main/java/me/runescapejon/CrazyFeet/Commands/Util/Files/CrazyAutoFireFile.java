@@ -20,9 +20,9 @@ public class CrazyAutoFireFile {
 	public CrazyAutoFireFile(File file) {
 
 		auCrazyFirePlayers = file;
-		cFPlayers = new ArrayList<String>();
+		cFPlayers = new ArrayList<>();
 
-		if (auCrazyFirePlayers.exists() == false) {
+		if (!auCrazyFirePlayers.exists()) {
 			try {
 				auCrazyFirePlayers.createNewFile();
 			} catch (IOException e) {
@@ -33,13 +33,13 @@ public class CrazyAutoFireFile {
 	}
 
 	public void add(Player player) {
-		if (cFPlayers.contains(player.getName()) == false) {
+		if (!cFPlayers.contains(player.getName())) {
 			cFPlayers.add(player.getName());
 		}
 	}
 
 	public void remove(Player player) {
-		if (cFPlayers.contains(player.getName()) == true) {
+		if (cFPlayers.contains(player.getName())) {
 			cFPlayers.remove(player.getName());
 		}
 	}
