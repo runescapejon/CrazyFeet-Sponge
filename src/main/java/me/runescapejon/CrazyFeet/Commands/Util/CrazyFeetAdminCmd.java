@@ -32,9 +32,9 @@ public class CrazyFeetAdminCmd implements CommandExecutor {
 		sender.sendMessage(
 				Text.of(yellow, "-", green, " /crazyheart <target>", yellow, " - Toggle Crazyheart on target player!"));
 		sender.sendMessage(
+				Text.of(yellow, "-", green, " /crazy<mode>head <target>", yellow, " - Toggle Crazy<mode>Head on target player"));
+		sender.sendMessage(
 				Text.of(yellow, "-", green, " /crazycheck <target>", yellow, " - Check target's CrazyFeet modes!"));
-		// sender.sendMessage(Text.of(yellow, "-", green, " /crazyautocheck
-		// <target>", yellow, " - Check target's automatic CrazyFeet modes!"));
 		sender.sendMessage(Text.of(yellow, "-", green, " /crazydisable <target>", yellow,
 				" - Turn off all CrazyFeet modes on target player!"));
 		// sender.sendMessage(Text.of(yellow, "-", green, " /crazydisable *",
