@@ -45,6 +45,7 @@ public class GuiCommand implements CommandExecutor {
 			if (item.getItem().equals(ItemTypes.FIRE_CHARGE)) {
          	//use this way so like that if they have permission to command or not.
 					Sponge.getCommandManager().process(player, "crazyfire");
+					player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 					// cFire.add(player);
 					// player.sendMessage(Text.of(TextColors.GOLD,
 					// player.getName(), TextColors.AQUA,
@@ -52,43 +53,60 @@ public class GuiCommand implements CommandExecutor {
 				}
 			if (item.getItem().equals(ItemTypes.REDSTONE_BLOCK)) {
 						Sponge.getCommandManager().process(player, "crazyheart");
+						player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 					}
 			if (item.getItem().equals(ItemTypes.NOTEBLOCK)) {
-				Sponge.getCommandManager().process(player, "crazynote");;
+				Sponge.getCommandManager().process(player, "crazynote");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.EMERALD)) {
 				Sponge.getCommandManager().process(player, "crazymagic");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.NETHER_STAR)) {
 				Sponge.getCommandManager().process(player, "crazywitch");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.ENDER_PEARL)) {
 				Sponge.getCommandManager().process(player, "crazypearl");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.COAL_BLOCK)) {
 				Sponge.getCommandManager().process(player, "crazysmoke");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			//Head Particle here
 			if (item.getItem().equals(ItemTypes.FLINT_AND_STEEL)) {
 				Sponge.getCommandManager().process(player, "crazyfirehead");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.REDSTONE)) {
 				Sponge.getCommandManager().process(player, "crazyhearthead");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.JUKEBOX)) {
 				Sponge.getCommandManager().process(player, "crazynotehead");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.EMERALD_BLOCK)) {
 				Sponge.getCommandManager().process(player, "crazymagichead");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.SOUL_SAND)) {
 				Sponge.getCommandManager().process(player, "crazywitchhead");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.ENDER_EYE)) {
 				Sponge.getCommandManager().process(player, "crazypearlhead");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 			}
 			if (item.getItem().equals(ItemTypes.TNT)) {
 				Sponge.getCommandManager().process(player, "crazysmokehead");
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
+			}
+			if (item.getItem().equals(ItemTypes.BARRIER)) {
+				Sponge.getCommandManager().process(player, "crazydisable");
+				player.playSound(SoundTypes.BLOCK_ANVIL_PLACE, player.getLocation().getPosition(), 1);
 			}
 			event.setCancelled(true);
 			}
@@ -135,6 +153,8 @@ public class GuiCommand implements CommandExecutor {
 												witchH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyWitchHead!"));
 												ItemStack pearlH = ItemStack.of(ItemTypes.ENDER_EYE, 1);
 												pearlH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyPearlHead!"));
+												ItemStack cdisable = ItemStack.of(ItemTypes.BARRIER, 1);
+												cdisable.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyDisable! Removed all particles"));
 		player.openInventory(invs, Cause.of(NamedCause.of(player.getName(), player)));
 		invs.query(new SlotPos(0, 0)).set(border);
 		invs.query(new SlotPos(1, 0)).set(border);
@@ -153,7 +173,7 @@ public class GuiCommand implements CommandExecutor {
 		invs.query(new SlotPos(5, 3)).set(border);
 		invs.query(new SlotPos(6, 3)).set(border);
 		invs.query(new SlotPos(7, 3)).set(border);
-		invs.query(new SlotPos(8, 3)).set(border);
+		invs.query(new SlotPos(8, 3)).set(cdisable);
 		invs.query(new SlotPos(8, 2)).set(border);
 		invs.query(new SlotPos(1, 1)).set(fire);
 		invs.query(new SlotPos(2, 1)).set(heart);
