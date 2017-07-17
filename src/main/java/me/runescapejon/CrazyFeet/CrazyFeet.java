@@ -34,7 +34,7 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazyPearlHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazySmokeHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
 
-@Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {"runescapejon"}, description = "CrazyFeet Ported over to Sponge", version = "1.5")
+@Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {"runescapejon"}, description = "CrazyFeet Ported over to Sponge", version = "1.6")
 public class CrazyFeet {
 	public static ArrayList<Player> crazyFireHead;
 	public static ArrayList<Player> crazyHeartHead;
