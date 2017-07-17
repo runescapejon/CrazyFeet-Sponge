@@ -18,6 +18,7 @@ import me.runescapejon.CrazyFeet.Commands.CrazyNoteCommands;
 import me.runescapejon.CrazyFeet.Commands.CrazyPearlCommands;
 import me.runescapejon.CrazyFeet.Commands.CrazySmokeCommands;
 import me.runescapejon.CrazyFeet.Commands.CrazyWitchCommands;
+import me.runescapejon.CrazyFeet.Commands.GuiCommand;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyCheckCommands;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyDisableCmds;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetAdminCmd;
@@ -90,6 +91,7 @@ public class CrazyFeet {
 
 	@Listener
 	public void onGameInitlization(GameInitializationEvent event) {
+		 CrazyFeet plugin = this;
 		//aFirePlayer.loadAutoFirePlayers();
 	//	autoFirePlayers = new File(folder+File.separator+"AutoFirePlayers.txt");
 		//aFirePlayer = new CrazyAutoFireFile(autoFirePlayers);
@@ -114,10 +116,21 @@ public class CrazyFeet {
 		CrazyHeadListener head = new CrazyHeadListener();
 		Sponge.getEventManager().registerListeners(this, head);
 		
+		GuiCommand guilistener = new GuiCommand();
+		Sponge.getEventManager().registerListeners(this, guilistener);
+		
 		//CrazyFeetJoinListener Registering Here
 		//CrazyFeetJoinListener joinlistener = new CrazyFeetJoinListener();
 		//Sponge.getEventManager().registerListeners(this, joinlistener);
 
+		
+		CommandSpec gui = CommandSpec.builder()
+				.description(Text.of("crazy a nice gui for crazyfeet particles"))
+				.permission("crazyfeet.crazygui")
+				.executor(new GuiCommand())
+				.build();
+		Sponge.getCommandManager().register(this, gui, "crazymenu", "crazygui");
+		
 		// CrazyWitchHead <PlayerName> - Register and <PlayerName> is Optional
 		CommandSpec CrazyWitchHeadSpec = CommandSpec.builder()
 				.description(Text.of("crazyfire to enable/disable Pearl Head particles"))
@@ -285,4 +298,10 @@ public class CrazyFeet {
     public CrazyAutoFireFile getAFirePlayers() {
 		return aFirePlayer;
 	}
+
+    public static CrazyFeet getInstance(){
+        CrazyFeet plugin = null;
+		return plugin;
+    }
+
 }

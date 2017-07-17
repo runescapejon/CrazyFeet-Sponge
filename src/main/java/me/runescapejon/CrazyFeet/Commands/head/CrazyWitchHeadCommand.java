@@ -26,12 +26,12 @@ public class CrazyWitchHeadCommand implements CommandExecutor {
 				if (cWitchHead.contains(player)) {
 					cWitchHead.remove(player);
 					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Witch Particles"));
+							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Witch Particles on your head"));
 					return CommandResult.success();
 				} else {
 					cWitchHead.add(player);
 					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your Witch particles"));
+							" You have enabled your Witch particles on your head"));
 					return CommandResult.success();
 				}
 			}
@@ -40,13 +40,13 @@ public class CrazyWitchHeadCommand implements CommandExecutor {
 
 			if (cWitchHead.contains(targ)) {
 				cWitchHead.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyWitch!"));
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyWitchHead!"));
 				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyWitch has been disabled!"));
 				return CommandResult.success();
 			} else {
 				cWitchHead.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyWitch!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyWitch!"));
+				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyWitchHead!"));
+				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyWitchHead!"));
 				return CommandResult.success();
 			}
 		}
