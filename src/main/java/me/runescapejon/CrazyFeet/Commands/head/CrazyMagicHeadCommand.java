@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands.head;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -17,7 +19,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyMagicHeadCommand implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cMagicHead = CrazyFeet.crazyMagicHead;
+		final ArrayList<Player> cMagicHead = CrazyFeet.getInstance().getCrazyMagicHead();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -26,13 +28,13 @@ public class CrazyMagicHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazymagichead")) {
 				if (cMagicHead.contains(player)) {
 					cMagicHead.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Magic Particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cMagicHead.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your magic particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -41,13 +43,17 @@ public class CrazyMagicHeadCommand implements CommandExecutor {
 
 			if (cMagicHead.contains(targ)) {
 				cMagicHead.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyMagicHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyMagicHead has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cMagicHead.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyMagicHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyMagicHead!"));
+				targ.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

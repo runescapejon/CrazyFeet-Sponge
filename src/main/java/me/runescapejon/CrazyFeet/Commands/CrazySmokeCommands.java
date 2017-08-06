@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -16,7 +18,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazySmokeCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cSmoke = CrazyFeet.crazySmoke;
+		final ArrayList<Player> cSmoke = CrazyFeet.getInstance().getCrazySmoke();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -25,13 +27,13 @@ public class CrazySmokeCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazysmoke")) {
 				if (cSmoke.contains(player)) {
 					cSmoke.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Smoke Particles"));
+					player.sendMessage(LanguageUtils.getText("crazySmokeDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cSmoke.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your Smoke particles"));
+					player.sendMessage(LanguageUtils.getText("crazySmokeEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -40,14 +42,17 @@ public class CrazySmokeCommands implements CommandExecutor {
 
 			if (cSmoke.contains(targ)) {
 				cSmoke.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazySmoke!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazySmoke has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazySmokeDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazySmokeDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cSmoke.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazySmoke!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazySmoke!"));
-				return CommandResult.success();
+				targ.sendMessage(LanguageUtils.getText("crazySmokeEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazySmokeEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));				return CommandResult.success();
 			}
 		}
 		return CommandResult.success();

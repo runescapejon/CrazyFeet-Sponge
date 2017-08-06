@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.Auto;
 
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
@@ -15,8 +16,6 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyAutoFire implements CommandExecutor {
 
-	private CrazyFeet p;
-
 	public CommandResult execute(CommandSource sender, CommandContext args) {
 		Optional<Player> target = args.getOne("target");
 		// Optional<String> targets = args.<String>getOne("targets");
@@ -29,17 +28,15 @@ public class CrazyAutoFire implements CommandExecutor {
 		if (!target.isPresent()) {
 			Player player = (Player) sender;
 			if (player.hasPermission("CrazyFeet.crazyfire.autofire")) {
-				if (p.getAFirePlayers().contains(player.getName())) {
-					p.getAFirePlayers().remove(player);
-					p.getAFirePlayers().saveAutoFirePlayers();
-					player.sendMessage(Text.of(Text.of(yellow + "You will no longer have " + red + "CrazyFire " + yellow
-							+ "enabled when joining!")));
+				if (CrazyFeet.getInstance().getAFirePlayers().contains(player.getName())) {
+					CrazyFeet.getInstance().getAFirePlayers().remove(player);
+					CrazyFeet.getInstance().getAFirePlayers().saveAutoFirePlayers();
+					player.sendMessage(LanguageUtils.getText("crazyAutoFireDisabled"));
 					return CommandResult.success();
 				} else {
-					p.getAFirePlayers().add(player);
-					p.getAFirePlayers().saveAutoFirePlayers();
-					player.sendMessage(Text
-							.of(yellow + "You will now have " + red + "CrazyFire " + yellow + "enabled when joining!"));
+					CrazyFeet.getInstance().getAFirePlayers().add(player);
+					CrazyFeet.getInstance().getAFirePlayers().saveAutoFirePlayers();
+					player.sendMessage(LanguageUtils.getText("crazyAutoFireEnabled"));
 					return CommandResult.success();
 				}
 			}

@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -15,8 +17,9 @@ import org.spongepowered.api.text.format.TextColors;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyWitchCommands implements CommandExecutor {
+
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cWitch = CrazyFeet.crazyWitch;
+		final ArrayList<Player> cWitch = CrazyFeet.getInstance().getCrazyWitch();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -25,13 +28,13 @@ public class CrazyWitchCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazywitch")) {
 				if (cWitch.contains(player)) {
 					cWitch.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Witch Particles"));
+					player.sendMessage(LanguageUtils.getText("crazyWitchDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cWitch.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your Witch particles"));
+					player.sendMessage(LanguageUtils.getText("crazyWitchEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -40,13 +43,17 @@ public class CrazyWitchCommands implements CommandExecutor {
 
 			if (cWitch.contains(targ)) {
 				cWitch.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyWitch!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyWitch has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazyWitchDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyWitchDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cWitch.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyWitch!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyWitch!"));
+				targ.sendMessage(LanguageUtils.getText("crazyWitchEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyWitchEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

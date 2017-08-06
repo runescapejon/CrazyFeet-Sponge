@@ -1,24 +1,23 @@
 package me.runescapejon.CrazyFeet;
 
+import java.io.File;
 import java.util.*;
 
+import com.google.inject.Inject;
+import me.runescapejon.CrazyFeet.Commands.*;
+import me.runescapejon.CrazyFeet.utils.Config;
+import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.state.GameConstructionEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
-import me.runescapejon.CrazyFeet.Commands.CrazyFireCommands;
-import me.runescapejon.CrazyFeet.Commands.CrazyHeartCommands;
-import me.runescapejon.CrazyFeet.Commands.CrazyMagicCommands;
-import me.runescapejon.CrazyFeet.Commands.CrazyNoteCommands;
-import me.runescapejon.CrazyFeet.Commands.CrazyPearlCommands;
-import me.runescapejon.CrazyFeet.Commands.CrazySmokeCommands;
-import me.runescapejon.CrazyFeet.Commands.CrazyWitchCommands;
-import me.runescapejon.CrazyFeet.Commands.GuiCommand;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyCheckCommands;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyDisableCmds;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetAdminCmd;
@@ -36,23 +35,29 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
 
 @Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {"runescapejon"}, description = "CrazyFeet Ported over to Sponge", version = "1.6")
 public class CrazyFeet {
-	public static ArrayList<Player> crazyFireHead;
-	public static ArrayList<Player> crazyHeartHead;
-	public static ArrayList<Player> crazyMagicHead;
-	public static ArrayList<Player> crazyNoteHead;
-	public static ArrayList<Player> crazyWitchHead;
-	public static ArrayList<Player> crazySmokeHead;
-	public static ArrayList<Player> crazyPearlHead;
-	public static ArrayList<Player> crazyFire;
-	public static ArrayList<Player> crazySmoke;
-	public static ArrayList<Player> crazyMagic;
-	public static ArrayList<Player> crazyPearl;
-	public static ArrayList<Player> crazynote;
-	public static ArrayList<Player> crazyWitch;
-	public static ArrayList<Player> crazyHeart;
-	public static CrazyAutoFireFile aFirePlayer;
 
-	HashMap<List<String>, CommandSpec> subcommands = new HashMap<>();
+	private static CrazyFeet instance;
+
+	public static CrazyFeet getInstance() {
+		return instance;
+	}
+
+	private ArrayList<Player> crazyFireHead = new ArrayList<>();
+	private ArrayList<Player> crazyHeartHead = new ArrayList<>();
+	private ArrayList<Player> crazyMagicHead = new ArrayList<>();
+	private ArrayList<Player> crazyNoteHead = new ArrayList<>();
+	private ArrayList<Player> crazyWitchHead = new ArrayList<>();
+	private ArrayList<Player> crazySmokeHead = new ArrayList<>();
+	private ArrayList<Player> crazyPearlHead = new ArrayList<>();
+	private ArrayList<Player> crazyFire = new ArrayList<>();
+	private ArrayList<Player> crazySmoke = new ArrayList<>();
+	private ArrayList<Player> crazyMagic = new ArrayList<>();
+	private ArrayList<Player> crazyPearl = new ArrayList<>();
+	private ArrayList<Player> crazyNote = new ArrayList<>();
+	private ArrayList<Player> crazyWitch = new ArrayList<>();
+	private ArrayList<Player> crazyHeart = new ArrayList<>();
+	private CrazyAutoFireFile aFirePlayer;
+
 	//private File autoFirePlayers;
 	//public static CrazyAutoSmokeFile aSmokeP;
 	//public static CrazyAutoPearlFile aPearlP;
@@ -68,34 +73,36 @@ public class CrazyFeet {
 	String folder = this.getDataFolder().getAbsolutePath();
 	(new File(folder)).mkdir();
 	*/
-	
-	
+
+	@Inject
+	private Logger logger;
+
+	@Inject()
+	@ConfigDir(sharedRoot = false)
+	private File configDirectory;
+
+	private Config languageConfig = new Config("language.conf", false);
+
 	@Listener
-	public void onServerStart(GameStartedServerEvent event) {
-		crazyFire = new ArrayList<>();
-		crazynote = new ArrayList<>();
-		crazyMagic = new ArrayList<>();
-		crazyHeart = new ArrayList<>();
-		crazySmoke = new ArrayList<>();
-		crazyPearl = new ArrayList<>();
-		crazyWitch = new ArrayList<>();
-		//head part
-		crazyFireHead = new ArrayList<>();
-		crazyMagicHead = new ArrayList<>();
-		crazyHeartHead  = new ArrayList<>();
-		crazyNoteHead = new ArrayList<>();
-		crazySmokeHead = new ArrayList<>();
-		crazyPearlHead  = new ArrayList<>();
-		crazyWitchHead = new ArrayList<>();
+	public void onConstruct(GameConstructionEvent event) {
+		instance = this;
+	}
+
+	@Listener
+	public void onGamePreInitialization(GamePreInitializationEvent event) {
+		if (!configDirectory.exists()) {
+			configDirectory.mkdirs();
+		}
+		languageConfig.activate();
 	}
 
 	@Listener
 	public void onGameInitlization(GameInitializationEvent event) {
-		 CrazyFeet plugin = this;
 		//aFirePlayer.loadAutoFirePlayers();
 	//	autoFirePlayers = new File(folder+File.separator+"AutoFirePlayers.txt");
 		//aFirePlayer = new CrazyAutoFireFile(autoFirePlayers);
 		// CrazyFeet Register
+		HashMap<List<String>, CommandSpec> subcommands = new HashMap<>();
 		subcommands.put(Collections.singletonList("admin"), CommandSpec.builder()
 				.description(Text.of("crazyfeet admin"))
 				.permission("crazyfeet.admin")
@@ -123,7 +130,13 @@ public class CrazyFeet {
 		//CrazyFeetJoinListener joinlistener = new CrazyFeetJoinListener();
 		//Sponge.getEventManager().registerListeners(this, joinlistener);
 
-		
+		CommandSpec reload = CommandSpec.builder().
+				description(Text.of("reloads crazyfeet configs!")).
+				permission("crazyfeet.reload").
+				executor(new CrazyFeetReloadCommand()).
+				build();
+		Sponge.getCommandManager().register(this, reload, "crazyfeetreload");
+
 		CommandSpec gui = CommandSpec.builder()
 				.description(Text.of("crazy a nice gui for crazyfeet particles"))
 				.permission("crazyfeet.crazygui")
@@ -294,14 +307,76 @@ public class CrazyFeet {
 		Sponge.getCommandManager().register(this, CrazyAutoFireSpec, "crazyautofire");
 	*/
 	}
-	
-    public CrazyAutoFireFile getAFirePlayers() {
-		return aFirePlayer;
+
+	public Logger getLogger() {
+		return logger;
 	}
 
-    public static CrazyFeet getInstance(){
-        CrazyFeet plugin = null;
-		return plugin;
-    }
+	public File getConfigDirectory() {
+		return configDirectory;
+	}
 
+	public Config getLanguageConfig() {
+		return languageConfig;
+	}
+
+	public ArrayList<Player> getCrazyFireHead() {
+		return crazyFireHead;
+	}
+
+	public ArrayList<Player> getCrazyHeartHead() {
+		return crazyHeartHead;
+	}
+
+	public ArrayList<Player> getCrazyMagicHead() {
+		return crazyMagicHead;
+	}
+
+	public ArrayList<Player> getCrazyNoteHead() {
+		return crazyNoteHead;
+	}
+
+	public ArrayList<Player> getCrazyWitchHead() {
+		return crazyWitchHead;
+	}
+
+	public ArrayList<Player> getCrazySmokeHead() {
+		return crazySmokeHead;
+	}
+
+	public ArrayList<Player> getCrazyPearlHead() {
+		return crazyPearlHead;
+	}
+
+	public ArrayList<Player> getCrazyFire() {
+		return crazyFire;
+	}
+
+	public ArrayList<Player> getCrazySmoke() {
+		return crazySmoke;
+	}
+
+	public ArrayList<Player> getCrazyMagic() {
+		return crazyMagic;
+	}
+
+	public ArrayList<Player> getCrazyPearl() {
+		return crazyPearl;
+	}
+
+	public ArrayList<Player> getCrazyNote() {
+		return crazyNote;
+	}
+
+	public ArrayList<Player> getCrazyWitch() {
+		return crazyWitch;
+	}
+
+	public ArrayList<Player> getCrazyHeart() {
+		return crazyHeart;
+	}
+
+	public CrazyAutoFireFile getAFirePlayers() {
+		return aFirePlayer;
+	}
 }

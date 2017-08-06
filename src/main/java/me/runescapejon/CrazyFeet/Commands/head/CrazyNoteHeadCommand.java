@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands.head;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -15,8 +17,9 @@ import org.spongepowered.api.text.format.TextColors;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyNoteHeadCommand implements CommandExecutor {
+
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cNoteHead = CrazyFeet.crazyNoteHead;
+		final ArrayList<Player> cNoteHead = CrazyFeet.getInstance().getCrazyNoteHead();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -25,13 +28,13 @@ public class CrazyNoteHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazynotehead")) {
 				if (cNoteHead.contains(player)) {
 					cNoteHead.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Note Particles on your head!"));
+					player.sendMessage(LanguageUtils.getText("crazyNoteHeadDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cNoteHead.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your Note particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazyNoteHeadEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -40,13 +43,17 @@ public class CrazyNoteHeadCommand implements CommandExecutor {
 
 			if (cNoteHead.contains(targ)) {
 				cNoteHead.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyNoteHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyNoteHead has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazyNoteHeadDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyNoteHeadDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cNoteHead.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyNoteHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyNoteHead!"));
+				targ.sendMessage(LanguageUtils.getText("crazyNoteHeadEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyNoteHeadEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}
