@@ -16,7 +16,7 @@ public class CrazyFeetJoinListener {
 		Player player = pJE.getTargetEntity();
 		if (CrazyAutoFireFile.cFPlayers.contains(player.getName())) {
 			CrazyFeet.getInstance().getCrazyFire().add(player);
-			player.sendMessage(LanguageUtils.getText("youJoinedGame"));
+			player.sendMessage(LanguageUtils.getText("crazyFeetAutoFireOnJoin"));
 		}
 	}
 }
