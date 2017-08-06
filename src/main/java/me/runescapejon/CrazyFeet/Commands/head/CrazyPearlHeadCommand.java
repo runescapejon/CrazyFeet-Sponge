@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands.head;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -15,8 +17,9 @@ import org.spongepowered.api.text.format.TextColors;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyPearlHeadCommand implements CommandExecutor {
+
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cPearlHead = CrazyFeet.crazyPearlHead;
+		final ArrayList<Player> cPearlHead = CrazyFeet.getInstance().getCrazyPearlHead();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -25,13 +28,13 @@ public class CrazyPearlHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazypearlhead")) {
 				if (cPearlHead.contains(player)) {
 					cPearlHead.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Pearl Particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cPearlHead.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your Pearl particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -40,13 +43,17 @@ public class CrazyPearlHeadCommand implements CommandExecutor {
 
 			if (cPearlHead.contains(targ)) {
 				cPearlHead.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyPearlHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyPearlHead has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cPearlHead.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyPearlHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyPearlHead!"));
+				targ.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

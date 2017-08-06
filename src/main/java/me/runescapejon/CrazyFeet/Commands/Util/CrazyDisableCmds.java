@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands.Util;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
@@ -18,20 +20,20 @@ public class CrazyDisableCmds implements CommandExecutor {
 	public CommandResult execute(CommandSource sender, CommandContext args) {
 		Optional<Player> target = args.getOne("target");
 
-		final ArrayList<Player> cFire = CrazyFeet.crazyFire;
-		final ArrayList<Player> cSmoke = CrazyFeet.crazySmoke;
-		final ArrayList<Player> cMagic = CrazyFeet.crazyMagic;
-		final ArrayList<Player> cPearl = CrazyFeet.crazyPearl;
-		final ArrayList<Player> cnote = CrazyFeet.crazynote;
-		final ArrayList<Player> cHeart = CrazyFeet.crazyHeart;
-		final ArrayList<Player> cWitch = CrazyFeet.crazyWitch;
-		final ArrayList<Player> cFireh = CrazyFeet.crazyFireHead;
-		final ArrayList<Player> cSmokeh = CrazyFeet.crazySmokeHead;
-		final ArrayList<Player> cMagich = CrazyFeet.crazyMagicHead;
-		final ArrayList<Player> cPearlh = CrazyFeet.crazyPearlHead;
-		final ArrayList<Player> cnoteh = CrazyFeet.crazyNoteHead;
-		final ArrayList<Player> cHearth = CrazyFeet.crazyHeartHead;
-		final ArrayList<Player> cWitchh = CrazyFeet.crazyWitchHead;
+		final ArrayList<Player> cFire = CrazyFeet.getInstance().getCrazyFire();
+		final ArrayList<Player> cSmoke = CrazyFeet.getInstance().getCrazySmoke();
+		final ArrayList<Player> cMagic = CrazyFeet.getInstance().getCrazyMagic();
+		final ArrayList<Player> cPearl = CrazyFeet.getInstance().getCrazyPearl();
+		final ArrayList<Player> cnote = CrazyFeet.getInstance().getCrazyNote();
+		final ArrayList<Player> cHeart = CrazyFeet.getInstance().getCrazyHeart();
+		final ArrayList<Player> cWitch = CrazyFeet.getInstance().getCrazyWitch();
+		final ArrayList<Player> cFireh = CrazyFeet.getInstance().getCrazyFireHead();
+		final ArrayList<Player> cSmokeh = CrazyFeet.getInstance().getCrazySmokeHead();
+		final ArrayList<Player> cMagich = CrazyFeet.getInstance().getCrazyMagicHead();
+		final ArrayList<Player> cPearlh = CrazyFeet.getInstance().getCrazyPearlHead();
+		final ArrayList<Player> cnoteh = CrazyFeet.getInstance().getCrazyNoteHead();
+		final ArrayList<Player> cHearth = CrazyFeet.getInstance().getCrazyHeartHead();
+		final ArrayList<Player> cWitchh = CrazyFeet.getInstance().getCrazyWitchHead();
 
 		if (!target.isPresent()) {
 			// if (sender instanceof Player) {
@@ -86,7 +88,7 @@ public class CrazyDisableCmds implements CommandExecutor {
 				if (cPearl.contains(player)) {
 					cPearl.remove(player);
 				}
-				player.sendMessage(Text.of(TextColors.AQUA, "All of your CrazyFeet modes have been cleared!"));
+				player.sendMessage(LanguageUtils.getText("crazyFeetModesCleared"));
 			}
 		} else if (sender.hasPermission("crazyfeet.disableothers")) {
 			Player targ = target.get();
@@ -132,10 +134,10 @@ public class CrazyDisableCmds implements CommandExecutor {
 			if (cPearl.contains(targ)) {
 				cPearl.remove(targ);
 			}
-			targ.sendMessage(Text.of(TextColors.YELLOW, "All of your CrazyFeet modes have been cleared by ",
-					sender.getName(), "!"));
-			sender.sendMessage(Text.of(TextColors.YELLOW, "All of ", TextColors.AQUA, targ.getName(), "'s ",
-					TextColors.YELLOW, "CrazyFeet modes have been cleared!"));
+			targ.sendMessage(LanguageUtils.getText("crazyFeetModesClearedByPlayer",
+					new Pair("%PLAYER%", sender.getName())));
+			sender.sendMessage(LanguageUtils.getText("crazyFeetModesClearedForPlayer",
+					new Pair("%PLAYER%", targ.getName())));
 		}
 		return CommandResult.success();
 

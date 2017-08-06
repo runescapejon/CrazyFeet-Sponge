@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -17,7 +19,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyFireCommands implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cFire = CrazyFeet.crazyFire;
+		final ArrayList<Player> cFire = CrazyFeet.getInstance().getCrazyFire();
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
@@ -25,30 +27,32 @@ public class CrazyFireCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazyfire")) {
 				if (cFire.contains(player)) {
 					cFire.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your fire particles"));
+					player.sendMessage(LanguageUtils.getText("crazyFireDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cFire.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your fire particles"));
+					player.sendMessage(LanguageUtils.getText("crazyFireEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
-		}
-
-		else if (src.hasPermission("CrazyFeet.crazyfireother")) {
+		} else if (src.hasPermission("CrazyFeet.crazyfireother")) {
 			Player targ = target.get();
 
 			if (cFire.contains(targ)) {
 				cFire.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyFire!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyFire has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazyFireDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyFireDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cFire.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyFire!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyFire!"));
+				targ.sendMessage(LanguageUtils.getText("crazyFireEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyFireEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

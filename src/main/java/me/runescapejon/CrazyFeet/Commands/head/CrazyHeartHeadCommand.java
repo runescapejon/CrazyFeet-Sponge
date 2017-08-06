@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands.head;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -17,7 +19,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyHeartHeadCommand implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cHeartHead = CrazyFeet.crazyHeartHead;
+		final ArrayList<Player> cHeartHead = CrazyFeet.getInstance().getCrazyHeartHead();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -26,13 +28,13 @@ public class CrazyHeartHeadCommand implements CommandExecutor {
 			if (player.hasPermission("crazyfeet.crazyhearthead")) {
 				if (cHeartHead.contains(player)) {
 					cHeartHead.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your heart Particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazyHeartHeadDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cHeartHead.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your heart particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazyHeartHeadEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -43,13 +45,17 @@ public class CrazyHeartHeadCommand implements CommandExecutor {
 
 			if (cHeartHead.contains(targ)) {
 				cHeartHead.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazyHeartHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazyHeartHead has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazyHeartHeadDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyHeartHeadDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cHeartHead.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazyHeartHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazyHeartHead!"));
+				targ.sendMessage(LanguageUtils.getText("crazyHeartHeadEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyHeartHeadEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

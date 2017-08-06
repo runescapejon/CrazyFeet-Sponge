@@ -3,6 +3,8 @@ package me.runescapejon.CrazyFeet.Commands.head;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import me.runescapejon.CrazyFeet.utils.LanguageUtils;
+import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -16,7 +18,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazySmokeHeadCommand implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cSmokeHead = CrazyFeet.crazySmokeHead;
+		final ArrayList<Player> cSmokeHead = CrazyFeet.getInstance().getCrazySmokeHead();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -25,13 +27,13 @@ public class CrazySmokeHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazysmokehead")) {
 				if (cSmokeHead.contains(player)) {
 					cSmokeHead.remove(player);
-					player.sendMessage(
-							Text.of(TextColors.GOLD, player.getName(), " You have disabled your Smoke Particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cSmokeHead.add(player);
-					player.sendMessage(Text.of(TextColors.GOLD, player.getName(), TextColors.AQUA,
-							" You have enabled your Smoke particles on your head"));
+					player.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabled",
+							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -40,13 +42,17 @@ public class CrazySmokeHeadCommand implements CommandExecutor {
 
 			if (cSmokeHead.contains(targ)) {
 				cSmokeHead.remove(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName(), " has disabled your CrazySmokeHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + "'s CrazySmokeHead has been disabled!"));
+				targ.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cSmokeHead.add(targ);
-				targ.sendMessage(Text.of(TextColors.YELLOW, src.getName() + " has given you CrazySmokeHead!"));
-				src.sendMessage(Text.of(TextColors.YELLOW, targ.getName() + " has been given CrazySmokeHead!"));
+				targ.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabledByPlayer",
+						new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabledForPlayer",
+						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

@@ -18,15 +18,14 @@ public class CrazyHeadListener {
 	@Listener
 	public void onMoveHead(MoveEntityEvent event, @First Player player) {
 
-		boolean fireh = false, noteh = false, magich = false, smokeh = false, hearth = false, pearlh = false,
-				witchh = false;
-		fireh = CrazyFeet.crazyFireHead.contains(player);
-		noteh = CrazyFeet.crazyNoteHead.contains(player);
-		magich = CrazyFeet.crazyMagicHead.contains(player);
-		smokeh = CrazyFeet.crazySmokeHead.contains(player);
-		hearth = CrazyFeet.crazyHeartHead.contains(player);
-		pearlh = CrazyFeet.crazyPearlHead.contains(player);
-		witchh = CrazyFeet.crazyWitchHead.contains(player);
+		boolean fireh, noteh, magich, smokeh, hearth, pearlh, witchh;
+		fireh = CrazyFeet.getInstance().getCrazyFireHead().contains(player);
+		noteh = CrazyFeet.getInstance().getCrazyNoteHead().contains(player);
+		magich = CrazyFeet.getInstance().getCrazyMagicHead().contains(player);
+		smokeh = CrazyFeet.getInstance().getCrazySmokeHead().contains(player);
+		hearth = CrazyFeet.getInstance().getCrazyHeartHead().contains(player);
+		pearlh = CrazyFeet.getInstance().getCrazyPearlHead().contains(player);
+		witchh = CrazyFeet.getInstance().getCrazyWitchHead().contains(player);
 
 		if (fireh) {
 			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.MOBSPAWNER_FLAMES).build(),
