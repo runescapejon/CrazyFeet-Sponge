@@ -29,7 +29,7 @@ public class Config {
     public void activate() {
         try {
             file = new File(CrazyFeet.getInstance().getConfigDirectory(), name);
-            loader = HoconConfigurationLoader.builder().setFile(getFile()).build();
+            loader = HoconConfigurationLoader.builder().setFile(file).build();
             node = loader.load();
             if (!file.exists()) {
                 file.createNewFile();
@@ -38,6 +38,7 @@ public class Config {
                         HoconConfigurationLoader.builder().setURL(defaultsURL).build();
                 ConfigurationNode defaultsNode = defaultsLoader.load();
                 node.mergeValuesFrom(defaultsNode);
+                save();
             }
             if (autoSave) {
                 Sponge.getScheduler().createTaskBuilder().async().execute(this::save).
@@ -95,7 +96,7 @@ public class Config {
 
     public void reload() {
         try {
-            setNode(getLoader().load());
+            node = loader.load();
             CrazyFeet.getInstance().getLogger().info("Config \"" + name + "\" successfully reloaded!");
         } catch (Exception e) {
             CrazyFeet.getInstance().getLogger().warn("Fail reloading config \"" + name + "\"!", e);
