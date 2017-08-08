@@ -1,5 +1,6 @@
 package me.runescapejon.CrazyFeet.Listeners;
 
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.effect.particle.ParticleOptions;
 import org.spongepowered.api.effect.particle.ParticleTypes;
@@ -15,6 +16,9 @@ public class CrazyFeetListener {
 
 	@Listener
 	public void onMove(MoveEntityEvent event, @First Player player) {
+		if (player.get(Keys.INVISIBLE).get()) {
+			return;
+		}
 		boolean fire, note, magic, smoke, heart, pearl, witch;
 		fire = CrazyFeet.getInstance().getCrazyFire().contains(player);
 		note = CrazyFeet.getInstance().getCrazyNote().contains(player);
