@@ -33,7 +33,7 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazyPearlHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazySmokeHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
 
-@Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {"runescapejon"}, description = "CrazyFeet Ported over to Sponge", version = "1.6")
+@Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {"runescapejon"}, description = "CrazyFeet Ported over to Sponge", version = "1.8")
 public class CrazyFeet {
 
 	private static CrazyFeet instance;
