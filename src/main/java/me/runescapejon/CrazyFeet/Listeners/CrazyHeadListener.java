@@ -1,5 +1,6 @@
 package me.runescapejon.CrazyFeet.Listeners;
 
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.effect.particle.ParticleOptions;
 import org.spongepowered.api.effect.particle.ParticleTypes;
@@ -17,7 +18,9 @@ public class CrazyHeadListener {
 	// - tested 2.5 is right
 	@Listener
 	public void onMoveHead(MoveEntityEvent event, @First Player player) {
-
+		if (player.get(Keys.INVISIBLE).get()) {
+			return;
+		}
 		boolean fireh, noteh, magich, smokeh, hearth, pearlh, witchh;
 		fireh = CrazyFeet.getInstance().getCrazyFireHead().contains(player);
 		noteh = CrazyFeet.getInstance().getCrazyNoteHead().contains(player);
