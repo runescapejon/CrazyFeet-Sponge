@@ -11,6 +11,7 @@ import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.util.Color;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
+import org.spongepowered.api.world.World;
 
 public class CrazyHeadListener {
 	// It's seem getPosition().add(0, 3, 0,) seem the right location for the
@@ -30,42 +31,44 @@ public class CrazyHeadListener {
 		pearlh = CrazyFeet.getInstance().getCrazyPearlHead().contains(player);
 		witchh = CrazyFeet.getInstance().getCrazyWitchHead().contains(player);
 
+		World world = player.getWorld();
+
 		if (fireh) {
-			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.MOBSPAWNER_FLAMES).build(),
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.MOBSPAWNER_FLAMES).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (noteh) {
 			// Crap Sponge api doesn't support color Notes seem like it
 			// here is aqua notes <3
-			player.spawnParticles(
+			world.spawnParticles(
 					ParticleEffect.builder().type(ParticleTypes.NOTE)
 							.option(ParticleOptions.COLOR, Color.ofRgb(0, 255, 255)).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 
 			// here is red notes
-			player.spawnParticles(
+			world.spawnParticles(
 					ParticleEffect.builder().type(ParticleTypes.NOTE)
 							.option(ParticleOptions.COLOR, Color.ofRgb(255, 0, 0)).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (magich) {
-			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.INSTANT_SPELL).build(),
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.INSTANT_SPELL).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (smokeh) {
-			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.SMOKE).build(),
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.SMOKE).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (hearth) {
-			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.HEART).build(),
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.HEART).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (pearlh) {
-			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ENDER_TELEPORT).build(),
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ENDER_TELEPORT).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (witchh) {
-			player.spawnParticles(ParticleEffect.builder().type(ParticleTypes.WITCH_SPELL).build(),
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.WITCH_SPELL).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 	}
