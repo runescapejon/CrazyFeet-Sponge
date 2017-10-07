@@ -17,6 +17,7 @@ import org.spongepowered.api.event.game.state.GameConstructionEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyCheckCommands;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyDisableCmds;
@@ -32,6 +33,7 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazyNoteHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyPearlHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazySmokeHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
+import me.runescapejon.CrazyFeet.CrazyFeet;
 
 @Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {"runescapejon"}, description = "CrazyFeet Ported over to Sponge", version = "1.9")
 public class CrazyFeet {
