@@ -15,7 +15,7 @@ import org.spongepowered.api.effect.sound.SoundTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.cause.NamedCause;
+//import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.item.ItemTypes;
@@ -31,12 +31,13 @@ import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
 
 public class GuiCommand implements CommandExecutor {
-	private Object plugins;
+	//this part is disabled due to creating null error making a better one 
+	//private Object plugins;
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
-			.property(InventoryDimension.PROPERTY_NAM, new InventoryDimension(9, 4))
+			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
 					InventoryTitle.of(Text.builder("CrazyFeet").color(TextColors.DARK_RED).style(TextStyles.BOLD).build()))
-			.build(this.plugins);
+			.build(CrazyFeet.getPlugin());
 
 	@Listener
 	public void onInventoryClick(ClickInventoryEvent event, @First Player player) {
@@ -183,7 +184,7 @@ public class GuiCommand implements CommandExecutor {
 		pearlH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyPearlHead!"));
 		ItemStack cdisable = ItemStack.of(ItemTypes.BARRIER, 1);
 		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("removeAllParticles"));
-		player.openInventory(invs, Cause.of(NamedCause.of(player.getName(), player)));
+		player.openInventory(invs);
 		invs.query(new SlotPos(0, 0)).set(border);
 		invs.query(new SlotPos(1, 0)).set(border);
 		invs.query(new SlotPos(2, 0)).set(border);
