@@ -87,7 +87,17 @@ public class CrazyFeet {
 	public void onConstruct(GameConstructionEvent event) {
 		instance = this;
 	}
-
+	private static PluginContainer plugin;
+	
+	@Listener
+	public void onPreInitializationEvent(GamePreInitializationEvent event) {
+		plugin = Sponge.getPluginManager().getPlugin("crazyfeetsponge").get();
+		instance = this;
+	}
+	public static PluginContainer getPlugin() {
+		return plugin;
+	}
+	
 	@Listener
 	public void onGamePreInitialization(GamePreInitializationEvent event) {
 		if (!configDirectory.exists()) {
@@ -116,15 +126,13 @@ public class CrazyFeet {
 		Sponge.getCommandManager().register(this, CrazyFeetSpec, "crazyfeet");
 
 		//CrazyFeetListener Registering Here
-		CrazyFeetListener listener = new CrazyFeetListener();
-		Sponge.getEventManager().registerListeners(this, listener);
+	Sponge.getEventManager().registerListeners(this, new CrazyFeetListener());
 		
 		//CrazyHeadListener Registering here
 		CrazyHeadListener head = new CrazyHeadListener();
 		Sponge.getEventManager().registerListeners(this, head);
 		
-		GuiCommand guilistener = new GuiCommand();
-		Sponge.getEventManager().registerListeners(this, guilistener);
+	    Sponge.getEventManager().registerListeners(this, new GuiCommand());
 		
 		//CrazyFeetJoinListener Registering Here
 		//CrazyFeetJoinListener joinlistener = new CrazyFeetJoinListener();
