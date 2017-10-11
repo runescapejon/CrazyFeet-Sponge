@@ -36,17 +36,16 @@ public class CrazyFeetListener {
 					player.getLocation().getPosition().add(0, -1, 0));
 		}
 		if (note) {
-			// Crap Sponge api doesn't support color Notes seem like it
-			// here is aqua notes <3
-			world.spawnParticles(
-					ParticleEffect.builder().type(ParticleTypes.NOTE)
-							.option(ParticleOptions.COLOR, Color.ofRgb(0, 255, 255)).build(),
+			// Thanks to @Cybermaxke for telling me how to change colors
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.NOTE)
+			        .option(ParticleOptions.NOTE, NotePitches.G_SHARP0)
+			        .build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
 
 			// here is red notes
-			world.spawnParticles(
-					ParticleEffect.builder().type(ParticleTypes.NOTE)
-							.option(ParticleOptions.COLOR, Color.ofRgb(255, 0, 0)).build(),
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.NOTE)
+			        .option(ParticleOptions.NOTE, NotePitches.C1)
+			        .build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
 		}
 		if (magic) {
