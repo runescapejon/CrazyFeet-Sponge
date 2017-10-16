@@ -9,7 +9,7 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.util.Color;
-
+import org.spongepowered.api.data.type.NotePitches;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 import org.spongepowered.api.world.World;
 
