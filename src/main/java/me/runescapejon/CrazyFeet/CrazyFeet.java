@@ -11,6 +11,9 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
+import org.spongepowered.api.effect.particle.ParticleEffect;
+import org.spongepowered.api.effect.particle.ParticleOptions;
+import org.spongepowered.api.effect.particle.ParticleTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameConstructionEvent;
@@ -18,7 +21,11 @@ import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
+import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.util.Color;
+import org.spongepowered.api.world.World;
+
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyCheckCommands;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyDisableCmds;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetAdminCmd;
@@ -58,7 +65,7 @@ public class CrazyFeet {
 	private ArrayList<UUID> crazyNote = new ArrayList<>();
 	private ArrayList<UUID> crazyWitch = new ArrayList<>();
 	private ArrayList<UUID> crazyHeart = new ArrayList<>();
-	private CrazyAutoFireFile aFirePlayer;
+	private ArrayList<UUID> helix = new ArrayList<>();
 
 	//private File autoFirePlayers;
 	//public static CrazyAutoSmokeFile aSmokeP;
@@ -285,13 +292,15 @@ public class CrazyFeet {
 				.arguments(GenericArguments.firstParsing(GenericArguments.flags().buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
 				.executor(new CrazyWitchCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyWitchSpec, "crazywitch");
-		/*
-		// Crazyautofeet Register
-		CommandSpec CrazyautofeetSpec = CommandSpec.builder().description(Text.of("Displays a help menu for Crazy-Auto"))
-				.permission("crazyfeet.autofeet").executor(new CrazyAutoFeetCommands()).build();
-		Sponge.getCommandManager().register(this, CrazyautofeetSpec, "crazyautofeet");
-		*/
-		//crazycheck <PlayerName> - Register and <PlayerName> is Optional
+	
+		CommandSpec CrazyHelixSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Helix Particles"))
+				.permission("crazyFeet.crazyhelix")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags().buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyHelixCommands())
+				.build();
+		Sponge.getCommandManager().register(this, CrazyHelixSpec, "crazyhelix");
+
 		CommandSpec CrazyCheckSpec = CommandSpec.builder()
 				.description(Text.of("crazycheck your particles status - helpful to see what enabled"))
 				.permission("crazyfeet.crazycheck")
@@ -386,7 +395,33 @@ public class CrazyFeet {
 		return crazyHeart;
 	}
 
-	public CrazyAutoFireFile getAFirePlayers() {
-		return aFirePlayer;
+	public ArrayList<UUID> getCrazyHelix() {
+		helix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimation));
+		return helix;
+	}
+	
+    Task task;
+	public void playanimation(Player player){
+		Task.builder().intervalTicks(3).execute(() -> { 
+			helix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleHelix)); 
+			}).submit(CrazyFeet.getInstance());
+}
+	
+    double phi = 0;
+	public void StyleHelix(Player player) {
+		phi = phi + Math.PI / 16;
+	double x, y, z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) *Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) *Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST).option(ParticleOptions.COLOR, Color.ofRgb(15, 86, 253)).build(),
+						player.getLocation().getPosition().add(x, y, z));
+				
+			}
+			
+	}
 	}
 }
