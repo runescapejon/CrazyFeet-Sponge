@@ -282,13 +282,15 @@ public class CrazyFeet {
 				.arguments(GenericArguments.firstParsing(GenericArguments.flags().buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
 				.executor(new CrazyWitchCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyWitchSpec, "crazywitch");
-		/*
-		// Crazyautofeet Register
-		CommandSpec CrazyautofeetSpec = CommandSpec.builder().description(Text.of("Displays a help menu for Crazy-Auto"))
-				.permission("crazyfeet.autofeet").executor(new CrazyAutoFeetCommands()).build();
-		Sponge.getCommandManager().register(this, CrazyautofeetSpec, "crazyautofeet");
-		*/
-		//crazycheck <PlayerName> - Register and <PlayerName> is Optional
+		
+		CommandSpec CrazyHelixSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Helix Particles"))
+				.permission("crazyFeet.crazyhelix")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags().buildWith(GenericArguments.firstParsing(GenericArguments.optional(GenericArguments.player(Text.of("target"))), GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyHelixCommands())
+				.build();
+		Sponge.getCommandManager().register(this, CrazyHelixSpec, "crazyhelix");
+	
 		CommandSpec CrazyCheckSpec = CommandSpec.builder()
 				.description(Text.of("crazycheck your particles status - helpful to see what enabled"))
 				.permission("crazyfeet.crazycheck")
