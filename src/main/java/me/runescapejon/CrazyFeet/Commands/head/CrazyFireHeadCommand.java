@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -19,19 +20,19 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyFireHeadCommand implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cFireh = CrazyFeet.getInstance().getCrazyFireHead();
+		final ArrayList<UUID> cFireh = CrazyFeet.getInstance().getCrazyFireHead();
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("crazyfeet.crazyfirehead")) {
-				if (cFireh.contains(player)) {
-					cFireh.remove(player);
+				if (cFireh.contains(player.getUniqueId())) {
+					cFireh.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyFireHeadDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cFireh.add(player);
+					cFireh.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyFireHeadEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -40,15 +41,15 @@ public class CrazyFireHeadCommand implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazyfireheadother")) {
 			Player targ = target.get();
 
-			if (cFireh.contains(targ)) {
-				cFireh.remove(targ);
+			if (cFireh.contains(targ.getUniqueId())) {
+				cFireh.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyFireHeadDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyFireHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cFireh.add(targ);
+				cFireh.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyFireHeadEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyFireHeadEnabledForPlayer",

@@ -44,20 +44,20 @@ public class CrazyFeet {
 		return instance;
 	}
 
-	private ArrayList<Player> crazyFireHead = new ArrayList<>();
-	private ArrayList<Player> crazyHeartHead = new ArrayList<>();
-	private ArrayList<Player> crazyMagicHead = new ArrayList<>();
-	private ArrayList<Player> crazyNoteHead = new ArrayList<>();
-	private ArrayList<Player> crazyWitchHead = new ArrayList<>();
-	private ArrayList<Player> crazySmokeHead = new ArrayList<>();
-	private ArrayList<Player> crazyPearlHead = new ArrayList<>();
-	private ArrayList<Player> crazyFire = new ArrayList<>();
-	private ArrayList<Player> crazySmoke = new ArrayList<>();
-	private ArrayList<Player> crazyMagic = new ArrayList<>();
-	private ArrayList<Player> crazyPearl = new ArrayList<>();
-	private ArrayList<Player> crazyNote = new ArrayList<>();
-	private ArrayList<Player> crazyWitch = new ArrayList<>();
-	private ArrayList<Player> crazyHeart = new ArrayList<>();
+	private ArrayList<UUID> crazyFireHead = new ArrayList<>();
+	private ArrayList<UUID> crazyHeartHead = new ArrayList<>();
+	private ArrayList<UUID> crazyMagicHead = new ArrayList<>();
+	private ArrayList<UUID> crazyNoteHead = new ArrayList<>();
+	private ArrayList<UUID> crazyWitchHead = new ArrayList<>();
+	private ArrayList<UUID> crazySmokeHead = new ArrayList<>();
+	private ArrayList<UUID> crazyPearlHead = new ArrayList<>();
+	private ArrayList<UUID> crazyFire = new ArrayList<>();
+	private ArrayList<UUID> crazySmoke = new ArrayList<>();
+	private ArrayList<UUID> crazyMagic = new ArrayList<>();
+	private ArrayList<UUID> crazyPearl = new ArrayList<>();
+	private ArrayList<UUID> crazyNote = new ArrayList<>();
+	private ArrayList<UUID> crazyWitch = new ArrayList<>();
+	private ArrayList<UUID> crazyHeart = new ArrayList<>();
 	private CrazyAutoFireFile aFirePlayer;
 
 	//private File autoFirePlayers;
@@ -330,59 +330,59 @@ public class CrazyFeet {
 		return languageConfig;
 	}
 
-	public ArrayList<Player> getCrazyFireHead() {
+	public ArrayList<UUID> getCrazyFireHead() {
 		return crazyFireHead;
 	}
 
-	public ArrayList<Player> getCrazyHeartHead() {
+	public ArrayList<UUID> getCrazyHeartHead() {
 		return crazyHeartHead;
 	}
 
-	public ArrayList<Player> getCrazyMagicHead() {
+	public ArrayList<UUID> getCrazyMagicHead() {
 		return crazyMagicHead;
 	}
 
-	public ArrayList<Player> getCrazyNoteHead() {
+	public ArrayList<UUID> getCrazyNoteHead() {
 		return crazyNoteHead;
 	}
 
-	public ArrayList<Player> getCrazyWitchHead() {
+	public ArrayList<UUID> getCrazyWitchHead() {
 		return crazyWitchHead;
 	}
 
-	public ArrayList<Player> getCrazySmokeHead() {
+	public ArrayList<UUID> getCrazySmokeHead() {
 		return crazySmokeHead;
 	}
 
-	public ArrayList<Player> getCrazyPearlHead() {
+	public ArrayList<UUID> getCrazyPearlHead() {
 		return crazyPearlHead;
 	}
 
-	public ArrayList<Player> getCrazyFire() {
+	public ArrayList<UUID> getCrazyFire() {
 		return crazyFire;
 	}
 
-	public ArrayList<Player> getCrazySmoke() {
+	public ArrayList<UUID> getCrazySmoke() {
 		return crazySmoke;
 	}
 
-	public ArrayList<Player> getCrazyMagic() {
+	public ArrayList<UUID> getCrazyMagic() {
 		return crazyMagic;
 	}
 
-	public ArrayList<Player> getCrazyPearl() {
+	public ArrayList<UUID> getCrazyPearl() {
 		return crazyPearl;
 	}
 
-	public ArrayList<Player> getCrazyNote() {
+	public ArrayList<UUID> getCrazyNote() {
 		return crazyNote;
 	}
 
-	public ArrayList<Player> getCrazyWitch() {
+	public ArrayList<UUID> getCrazyWitch() {
 		return crazyWitch;
 	}
 
-	public ArrayList<Player> getCrazyHeart() {
+	public ArrayList<UUID> getCrazyHeart() {
 		return crazyHeart;
 	}
 

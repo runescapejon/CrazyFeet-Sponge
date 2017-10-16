@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -19,20 +20,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyHeartHeadCommand implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cHeartHead = CrazyFeet.getInstance().getCrazyHeartHead();
+		final ArrayList<UUID> cHeartHead = CrazyFeet.getInstance().getCrazyHeartHead();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("crazyfeet.crazyhearthead")) {
-				if (cHeartHead.contains(player)) {
-					cHeartHead.remove(player);
+				if (cHeartHead.contains(player.getUniqueId())) {
+					cHeartHead.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyHeartHeadDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cHeartHead.add(player);
+					cHeartHead.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyHeartHeadEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -43,15 +44,15 @@ public class CrazyHeartHeadCommand implements CommandExecutor {
 		else if (src.hasPermission("CrazyFeet.crazyheartheadother")) {
 			Player targ = target.get();
 
-			if (cHeartHead.contains(targ)) {
-				cHeartHead.remove(targ);
+			if (cHeartHead.contains(targ.getUniqueId())) {
+				cHeartHead.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyHeartHeadDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyHeartHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cHeartHead.add(targ);
+				cHeartHead.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyHeartHeadEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyHeartHeadEnabledForPlayer",

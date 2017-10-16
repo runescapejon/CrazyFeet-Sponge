@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -19,20 +20,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyHeartCommands implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cHeart = CrazyFeet.getInstance().getCrazyHeart();
+		final ArrayList<UUID> cHeart = CrazyFeet.getInstance().getCrazyHeart();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazyheart")) {
-				if (cHeart.contains(player)) {
-					cHeart.remove(player);
+				if (cHeart.contains(player.getUniqueId())) {
+					cHeart.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyHeartDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cHeart.add(player);
+					cHeart.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyHeartEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -41,15 +42,15 @@ public class CrazyHeartCommands implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazyheartother")) {
 			Player targ = target.get();
 
-			if (cHeart.contains(targ)) {
-				cHeart.remove(targ);
+			if (cHeart.contains(targ.getUniqueId())) {
+				cHeart.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyHeartDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyHeartDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cHeart.add(targ);
+				cHeart.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyHeartEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyHeartEnabledForPlayer",

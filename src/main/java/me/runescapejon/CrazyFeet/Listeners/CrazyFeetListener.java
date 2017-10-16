@@ -1,6 +1,7 @@
 package me.runescapejon.CrazyFeet.Listeners;
 
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.data.type.NotePitches;
 import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.effect.particle.ParticleOptions;
 import org.spongepowered.api.effect.particle.ParticleTypes;
@@ -9,7 +10,7 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.util.Color;
-import org.spongepowered.api.data.type.NotePitches;
+
 import me.runescapejon.CrazyFeet.CrazyFeet;
 import org.spongepowered.api.world.World;
 

@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -18,20 +19,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyPearlCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cPearl = CrazyFeet.getInstance().getCrazyPearl();
+		final ArrayList<UUID> cPearl = CrazyFeet.getInstance().getCrazyPearl();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazypearl")) {
-				if (cPearl.contains(player)) {
-					cPearl.remove(player);
+				if (cPearl.contains(player.getUniqueId())) {
+					cPearl.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyPearlDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cPearl.add(player);
+					cPearl.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyPearlEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -40,15 +41,15 @@ public class CrazyPearlCommands implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazypearlother")) {
 			Player targ = target.get();
 
-			if (cPearl.contains(targ)) {
-				cPearl.remove(targ);
+			if (cPearl.contains(targ.getUniqueId())) {
+				cPearl.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyPearlDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyPearlDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cPearl.add(targ);
+				cPearl.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyPearlEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyPearlEnabledForPlayer",
