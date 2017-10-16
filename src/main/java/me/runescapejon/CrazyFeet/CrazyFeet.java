@@ -11,13 +11,20 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
+import org.spongepowered.api.effect.particle.ParticleEffect;
+import org.spongepowered.api.effect.particle.ParticleOptions;
+import org.spongepowered.api.effect.particle.ParticleTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameConstructionEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.util.Color;
+import org.spongepowered.api.world.World;
+
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyCheckCommands;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyDisableCmds;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetAdminCmd;
@@ -42,22 +49,22 @@ public class CrazyFeet {
 		return instance;
 	}
 
-	private ArrayList<Player> crazyFireHead = new ArrayList<>();
-	private ArrayList<Player> crazyHeartHead = new ArrayList<>();
-	private ArrayList<Player> crazyMagicHead = new ArrayList<>();
-	private ArrayList<Player> crazyNoteHead = new ArrayList<>();
-	private ArrayList<Player> crazyWitchHead = new ArrayList<>();
-	private ArrayList<Player> crazySmokeHead = new ArrayList<>();
-	private ArrayList<Player> crazyPearlHead = new ArrayList<>();
-	private ArrayList<Player> crazyFire = new ArrayList<>();
-	private ArrayList<Player> crazySmoke = new ArrayList<>();
-	private ArrayList<Player> crazyMagic = new ArrayList<>();
-	private ArrayList<Player> crazyPearl = new ArrayList<>();
-	private ArrayList<Player> crazyNote = new ArrayList<>();
-	private ArrayList<Player> crazyWitch = new ArrayList<>();
-	private ArrayList<Player> crazyHeart = new ArrayList<>();
-	private CrazyAutoFireFile aFirePlayer;
-
+	private ArrayList<UUID> crazyFireHead = new ArrayList<>();
+	private ArrayList<UUID> crazyHeartHead = new ArrayList<>();
+	private ArrayList<UUID> crazyMagicHead = new ArrayList<>();
+	private ArrayList<UUID> crazyNoteHead = new ArrayList<>();
+	private ArrayList<UUID> crazyWitchHead = new ArrayList<>();
+	private ArrayList<UUID> crazySmokeHead = new ArrayList<>();
+	private ArrayList<UUID> crazyPearlHead = new ArrayList<>();
+	private ArrayList<UUID> crazyFire = new ArrayList<>();
+	private ArrayList<UUID> crazySmoke = new ArrayList<>();
+	private ArrayList<UUID> crazyMagic = new ArrayList<>();
+	private ArrayList<UUID> crazyPearl = new ArrayList<>();
+	private ArrayList<UUID> crazyNote = new ArrayList<>();
+	private ArrayList<UUID> crazyWitch = new ArrayList<>();
+	private ArrayList<UUID> crazyHeart = new ArrayList<>();
+	private ArrayList<UUID> helix = new ArrayList<>();
+	
 	//private File autoFirePlayers;
 	//public static CrazyAutoSmokeFile aSmokeP;
 	//public static CrazyAutoPearlFile aPearlP;
@@ -320,63 +327,89 @@ public class CrazyFeet {
 		return languageConfig;
 	}
 
-	public ArrayList<Player> getCrazyFireHead() {
+	public ArrayList<UUID> getCrazyFireHead() {
 		return crazyFireHead;
 	}
 
-	public ArrayList<Player> getCrazyHeartHead() {
+	public ArrayList<UUID> getCrazyHeartHead() {
 		return crazyHeartHead;
 	}
 
-	public ArrayList<Player> getCrazyMagicHead() {
+	public ArrayList<UUID> getCrazyMagicHead() {
 		return crazyMagicHead;
 	}
 
-	public ArrayList<Player> getCrazyNoteHead() {
+	public ArrayList<UUID> getCrazyNoteHead() {
 		return crazyNoteHead;
 	}
 
-	public ArrayList<Player> getCrazyWitchHead() {
+	public ArrayList<UUID> getCrazyWitchHead() {
 		return crazyWitchHead;
 	}
 
-	public ArrayList<Player> getCrazySmokeHead() {
+	public ArrayList<UUID> getCrazySmokeHead() {
 		return crazySmokeHead;
 	}
 
-	public ArrayList<Player> getCrazyPearlHead() {
+	public ArrayList<UUID> getCrazyPearlHead() {
 		return crazyPearlHead;
 	}
 
-	public ArrayList<Player> getCrazyFire() {
+	public ArrayList<UUID> getCrazyFire() {
 		return crazyFire;
 	}
 
-	public ArrayList<Player> getCrazySmoke() {
+	public ArrayList<UUID> getCrazySmoke() {
 		return crazySmoke;
 	}
 
-	public ArrayList<Player> getCrazyMagic() {
+	public ArrayList<UUID> getCrazyMagic() {
 		return crazyMagic;
 	}
 
-	public ArrayList<Player> getCrazyPearl() {
+	public ArrayList<UUID> getCrazyPearl() {
 		return crazyPearl;
 	}
 
-	public ArrayList<Player> getCrazyNote() {
+	public ArrayList<UUID> getCrazyNote() {
 		return crazyNote;
 	}
 
-	public ArrayList<Player> getCrazyWitch() {
+	public ArrayList<UUID> getCrazyWitch() {
 		return crazyWitch;
 	}
 
-	public ArrayList<Player> getCrazyHeart() {
+	public ArrayList<UUID> getCrazyHeart() {
 		return crazyHeart;
 	}
 
-	public CrazyAutoFireFile getAFirePlayers() {
-		return aFirePlayer;
+	public ArrayList<UUID> getCrazyHelix() {
+		helix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimation));
+		return helix;
+	}
+	
+    Task task;
+	public void playanimation(Player player){
+		Task.builder().intervalTicks(3).execute(() -> { 
+			helix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleHelix)); 
+			}).submit(CrazyFeet.getInstance());
+}
+	
+    double phi = 0;
+	public void StyleHelix(Player player) {
+		phi = phi + Math.PI / 16;
+	double x, y, z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) *Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) *Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST).option(ParticleOptions.COLOR, Color.ofRgb(15, 86, 253)).build(),
+						player.getLocation().getPosition().add(x, y, z));
+				
+			}
+			
+	}
 	}
 }

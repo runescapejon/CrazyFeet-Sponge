@@ -1,6 +1,7 @@
 package me.runescapejon.CrazyFeet.Listeners;
 
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.data.type.NotePitches;
 import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.effect.particle.ParticleOptions;
 import org.spongepowered.api.effect.particle.ParticleTypes;

@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -19,20 +20,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyWitchHeadCommand implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cWitchHead = CrazyFeet.getInstance().getCrazyWitchHead();
+		final ArrayList<UUID> cWitchHead = CrazyFeet.getInstance().getCrazyWitchHead();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazywitchhead")) {
-				if (cWitchHead.contains(player)) {
-					cWitchHead.remove(player);
+				if (cWitchHead.contains(player.getUniqueId())) {
+					cWitchHead.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyWitchHeadDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cWitchHead.add(player);
+					cWitchHead.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyWitchHeadEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -41,15 +42,15 @@ public class CrazyWitchHeadCommand implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazywitchheadother")) {
 			Player targ = target.get();
 
-			if (cWitchHead.contains(targ)) {
-				cWitchHead.remove(targ);
+			if (cWitchHead.contains(targ.getUniqueId())) {
+				cWitchHead.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyWitchHeadDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyWitchHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cWitchHead.add(targ);
+				cWitchHead.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyWitchHeadEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyWitchHeadEnabledForPlayer",

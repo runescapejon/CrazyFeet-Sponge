@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -18,20 +19,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyNoteCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cNote = CrazyFeet.getInstance().getCrazyNote();
+		final ArrayList<UUID> cNote = CrazyFeet.getInstance().getCrazyNote();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazynote")) {
-				if (cNote.contains(player)) {
-					cNote.remove(player);
+				if (cNote.contains(player.getUniqueId())) {
+					cNote.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyNoteDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cNote.add(player);
+					cNote.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyNoteEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -40,15 +41,15 @@ public class CrazyNoteCommands implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazynoteother")) {
 			Player targ = target.get();
 
-			if (cNote.contains(targ)) {
-				cNote.remove(targ);
+			if (cNote.contains(targ.getUniqueId())) {
+				cNote.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyNoteDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyNoteDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cNote.add(targ);
+				cNote.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyNoteEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyNoteEnabledForPlayer",

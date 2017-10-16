@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -19,20 +20,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyPearlHeadCommand implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cPearlHead = CrazyFeet.getInstance().getCrazyPearlHead();
+		final ArrayList<UUID> cPearlHead = CrazyFeet.getInstance().getCrazyPearlHead();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazypearlhead")) {
-				if (cPearlHead.contains(player)) {
-					cPearlHead.remove(player);
+				if (cPearlHead.contains(player.getUniqueId())) {
+					cPearlHead.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cPearlHead.add(player);
+					cPearlHead.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -41,15 +42,15 @@ public class CrazyPearlHeadCommand implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazypearlheadother")) {
 			Player targ = target.get();
 
-			if (cPearlHead.contains(targ)) {
-				cPearlHead.remove(targ);
+			if (cPearlHead.contains(targ.getUniqueId())) {
+				cPearlHead.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cPearlHead.add(targ);
+				cPearlHead.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabledForPlayer",

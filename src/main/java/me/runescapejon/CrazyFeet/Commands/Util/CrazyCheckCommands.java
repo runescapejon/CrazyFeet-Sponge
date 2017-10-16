@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.Util;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -20,20 +21,20 @@ public class CrazyCheckCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource sender, CommandContext args) {
 		Optional<Player> target = args.getOne("target");
 		Optional<String> targets = args.getOne("targets");
-		final ArrayList<Player> cFire = CrazyFeet.getInstance().getCrazyFire();
-		final ArrayList<Player> cSmoke = CrazyFeet.getInstance().getCrazySmoke();
-		final ArrayList<Player> cMagic = CrazyFeet.getInstance().getCrazyMagic();
-		final ArrayList<Player> cPearl = CrazyFeet.getInstance().getCrazyPearl();
-		final ArrayList<Player> cnote = CrazyFeet.getInstance().getCrazyNote();
-		final ArrayList<Player> cHeart = CrazyFeet.getInstance().getCrazyHeart();
-		final ArrayList<Player> cWitch = CrazyFeet.getInstance().getCrazyWitch();
-		final ArrayList<Player> cFireh = CrazyFeet.getInstance().getCrazyFireHead();
-		final ArrayList<Player> cSmokeh = CrazyFeet.getInstance().getCrazySmokeHead();
-		final ArrayList<Player> cMagich = CrazyFeet.getInstance().getCrazyMagicHead();
-		final ArrayList<Player> cPearlh = CrazyFeet.getInstance().getCrazyPearlHead();
-		final ArrayList<Player> cnoteh = CrazyFeet.getInstance().getCrazyNoteHead();
-		final ArrayList<Player> cHearth = CrazyFeet.getInstance().getCrazyHeartHead();
-		final ArrayList<Player> cWitchh = CrazyFeet.getInstance().getCrazyWitchHead();
+		final ArrayList<UUID> cFire = CrazyFeet.getInstance().getCrazyFire();
+		final ArrayList<UUID> cSmoke = CrazyFeet.getInstance().getCrazySmoke();
+		final ArrayList<UUID> cMagic = CrazyFeet.getInstance().getCrazyMagic();
+		final ArrayList<UUID> cPearl = CrazyFeet.getInstance().getCrazyPearl();
+		final ArrayList<UUID> cnote = CrazyFeet.getInstance().getCrazyNote();
+		final ArrayList<UUID> cHeart = CrazyFeet.getInstance().getCrazyHeart();
+		final ArrayList<UUID> cWitch = CrazyFeet.getInstance().getCrazyWitch();
+		final ArrayList<UUID> cFireh = CrazyFeet.getInstance().getCrazyFireHead();
+		final ArrayList<UUID> cSmokeh = CrazyFeet.getInstance().getCrazySmokeHead();
+		final ArrayList<UUID> cMagich = CrazyFeet.getInstance().getCrazyMagicHead();
+		final ArrayList<UUID> cPearlh = CrazyFeet.getInstance().getCrazyPearlHead();
+		final ArrayList<UUID> cnoteh = CrazyFeet.getInstance().getCrazyNoteHead();
+		final ArrayList<UUID> cHearth = CrazyFeet.getInstance().getCrazyHeartHead();
+		final ArrayList<UUID> cWitchh = CrazyFeet.getInstance().getCrazyWitchHead();
 
 		if (!target.isPresent() && !targets.isPresent()) {
 			//if (sender instanceof Player) { had to disable this due to it's not detected /crazycheck others

@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -19,20 +20,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyWitchCommands implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cWitch = CrazyFeet.getInstance().getCrazyWitch();
+		final ArrayList<UUID> cWitch = CrazyFeet.getInstance().getCrazyWitch();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazywitch")) {
-				if (cWitch.contains(player)) {
-					cWitch.remove(player);
+				if (cWitch.contains(player.getUniqueId())) {
+					cWitch.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyWitchDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cWitch.add(player);
+					cWitch.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyWitchEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -41,15 +42,15 @@ public class CrazyWitchCommands implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazywitchother")) {
 			Player targ = target.get();
 
-			if (cWitch.contains(targ)) {
-				cWitch.remove(targ);
+			if (cWitch.contains(targ.getUniqueId())) {
+				cWitch.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyWitchDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyWitchDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cWitch.add(targ);
+				cWitch.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyWitchEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyWitchEnabledForPlayer",

@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -19,20 +20,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 public class CrazyMagicHeadCommand implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cMagicHead = CrazyFeet.getInstance().getCrazyMagicHead();
+		final ArrayList<UUID> cMagicHead = CrazyFeet.getInstance().getCrazyMagicHead();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazymagichead")) {
-				if (cMagicHead.contains(player)) {
-					cMagicHead.remove(player);
+				if (cMagicHead.contains(player.getUniqueId())) {
+					cMagicHead.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cMagicHead.add(player);
+					cMagicHead.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -41,15 +42,15 @@ public class CrazyMagicHeadCommand implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazymagicheadother")) {
 			Player targ = target.get();
 
-			if (cMagicHead.contains(targ)) {
-				cMagicHead.remove(targ);
+			if (cMagicHead.contains(targ.getUniqueId())) {
+				cMagicHead.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cMagicHead.add(targ);
+				cMagicHead.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabledForPlayer",

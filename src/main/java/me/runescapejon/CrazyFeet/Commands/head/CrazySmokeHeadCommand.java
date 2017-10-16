@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet.Commands.head;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
@@ -18,20 +19,20 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazySmokeHeadCommand implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<Player> cSmokeHead = CrazyFeet.getInstance().getCrazySmokeHead();
+		final ArrayList<UUID> cSmokeHead = CrazyFeet.getInstance().getCrazySmokeHead();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazysmokehead")) {
-				if (cSmokeHead.contains(player)) {
-					cSmokeHead.remove(player);
+				if (cSmokeHead.contains(player.getUniqueId())) {
+					cSmokeHead.remove(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cSmokeHead.add(player);
+					cSmokeHead.add(player.getUniqueId());
 					player.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -40,15 +41,15 @@ public class CrazySmokeHeadCommand implements CommandExecutor {
 		} else if (src.hasPermission("CrazyFeet.crazysmokeheadother")) {
 			Player targ = target.get();
 
-			if (cSmokeHead.contains(targ)) {
-				cSmokeHead.remove(targ);
+			if (cSmokeHead.contains(targ.getUniqueId())) {
+				cSmokeHead.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cSmokeHead.add(targ);
+				cSmokeHead.add(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabledForPlayer",

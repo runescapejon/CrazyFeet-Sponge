@@ -12,48 +12,44 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
-public class CrazyHeartCommands implements CommandExecutor {
-
+public class CrazyHelixCommands implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<UUID> cHeart = CrazyFeet.getInstance().getCrazyHeart();
+		final ArrayList<UUID> chelix = CrazyFeet.getInstance().getCrazyHelix();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
-			if (player.hasPermission("CrazyFeet.crazyheart")) {
-				if (cHeart.contains(player.getUniqueId())) {
-					cHeart.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyHeartDisabled",
+			if (player.hasPermission("crazyFeet.crazyhelix")) {
+				if (chelix.contains(player.getUniqueId())) {
+					chelix.remove(player.getUniqueId());
+					player.sendMessage(LanguageUtils.getText("crazyHelixDisabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cHeart.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyHeartEnabled",
+					chelix.add(player.getUniqueId());
+					player.sendMessage(LanguageUtils.getText("crazyHelixEnabled",
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
-		} else if (src.hasPermission("CrazyFeet.crazyheartother")) {
+		} else if (src.hasPermission("crazyFeet.crazyhelixother")) {
 			Player targ = target.get();
 
-			if (cHeart.contains(targ.getUniqueId())) {
-				cHeart.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyHeartDisabledByPlayer",
+			if (chelix.contains(targ.getUniqueId())) {
+				chelix.remove(targ.getUniqueId());
+				targ.sendMessage(LanguageUtils.getText("crazyHelixDisabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyHeartDisabledForPlayer",
+				src.sendMessage(LanguageUtils.getText("crazyHelixDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cHeart.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyHeartEnabledByPlayer",
+				chelix.add(targ.getUniqueId());
+				targ.sendMessage(LanguageUtils.getText("crazyHelixEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyHeartEnabledForPlayer",
+				src.sendMessage(LanguageUtils.getText("crazyHelixEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
