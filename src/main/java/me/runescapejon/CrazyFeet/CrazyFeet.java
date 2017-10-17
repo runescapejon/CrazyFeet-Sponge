@@ -32,7 +32,6 @@ import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetAdminCmd;
 import me.runescapejon.CrazyFeet.Commands.Util.CrazyFeetCommands;
 import me.runescapejon.CrazyFeet.Listeners.CrazyFeetListener;
 import me.runescapejon.CrazyFeet.Listeners.CrazyHeadListener;
-import me.runescapejon.CrazyFeet.Commands.Util.Files.CrazyAutoFireFile;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyFireHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyHeartHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyMagicHeadCommand;
