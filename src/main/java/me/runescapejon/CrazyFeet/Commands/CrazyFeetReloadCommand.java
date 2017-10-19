@@ -10,7 +10,8 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 
 public class CrazyFeetReloadCommand implements CommandExecutor {
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         CrazyFeet.getInstance().getLanguageConfig().reload();
         src.sendMessage(LanguageUtils.getText("crazyFeetReloaded"));

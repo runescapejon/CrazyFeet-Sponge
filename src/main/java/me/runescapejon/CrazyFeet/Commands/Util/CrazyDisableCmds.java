@@ -11,13 +11,11 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyDisableCmds implements CommandExecutor {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public CommandResult execute(CommandSource sender, CommandContext args) {
 		Optional<Player> target = args.getOne("target");
 
@@ -35,6 +33,8 @@ public class CrazyDisableCmds implements CommandExecutor {
 		final ArrayList<UUID> cnoteh = CrazyFeet.getInstance().getCrazyNoteHead();
 		final ArrayList<UUID> cHearth = CrazyFeet.getInstance().getCrazyHeartHead();
 		final ArrayList<UUID> cWitchh = CrazyFeet.getInstance().getCrazyWitchHead();
+		final ArrayList<UUID> chelix = CrazyFeet.getInstance().getCrazyBlueHelix();
+		final ArrayList<UUID> cglobe = CrazyFeet.getInstance().getCrazyGlobe();
 
 		if (!target.isPresent()) {
 			// if (sender instanceof Player) {
@@ -45,10 +45,16 @@ public class CrazyDisableCmds implements CommandExecutor {
 					|| player.hasPermission("crazyfeet.crazypearlhead") || 
 					player.hasPermission("crazyfeet.crazyfire") || player.hasPermission("crazyfeet.crazysmoke")
 					|| player.hasPermission("crazyfeet.crazymagic") || player.hasPermission("crazyfeet.crazywitch")
-					|| player.hasPermission("crazyfeet.crazynote") || player.hasPermission("crazyfeet.crazyheart")
+					|| player.hasPermission("crazyfeet.crazynote") || player.hasPermission("crazyfeet.crazyhelix")| player.hasPermission("crazyfeet.crazyheart")
 					|| player.hasPermission("crazyfeet.crazypearl")){
 				if (cFireh.contains(player)) {
 					cFireh.remove(player);
+				}
+				if (chelix.contains(player)) {
+					chelix.remove(player);
+				}
+				if (cglobe.contains(player)) {
+					cglobe.remove(player);
 				}
 				if (cSmokeh.contains(player)) {
 					cSmokeh.remove(player);
@@ -93,6 +99,12 @@ public class CrazyDisableCmds implements CommandExecutor {
 			}
 		} else if (sender.hasPermission("crazyfeet.disableothers")) {
 			Player targ = target.get();
+			if (cglobe.contains(targ)) {
+				cglobe.remove(targ);
+			}
+			if (chelix.contains(targ)) {
+				chelix.remove(targ);
+			}
 			if (cFireh.contains(targ)) {
 				cFireh.remove(targ);
 			}

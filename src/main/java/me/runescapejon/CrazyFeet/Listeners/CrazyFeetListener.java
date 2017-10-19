@@ -9,8 +9,6 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.filter.cause.First;
-import org.spongepowered.api.util.Color;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 import org.spongepowered.api.world.World;
 
@@ -22,13 +20,13 @@ public class CrazyFeetListener {
 			return;
 		}
 		boolean fire, note, magic, smoke, heart, pearl, witch;
-		fire = CrazyFeet.getInstance().getCrazyFire().contains(player);
-		note = CrazyFeet.getInstance().getCrazyNote().contains(player);
-		magic = CrazyFeet.getInstance().getCrazyMagic().contains(player);
-		smoke = CrazyFeet.getInstance().getCrazySmoke().contains(player);
-		heart = CrazyFeet.getInstance().getCrazyHeart().contains(player);
-		pearl = CrazyFeet.getInstance().getCrazyPearl().contains(player);
-		witch = CrazyFeet.getInstance().getCrazyWitch().contains(player);
+		fire = CrazyFeet.getInstance().getCrazyFire().contains(player.getUniqueId());
+		note = CrazyFeet.getInstance().getCrazyNote().contains(player.getUniqueId());
+		magic = CrazyFeet.getInstance().getCrazyMagic().contains(player.getUniqueId());
+		smoke = CrazyFeet.getInstance().getCrazySmoke().contains(player.getUniqueId());
+		heart = CrazyFeet.getInstance().getCrazyHeart().contains(player.getUniqueId());
+		pearl = CrazyFeet.getInstance().getCrazyPearl().contains(player.getUniqueId());
+		witch = CrazyFeet.getInstance().getCrazyWitch().contains(player.getUniqueId());
 
 		World world = player.getWorld();
 
@@ -39,14 +37,12 @@ public class CrazyFeetListener {
 		if (note) {
 			// Thanks to @Cybermaxke for telling me how to change colors
 			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.NOTE)
-			        .option(ParticleOptions.NOTE, NotePitches.G_SHARP0)
-			        .build(),
+					.option(ParticleOptions.NOTE, NotePitches.G_SHARP0).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
 
 			// here is red notes
 			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.NOTE)
-			        .option(ParticleOptions.NOTE, NotePitches.C1)
-			        .build(),
+					.option(ParticleOptions.NOTE, NotePitches.C1).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
 		}
 		if (magic) {

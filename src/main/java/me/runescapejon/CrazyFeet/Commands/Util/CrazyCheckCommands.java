@@ -12,12 +12,11 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyCheckCommands implements CommandExecutor {
 
+	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource sender, CommandContext args) {
 		Optional<Player> target = args.getOne("target");
 		Optional<String> targets = args.getOne("targets");
@@ -35,14 +34,16 @@ public class CrazyCheckCommands implements CommandExecutor {
 		final ArrayList<UUID> cnoteh = CrazyFeet.getInstance().getCrazyNoteHead();
 		final ArrayList<UUID> cHearth = CrazyFeet.getInstance().getCrazyHeartHead();
 		final ArrayList<UUID> cWitchh = CrazyFeet.getInstance().getCrazyWitchHead();
-
+		final ArrayList<UUID> cHelix = CrazyFeet.getInstance().getCrazyBlueHelix();
+		final ArrayList<UUID> cGlobe = CrazyFeet.getInstance().getCrazyGlobe();
+		
 		if (!target.isPresent() && !targets.isPresent()) {
 			//if (sender instanceof Player) { had to disable this due to it's not detected /crazycheck others
 				Player player = (Player) sender;
 				if (player.hasPermission("crazyfeet.crazyfirehead") || player.hasPermission("crazyfeet.crazysmokeheaed")
 						|| player.hasPermission("crazyfeet.crazymagichead") || player.hasPermission("crazyfeet.crazywitchhead")
 						|| player.hasPermission("crazyfeet.crazynotehead") || player.hasPermission("crazyfeet.crazyhearthead")
-						|| player.hasPermission("crazyfeet.crazypearlhead") || 
+						|| player.hasPermission("crazyfeet.crazyhelix") || player.hasPermission("crazyfeet.crazypearlhead") || 
 						player.hasPermission("crazyfeet.crazyfire") || player.hasPermission("crazyfeet.crazysmoke")
 						|| player.hasPermission("crazyfeet.crazymagic") || player.hasPermission("crazyfeet.crazywitch")
 						|| player.hasPermission("crazyfeet.crazynote") || player.hasPermission("crazyfeet.crazyheart")
@@ -53,6 +54,12 @@ public class CrazyCheckCommands implements CommandExecutor {
 				//	System.out.println("It's being called crazycheck");
 				{
 					player.sendMessage(LanguageUtils.getText("crazyFeetModes"));
+					if (cGlobe.contains(player)) {
+						player.sendMessage(Text.of("- CrazyGlobe"));
+					}
+					if (cHelix.contains(player)) {
+						player.sendMessage(Text.of("- CrazyHelix"));
+					}
 					if (cFireh.contains(player)) {
 						player.sendMessage(Text.of("- CrazyFireHead"));
 					}
@@ -96,7 +103,7 @@ public class CrazyCheckCommands implements CommandExecutor {
 						player.sendMessage(Text.of("- CrazyPearl"));
 					}
 					if (!cFireh.contains(player) && !cHearth.contains(player) && !cnoteh.contains(player)
-							&& !cWitchh.contains(player) && !cSmokeh.contains(player) && !cMagich.contains(player)
+							&& !cGlobe.contains(player) && !cHelix.contains(player) && !cWitchh.contains(player) && !cSmokeh.contains(player) && !cMagich.contains(player)
 							&& !cPearlh.contains(player) &&
 							!cFire.contains(player) && !cHeart.contains(player) && !cnote.contains(player)
 							&& !cWitch.contains(player) && !cSmoke.contains(player) && !cMagic.contains(player)
@@ -105,11 +112,17 @@ public class CrazyCheckCommands implements CommandExecutor {
 						//return CommandResult.success();
 					}
 				}
-		} else if (target.isPresent() && sender.hasPermission("CrazyFeet.checkothers")) {
+		} else if (target.isPresent() && sender.hasPermission("crazyfeet.checkothers")) {
 						Player targ = target.get();
 						sender.sendMessage(LanguageUtils.getText("crazyFeetOtherPlayerModes",
 								new Pair<>("%PLAYER%", targ.getName())));
 					//	System.out.println("It's being called crazycheck other");
+						if (cGlobe.contains(targ)) {
+							sender.sendMessage(Text.of("- CrazyGlobe"));
+						}
+						if (cHelix.contains(targ)) {
+							sender.sendMessage(Text.of("- CrazyHelix"));
+						}
 						if (cFireh.contains(targ)) {
 							sender.sendMessage(Text.of("- CrazyFireHead"));
 						}
@@ -153,7 +166,7 @@ public class CrazyCheckCommands implements CommandExecutor {
 							sender.sendMessage(Text.of("- CrazyPearl"));
 						}
 						if (!cFireh.contains(targ) && !cSmokeh.contains(targ) && !cnoteh.contains(targ)
-								&& !cWitchh.contains(targ) && !cHearth.contains(targ) && !cMagich.contains(targ)
+								&& !cGlobe.contains(targ) && !cHelix.contains(targ) && !cWitchh.contains(targ) && !cHearth.contains(targ) && !cMagich.contains(targ)
 								&& !cPearlh.contains(targ) &&!cFire.contains(targ) && !cSmoke.contains(targ) && !cnote.contains(targ)
 								&& !cWitch.contains(targ) && !cHeart.contains(targ) && !cMagic.contains(targ)
 								&& !cPearl.contains(targ)) {
