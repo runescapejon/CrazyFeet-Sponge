@@ -68,6 +68,7 @@ public class CrazyFeet {
 	private ArrayList<UUID> Purplehelix = new ArrayList<>();
 	private ArrayList<UUID> Yellowhelix = new ArrayList<>();
 	private ArrayList<UUID> Orangehelix = new ArrayList<>();
+	private ArrayList<UUID> Brownhelix = new ArrayList<>();
 
 	private static CrazyFeet instance;
 
@@ -405,6 +406,16 @@ public class CrazyFeet {
 								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
 				.executor(new CrazyOrangeHelixCommand()).build();
 		Sponge.getCommandManager().register(this, CrazyOrangeHelixSpec, "crazyorangehelix");
+		
+		CommandSpec CrazyBrownHelixSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Helix Particles"))
+				.permission("crazyFeet.crazybrownhelix")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags()
+						.buildWith(GenericArguments.firstParsing(
+								GenericArguments.optional(GenericArguments.player(Text.of("target"))),
+								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyBrownHelixCommands()).build();
+		Sponge.getCommandManager().register(this, CrazyBrownHelixSpec, "crazybrownhelix");
 	}
 
 	public Logger getLogger() {
@@ -473,6 +484,35 @@ public class CrazyFeet {
 
 	public ArrayList<UUID> getCrazyHeart() {
 		return crazyHeart;
+	}
+	
+	public ArrayList<UUID> getCrazyBrownHelix() {
+		Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationBrown));
+		return Brownhelix;
+	}
+
+	public void playanimationBrown(Player player) {
+		Task.builder().intervalTicks(3).execute(() -> {
+			Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
+		}).submit(CrazyFeet.getInstance());
+	}
+
+	public void BrownHelix(Player player) {
+		phi = phi + Math.PI / 16;
+		double x, y, z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(
+						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
+								.option(ParticleOptions.COLOR, Color.ofRgb(127, 85, 42)).build(),
+						player.getLocation().getPosition().add(x, y, z));
+
+			}
+		}
 	}
 	
 	public ArrayList<UUID> getCrazyOrangeHelix() {

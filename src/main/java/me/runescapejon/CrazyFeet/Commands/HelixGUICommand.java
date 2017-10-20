@@ -120,6 +120,16 @@ public class HelixGUICommand implements CommandExecutor {
 						.execute(() -> Sponge.getCommandManager().process(player, "crazyorangehelix"))
 						.submit(CrazyFeet.getInstance());
 			}
+			Optional<DyeColor> optionalDyeColorBrown = item.get(Keys.DYE_COLOR);
+			if (!optionalDyeColorBrown.isPresent())
+				return;
+			DyeColor dyeColorBrown = optionalDyeColorBrown.get();
+			if (dyeColorBrown.equals(DyeColors.BROWN)) {
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
+				Sponge.getScheduler().createTaskBuilder().delayTicks(1)
+						.execute(() -> Sponge.getCommandManager().process(player, "crazybrownhelix"))
+						.submit(CrazyFeet.getInstance());
+			}
 			
 			if (item.getType().equals(ItemTypes.BOOK)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
@@ -173,6 +183,10 @@ public class HelixGUICommand implements CommandExecutor {
 		ItemStack orange = ItemStack.of(ItemTypes.DYE, 1);
 		orange.offer(Keys.DISPLAY_NAME, Text.of(TextColors.GOLD, "Crazy Orange Helix!"));
 		orange.offer(Keys.DYE_COLOR, DyeColors.ORANGE);
+		
+		ItemStack brown = ItemStack.of(ItemTypes.DYE, 1);
+		brown.offer(Keys.DISPLAY_NAME, Text.of(TextColors.GRAY, "Crazy Brown Helix!"));
+		brown.offer(Keys.DYE_COLOR, DyeColors.BROWN);
 		
 		ItemStack bordergray = ItemStack.of(ItemTypes.STAINED_GLASS_PANE, 1);
 		bordergray.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("chooseParticleMode"));
@@ -244,7 +258,7 @@ public class HelixGUICommand implements CommandExecutor {
 		invs.query(new SlotPos(5, 1)).set(purple);
 		invs.query(new SlotPos(6, 1)).set(yellow);
 		invs.query(new SlotPos(7, 1)).set(orange);
-		// invs.query(new SlotPos(7, 1)).set(smoke);
+		invs.query(new SlotPos(1, 2)).set(brown);
 		// invs.query(new SlotPos(1, 2)).set(fireH);
 		// invs.query(new SlotPos(2, 2)).set(heartH);
 		// invs.query(new SlotPos(3, 2)).set(noteH);
