@@ -66,6 +66,13 @@ public class GuiPage2Cmd implements CommandExecutor {
 						.execute(() -> Sponge.getCommandManager().process(player, "crazyglobe"))
 						.submit(CrazyFeet.getInstance());
 			}
+			if (item.getType().equals(ItemTypes.WATER_BUCKET)) {
+
+				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
+				Sponge.getScheduler().createTaskBuilder().delayTicks(1)
+						.execute(() -> Sponge.getCommandManager().process(player, "crazystorm"))
+						.submit(CrazyFeet.getInstance());
+			}
 			event.setCancelled(true);
 		}
 	}
@@ -91,6 +98,8 @@ public class GuiPage2Cmd implements CommandExecutor {
 		mainmenu.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("MainMenu"));
 		ItemStack globe = ItemStack.of(ItemTypes.SLIME_BALL, 1);
 		globe.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("CrazyGlobe"));
+		ItemStack storm = ItemStack.of(ItemTypes.WATER_BUCKET, 1);
+		storm.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("CrazyStorm"));
 		player.openInventory(invs);
 		invs.query(new SlotPos(0, 0)).set(border);
 		invs.query(new SlotPos(1, 0)).set(border);
@@ -117,6 +126,7 @@ public class GuiPage2Cmd implements CommandExecutor {
 		invs.query(new SlotPos(0, 2)).set(border);
 		invs.query(new SlotPos(1, 1)).set(mhelix);
 		invs.query(new SlotPos(2, 1)).set(globe);
+		invs.query(new SlotPos(3, 1)).set(storm);
 		player.sendMessage(LanguageUtils.getText("pleaseSelectCrazyParticle"));
 		player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 		return CommandResult.success();

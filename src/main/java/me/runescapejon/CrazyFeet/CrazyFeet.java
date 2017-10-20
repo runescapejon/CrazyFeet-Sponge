@@ -69,7 +69,7 @@ public class CrazyFeet {
 	private ArrayList<UUID> Yellowhelix = new ArrayList<>();
 	private ArrayList<UUID> Orangehelix = new ArrayList<>();
 	private ArrayList<UUID> Brownhelix = new ArrayList<>();
-
+	private ArrayList<UUID> Storm = new ArrayList<>();
 	private static CrazyFeet instance;
 
 	public static CrazyFeet getInstance() {
@@ -416,6 +416,16 @@ public class CrazyFeet {
 								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
 				.executor(new CrazyBrownHelixCommands()).build();
 		Sponge.getCommandManager().register(this, CrazyBrownHelixSpec, "crazybrownhelix");
+		
+		CommandSpec CrazystormSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Storm Particles"))
+				.permission("crazyFeet.crazystorm")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags()
+						.buildWith(GenericArguments.firstParsing(
+								GenericArguments.optional(GenericArguments.player(Text.of("target"))),
+								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyStormCommand()).build();
+		Sponge.getCommandManager().register(this, CrazystormSpec, "crazystorm");
 	}
 
 	public Logger getLogger() {
@@ -755,28 +765,50 @@ public class CrazyFeet {
 		}
 	}
 
+	
+	public ArrayList<UUID> getCrazyStorm() {
+		Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationStorm));
+		Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationRain));
+		return Storm;
+	}
+
+	public void playanimationStorm(Player player) {
+		Task.builder().intervalTicks(1).execute(() -> {
+			Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::Cloud));
+		}).submit(CrazyFeet.getInstance());
+
+	}
+	
+	public void playanimationRain(Player player) {
+		Task.builder().intervalTicks(1).execute(() -> {
+			Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::Rain));
+		}).submit(CrazyFeet.getInstance());
+
+	}
+	
 	public void Rain(Player player) {
 		World world = player.getWorld();
 		world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.WATER_DROP).build(),
 				player.getLocation().getPosition().add(0, 2.5, 0));
-		world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.DRIP_WATER).build(),
-				player.getLocation().getPosition().add(0, 2.5, 0));
+		//world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.DRIP_WATER).build(),
+			//	player.getLocation().getPosition().add(0, 2.5, 0));
 	}
 
-	Integer r;
 
 	public void Cloud(Player player) {
-		for (int degree = 0; degree < 360; degree++) {
-			double radians = Math.toRadians(degree);
-			double x = Math.cos(360);
-			double z = Math.sin(360);
-
 			World world = player.getWorld();
 			world.spawnParticles(
-					ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-							.option(ParticleOptions.COLOR, Color.ofRgb(255, 255, 255)).build(),
-					player.getLocation().getPosition().add(x, 2.5, z));
-		}
+					ParticleEffect.builder().type(ParticleTypes.CLOUD).build(),
+					player.getLocation().getPosition().add(0, 2.5, 0));
+			world.spawnParticles(
+					ParticleEffect.builder().type(ParticleTypes.CLOUD).build(),
+					player.getLocation().getPosition().add(0.2, 2.5, 0.2));
+			world.spawnParticles(
+					ParticleEffect.builder().type(ParticleTypes.CLOUD).build(),
+					player.getLocation().getPosition().add(0, 2.5, 0.4));
+			world.spawnParticles(
+					ParticleEffect.builder().type(ParticleTypes.CLOUD).build(),
+					player.getLocation().getPosition().add(0.4, 2.5, 0));
 	}
 
 	public void StyleYinYang(Player player) {
