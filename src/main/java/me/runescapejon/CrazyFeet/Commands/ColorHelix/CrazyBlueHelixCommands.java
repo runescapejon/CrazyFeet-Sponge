@@ -1,4 +1,4 @@
-package me.runescapejon.CrazyFeet.Commands.head;
+package me.runescapejon.CrazyFeet.Commands.ColorHelix;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -14,44 +14,45 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
-public class CrazyWitchHeadCommand implements CommandExecutor {
-
+public class CrazyBlueHelixCommands implements CommandExecutor {
 	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<UUID> cWitchHead = CrazyFeet.getInstance().getCrazyWitchHead();
+		final ArrayList<UUID> chelix = CrazyFeet.getInstance().getCrazyBlueHelix();
+		final ArrayList<UUID> cfire = CrazyFeet.getInstance().getCrazyFire();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
-			if (player.hasPermission("CrazyFeet.crazywitchhead")) {
-				if (cWitchHead.contains(player.getUniqueId())) {
-					cWitchHead.remove(player.getUniqueId());
+			if (player.hasPermission("crazyFeet.crazybluehelix")) {
+				if (chelix.contains(player.getUniqueId())) {
+					chelix.remove(player.getUniqueId());
 					player.sendMessage(
-							LanguageUtils.getText("crazyWitchHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
+							LanguageUtils.getText("crazyBlueHelixDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cWitchHead.add(player.getUniqueId());
+					chelix.add(player.getUniqueId());
+					cfire.remove(player.getUniqueId());
 					player.sendMessage(
-							LanguageUtils.getText("crazyWitchHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
+							LanguageUtils.getText("crazyBlueHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
-		} else if (src.hasPermission("CrazyFeet.crazywitchheadother")) {
+		} else if (src.hasPermission("crazyFeet.crazybluehelixother")) {
 			Player targ = target.get();
 
-			if (cWitchHead.contains(targ.getUniqueId())) {
-				cWitchHead.remove(targ.getUniqueId());
+			if (chelix.contains(targ.getUniqueId())) {
+				chelix.remove(targ.getUniqueId());
 				targ.sendMessage(
-						LanguageUtils.getText("crazyWitchHeadDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyWitchHeadDisabledForPlayer",
+						LanguageUtils.getText("crazyBlueHelixDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyBlueHelixDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cWitchHead.add(targ.getUniqueId());
+				chelix.add(targ.getUniqueId());
 				targ.sendMessage(
-						LanguageUtils.getText("crazyWitchHeadEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyWitchHeadEnabledForPlayer",
+						LanguageUtils.getText("crazyBlueHelixEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(LanguageUtils.getText("crazyBlueHelixEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}

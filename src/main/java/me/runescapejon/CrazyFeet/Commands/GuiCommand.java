@@ -31,12 +31,13 @@ import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
 
 public class GuiCommand implements CommandExecutor {
-	private Object plugins;
+	//this part is disabled due to creating null error making a better one 
+	//private Object plugins;
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAM, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
 					InventoryTitle.of(Text.builder("CrazyFeet").color(TextColors.DARK_RED).style(TextStyles.BOLD).build()))
-			.build(this.plugins);
+			.build(CrazyFeet.getPlugin());
 
 	@Listener
 	public void onInventoryClick(ClickInventoryEvent event, @First Player player) {
@@ -136,6 +137,11 @@ public class GuiCommand implements CommandExecutor {
 						execute(() -> Sponge.getCommandManager().process(player, "crazydisable")).
 						submit(CrazyFeet.getInstance());
 			}
+			if (item.getItem().equals(ItemTypes.PAPER)) {
+				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
+						execute(() -> Sponge.getCommandManager().process(player, "crazymenu2")).
+						submit(CrazyFeet.getInstance());
+			}
 			event.setCancelled(true);
 		}
 	}
@@ -148,6 +154,7 @@ public class GuiCommand implements CommandExecutor {
 		 }
 	 }
 
+	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext ctx) throws CommandException {
 		Player player = (Player) src;
 		ItemStack fire = ItemStack.of(ItemTypes.FIRE_CHARGE, 1);
@@ -183,6 +190,8 @@ public class GuiCommand implements CommandExecutor {
 		pearlH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyPearlHead!"));
 		ItemStack cdisable = ItemStack.of(ItemTypes.BARRIER, 1);
 		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("removeAllParticles"));
+		ItemStack nextpage = ItemStack.of(ItemTypes.PAPER, 2);
+		nextpage.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("NextPage"));
 		player.openInventory(invs, Cause.of(NamedCause.of(player.getName(), player)));
 		invs.query(new SlotPos(0, 0)).set(border);
 		invs.query(new SlotPos(1, 0)).set(border);
@@ -193,15 +202,17 @@ public class GuiCommand implements CommandExecutor {
 		invs.query(new SlotPos(6, 0)).set(border);
 		invs.query(new SlotPos(7, 0)).set(border);
 		invs.query(new SlotPos(8, 0)).set(border);
-		invs.query(new SlotPos(0, 3)).set(border);
+		//invs.query(new SlotPos(0, 3)).set(border);
 		invs.query(new SlotPos(1, 3)).set(border);
 		invs.query(new SlotPos(2, 3)).set(border);
 		invs.query(new SlotPos(3, 3)).set(border);
 		invs.query(new SlotPos(4, 3)).set(border);
 		invs.query(new SlotPos(5, 3)).set(border);
 		invs.query(new SlotPos(6, 3)).set(border);
+		//invs.query(new SlotPos(7, 3)).set(border);
+		invs.query(new SlotPos(0, 3)).set(cdisable);
+		invs.query(new SlotPos(8, 3)).set(nextpage);
 		invs.query(new SlotPos(7, 3)).set(border);
-		invs.query(new SlotPos(8, 3)).set(cdisable);
 		invs.query(new SlotPos(8, 2)).set(border);
 		invs.query(new SlotPos(1, 1)).set(fire);
 		invs.query(new SlotPos(2, 1)).set(heart);

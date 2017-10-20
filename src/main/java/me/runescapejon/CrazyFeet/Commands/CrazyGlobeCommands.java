@@ -14,44 +14,44 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
-public class CrazyNoteCommands implements CommandExecutor {
+public class CrazyGlobeCommands implements CommandExecutor {
 	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<UUID> cNote = CrazyFeet.getInstance().getCrazyNote();
+		final ArrayList<UUID> cGlobe = CrazyFeet.getInstance().getCrazyGlobe();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
-			if (player.hasPermission("CrazyFeet.crazynote")) {
-				if (cNote.contains(player.getUniqueId())) {
-					cNote.remove(player.getUniqueId());
+			if (player.hasPermission("crazyFeet.crazyglobe")) {
+				if (cGlobe.contains(player.getUniqueId())) {
+					cGlobe.remove(player.getUniqueId());
 					player.sendMessage(
-							LanguageUtils.getText("crazyNoteDisabled", new Pair<>("%PLAYER%", player.getName())));
+							LanguageUtils.getText("crazyGlobeDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					cNote.add(player.getUniqueId());
+					cGlobe.add(player.getUniqueId());
 					player.sendMessage(
-							LanguageUtils.getText("crazyNoteEnabled", new Pair<>("%PLAYER%", player.getName())));
+							LanguageUtils.getText("crazyGlobeEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
-		} else if (src.hasPermission("CrazyFeet.crazynoteother")) {
+		} else if (src.hasPermission("crazyFeet.crazyglobeother")) {
 			Player targ = target.get();
 
-			if (cNote.contains(targ.getUniqueId())) {
-				cNote.remove(targ.getUniqueId());
+			if (cGlobe.contains(targ.getUniqueId())) {
+				cGlobe.remove(targ.getUniqueId());
 				targ.sendMessage(
-						LanguageUtils.getText("crazyNoteDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+						LanguageUtils.getText("crazyGlobeDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(
-						LanguageUtils.getText("crazyNoteDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
+						LanguageUtils.getText("crazyGlobeDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				cNote.add(targ.getUniqueId());
+				cGlobe.add(targ.getUniqueId());
 				targ.sendMessage(
-						LanguageUtils.getText("crazyNoteEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+						LanguageUtils.getText("crazyGlobeEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(
-						LanguageUtils.getText("crazyNoteEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
+						LanguageUtils.getText("crazyGlobeEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

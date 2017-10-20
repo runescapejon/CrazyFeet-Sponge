@@ -12,13 +12,11 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyMagicHeadCommand implements CommandExecutor {
 
+	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<UUID> cMagicHead = CrazyFeet.getInstance().getCrazyMagicHead();
 
@@ -29,13 +27,13 @@ public class CrazyMagicHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazymagichead")) {
 				if (cMagicHead.contains(player.getUniqueId())) {
 					cMagicHead.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyMagicHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cMagicHead.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyMagicHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -44,15 +42,15 @@ public class CrazyMagicHeadCommand implements CommandExecutor {
 
 			if (cMagicHead.contains(targ.getUniqueId())) {
 				cMagicHead.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyMagicHeadDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyMagicHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cMagicHead.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyMagicHeadEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyMagicHeadEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();

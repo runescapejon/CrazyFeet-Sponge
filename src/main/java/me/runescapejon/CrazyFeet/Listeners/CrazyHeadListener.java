@@ -12,6 +12,8 @@ import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.util.Color;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
+
+
 import org.spongepowered.api.world.World;
 
 public class CrazyHeadListener {
@@ -24,13 +26,13 @@ public class CrazyHeadListener {
 			return;
 		}
 		boolean fireh, noteh, magich, smokeh, hearth, pearlh, witchh;
-		fireh = CrazyFeet.getInstance().getCrazyFireHead().contains(player);
-		noteh = CrazyFeet.getInstance().getCrazyNoteHead().contains(player);
-		magich = CrazyFeet.getInstance().getCrazyMagicHead().contains(player);
-		smokeh = CrazyFeet.getInstance().getCrazySmokeHead().contains(player);
-		hearth = CrazyFeet.getInstance().getCrazyHeartHead().contains(player);
-		pearlh = CrazyFeet.getInstance().getCrazyPearlHead().contains(player);
-		witchh = CrazyFeet.getInstance().getCrazyWitchHead().contains(player);
+		fireh = CrazyFeet.getInstance().getCrazyFireHead().contains(player.getUniqueId());
+		noteh = CrazyFeet.getInstance().getCrazyNoteHead().contains(player.getUniqueId());
+		magich = CrazyFeet.getInstance().getCrazyMagicHead().contains(player.getUniqueId());
+		smokeh = CrazyFeet.getInstance().getCrazySmokeHead().contains(player.getUniqueId());
+		hearth = CrazyFeet.getInstance().getCrazyHeartHead().contains(player.getUniqueId());
+		pearlh = CrazyFeet.getInstance().getCrazyPearlHead().contains(player.getUniqueId());
+		witchh = CrazyFeet.getInstance().getCrazyWitchHead().contains(player.getUniqueId());
 
 		World world = player.getWorld();
 
@@ -39,20 +41,21 @@ public class CrazyHeadListener {
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (noteh) {
-			// Thanks to @Cybermaxke for telling me how to change colors
 			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.NOTE)
-			        .option(ParticleOptions.NOTE, NotePitches.G_SHARP0)
-			        .build(),
+					.option(ParticleOptions.NOTE, NotePitches.G_SHARP0).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
 
 			// here is red notes
 			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.NOTE)
-			        .option(ParticleOptions.NOTE, NotePitches.C1)
-			        .build(),
+					.option(ParticleOptions.NOTE, NotePitches.C1).build(),
 					player.getLocation().getPosition().add(0, 0.1, 0));
 		}
 		if (magich) {
-			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.INSTANT_SPELL).build(),
+			world.spawnParticles(
+					ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
+							.option(ParticleOptions.COLOR, Color.ofRgb(255, 255, 255)).build(),
+					player.getLocation().getPosition().add(0, 2.5, 0));
+			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.WATER_DROP).build(),
 					player.getLocation().getPosition().add(0, 2.5, 0));
 		}
 		if (smokeh) {

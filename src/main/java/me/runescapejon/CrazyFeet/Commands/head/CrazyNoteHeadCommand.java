@@ -12,13 +12,11 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyNoteHeadCommand implements CommandExecutor {
 
+	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<UUID> cNoteHead = CrazyFeet.getInstance().getCrazyNoteHead();
 
@@ -29,13 +27,13 @@ public class CrazyNoteHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazynotehead")) {
 				if (cNoteHead.contains(player.getUniqueId())) {
 					cNoteHead.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyNoteHeadDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyNoteHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cNoteHead.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyNoteHeadEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyNoteHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -44,17 +42,17 @@ public class CrazyNoteHeadCommand implements CommandExecutor {
 
 			if (cNoteHead.contains(targ.getUniqueId())) {
 				cNoteHead.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyNoteHeadDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyNoteHeadDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyNoteHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cNoteHead.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyNoteHeadEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyNoteHeadEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyNoteHeadEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyNoteHeadEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

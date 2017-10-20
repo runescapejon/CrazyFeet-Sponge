@@ -12,13 +12,11 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyHeartCommands implements CommandExecutor {
 
+	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<UUID> cHeart = CrazyFeet.getInstance().getCrazyHeart();
 
@@ -29,13 +27,13 @@ public class CrazyHeartCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazyheart")) {
 				if (cHeart.contains(player.getUniqueId())) {
 					cHeart.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyHeartDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyHeartDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cHeart.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyHeartEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyHeartEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -44,17 +42,17 @@ public class CrazyHeartCommands implements CommandExecutor {
 
 			if (cHeart.contains(targ.getUniqueId())) {
 				cHeart.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyHeartDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyHeartDisabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyHeartDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyHeartDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cHeart.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyHeartEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyHeartEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyHeartEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyHeartEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

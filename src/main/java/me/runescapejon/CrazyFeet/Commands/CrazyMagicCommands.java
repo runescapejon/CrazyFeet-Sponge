@@ -12,13 +12,11 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyMagicCommands implements CommandExecutor {
 
+	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<UUID> cMagic = CrazyFeet.getInstance().getCrazyMagic();
 
@@ -29,13 +27,13 @@ public class CrazyMagicCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazymagic")) {
 				if (cMagic.contains(player.getUniqueId())) {
 					cMagic.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyMagicDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyMagicDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cMagic.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyMagicEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyMagicEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -44,17 +42,17 @@ public class CrazyMagicCommands implements CommandExecutor {
 
 			if (cMagic.contains(targ.getUniqueId())) {
 				cMagic.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyMagicDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyMagicDisabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyMagicDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyMagicDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cMagic.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyMagicEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyMagicEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyMagicEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyMagicEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}
