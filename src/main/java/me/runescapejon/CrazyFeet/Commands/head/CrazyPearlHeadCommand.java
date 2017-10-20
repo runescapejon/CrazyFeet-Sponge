@@ -27,13 +27,13 @@ public class CrazyPearlHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazypearlhead")) {
 				if (cPearlHead.contains(player.getUniqueId())) {
 					cPearlHead.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyPearlHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cPearlHead.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyPearlHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -42,15 +42,15 @@ public class CrazyPearlHeadCommand implements CommandExecutor {
 
 			if (cPearlHead.contains(targ.getUniqueId())) {
 				cPearlHead.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyPearlHeadDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyPearlHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cPearlHead.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyPearlHeadEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyPearlHeadEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();

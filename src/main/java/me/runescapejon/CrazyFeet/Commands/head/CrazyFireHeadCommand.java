@@ -26,13 +26,13 @@ public class CrazyFireHeadCommand implements CommandExecutor {
 			if (player.hasPermission("crazyfeet.crazyfirehead")) {
 				if (cFireh.contains(player.getUniqueId())) {
 					cFireh.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyFireHeadDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyFireHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cFireh.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyFireHeadEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyFireHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -41,17 +41,17 @@ public class CrazyFireHeadCommand implements CommandExecutor {
 
 			if (cFireh.contains(targ.getUniqueId())) {
 				cFireh.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyFireHeadDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyFireHeadDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyFireHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cFireh.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyFireHeadEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyFireHeadEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyFireHeadEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyFireHeadEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

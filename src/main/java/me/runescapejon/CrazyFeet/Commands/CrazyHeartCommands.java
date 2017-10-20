@@ -27,13 +27,13 @@ public class CrazyHeartCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazyheart")) {
 				if (cHeart.contains(player.getUniqueId())) {
 					cHeart.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyHeartDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyHeartDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cHeart.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyHeartEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyHeartEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -42,17 +42,17 @@ public class CrazyHeartCommands implements CommandExecutor {
 
 			if (cHeart.contains(targ.getUniqueId())) {
 				cHeart.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyHeartDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyHeartDisabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyHeartDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyHeartDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cHeart.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyHeartEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyHeartEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyHeartEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyHeartEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

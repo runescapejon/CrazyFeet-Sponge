@@ -15,7 +15,7 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 
-public class CrazyGreenHelixCommands  implements CommandExecutor {
+public class CrazyGreenHelixCommands implements CommandExecutor {
 	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<UUID> cGreenhelix = CrazyFeet.getInstance().getCrazyGreenHelix();
@@ -27,13 +27,13 @@ public class CrazyGreenHelixCommands  implements CommandExecutor {
 			if (player.hasPermission("crazyFeet.crazygreenhelix")) {
 				if (cGreenhelix.contains(player.getUniqueId())) {
 					cGreenhelix.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyGreenHelixDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyGreenHelixDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cGreenhelix.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyGreenHelixEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyGreenHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -49,8 +49,8 @@ public class CrazyGreenHelixCommands  implements CommandExecutor {
 				return CommandResult.success();
 			} else {
 				cGreenhelix.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyGreenHelixEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyGreenHelixEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyGreenHelixEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();

@@ -30,53 +30,52 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 
 public class GuiPage2Cmd implements CommandExecutor {
-	
+
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
-					InventoryTitle.of(Text.builder("CrazyFeet Page 2").color(TextColors.DARK_RED).style(TextStyles.BOLD).build()))
+					InventoryTitle.of(
+							Text.builder("CrazyFeet Page 2").color(TextColors.DARK_RED).style(TextStyles.BOLD).build()))
 			.build(CrazyFeet.getPlugin());
 
 	@Listener
 	public void onInventoryClick(ClickInventoryEvent event, @First Player player) {
 		if (event.getTargetInventory().getName().get().equals(this.invs.getName().get())) {
-			//event.setCancelled(true);
 			Transaction<ItemStackSnapshot> clickTransaction = event.getTransactions().get(0);
 			ItemStack item = clickTransaction.getOriginal().createStack();
-			if (item.getType().equals(ItemTypes.FIRE_CHARGE)) {
-         	    //use this way so like that if they have permission to command or not.
+			if (item.getType().equals(ItemTypes.ENCHANTED_BOOK)) {
+
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
-				//1 tick delay may prevent "Phase Switch Error" from Sponge.
-				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
-						execute(() -> Sponge.getCommandManager().process(player, "crazyhelixmenu")).
-						submit(CrazyFeet.getInstance());
+
+				Sponge.getScheduler().createTaskBuilder().delayTicks(1)
+						.execute(() -> Sponge.getCommandManager().process(player, "crazyhelixmenu"))
+						.submit(CrazyFeet.getInstance());
 			}
 			if (item.getType().equals(ItemTypes.BOOK)) {
-         	    //use this way so like that if they have permission to command or not.
+
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
-				//1 tick delay may prevent "Phase Switch Error" from Sponge.
-				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
-						execute(() -> Sponge.getCommandManager().process(player, "crazymenu")).
-						submit(CrazyFeet.getInstance());
+
+				Sponge.getScheduler().createTaskBuilder().delayTicks(1)
+						.execute(() -> Sponge.getCommandManager().process(player, "crazymenu"))
+						.submit(CrazyFeet.getInstance());
 			}
 			if (item.getType().equals(ItemTypes.SLIME_BALL)) {
-         	    //use this way so like that if they have permission to command or not.
+
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
-				//1 tick delay may prevent "Phase Switch Error" from Sponge.
-				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
-						execute(() -> Sponge.getCommandManager().process(player, "crazyglobe")).
-						submit(CrazyFeet.getInstance());
+				Sponge.getScheduler().createTaskBuilder().delayTicks(1)
+						.execute(() -> Sponge.getCommandManager().process(player, "crazyglobe"))
+						.submit(CrazyFeet.getInstance());
 			}
 			event.setCancelled(true);
 		}
 	}
-	
-	 @Listener
-	 public void DropEvent(ClickInventoryEvent.Drop event) {
-		 if (event.getTargetInventory().getName().get().equals(this.invs.getName().get())) {
-			 event.setCancelled(true);
-		 }
-	 }
+
+	@Listener
+	public void DropEvent(ClickInventoryEvent.Drop event) {
+		if (event.getTargetInventory().getName().get().equals(this.invs.getName().get())) {
+			event.setCancelled(true);
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext ctx) throws CommandException {
@@ -86,8 +85,7 @@ public class GuiPage2Cmd implements CommandExecutor {
 		border.offer(Keys.DYE_COLOR, DyeColors.ORANGE);
 		ItemStack cdisable = ItemStack.of(ItemTypes.BARRIER, 1);
 		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("removeAllParticles"));
-		ItemStack mhelix = ItemStack.of(ItemTypes.DYE, 1);
-		mhelix.offer(Keys.DYE_COLOR, DyeColors.GREEN);
+		ItemStack mhelix = ItemStack.of(ItemTypes.ENCHANTED_BOOK, 1);
 		mhelix.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("HelixColorPicker"));
 		ItemStack mainmenu = ItemStack.of(ItemTypes.BOOK, 1);
 		mainmenu.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("MainMenu"));

@@ -27,13 +27,13 @@ public class CrazyWhiteHelixCommands implements CommandExecutor {
 			if (player.hasPermission("crazyFeet.crazywhitehelix")) {
 				if (cwhitehelix.contains(player.getUniqueId())) {
 					cwhitehelix.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyWhiteHelixDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyWhiteHelixDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cwhitehelix.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazywhiteHelixEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazywhiteHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -49,8 +49,8 @@ public class CrazyWhiteHelixCommands implements CommandExecutor {
 				return CommandResult.success();
 			} else {
 				cwhitehelix.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyWhiteHelixEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyWhiteHelixEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyWhiteHelixEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();

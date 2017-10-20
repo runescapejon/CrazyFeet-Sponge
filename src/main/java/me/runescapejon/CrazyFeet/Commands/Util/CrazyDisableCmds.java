@@ -40,13 +40,15 @@ public class CrazyDisableCmds implements CommandExecutor {
 			// if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (player.hasPermission("crazyfeet.crazyfirehead") || player.hasPermission("crazyfeet.crazysmokeheaed")
-					|| player.hasPermission("crazyfeet.crazymagichead") || player.hasPermission("crazyfeet.crazywitchhead")
-					|| player.hasPermission("crazyfeet.crazynotehead") || player.hasPermission("crazyfeet.crazyhearthead")
-					|| player.hasPermission("crazyfeet.crazypearlhead") || 
-					player.hasPermission("crazyfeet.crazyfire") || player.hasPermission("crazyfeet.crazysmoke")
-					|| player.hasPermission("crazyfeet.crazymagic") || player.hasPermission("crazyfeet.crazywitch")
-					|| player.hasPermission("crazyfeet.crazynote") || player.hasPermission("crazyfeet.crazyhelix")| player.hasPermission("crazyfeet.crazyheart")
-					|| player.hasPermission("crazyfeet.crazypearl")){
+					|| player.hasPermission("crazyfeet.crazymagichead")
+					|| player.hasPermission("crazyfeet.crazywitchhead")
+					|| player.hasPermission("crazyfeet.crazynotehead")
+					|| player.hasPermission("crazyfeet.crazyhearthead")
+					|| player.hasPermission("crazyfeet.crazypearlhead") || player.hasPermission("crazyfeet.crazyfire")
+					|| player.hasPermission("crazyfeet.crazysmoke") || player.hasPermission("crazyfeet.crazymagic")
+					|| player.hasPermission("crazyfeet.crazywitch") || player.hasPermission("crazyfeet.crazynote")
+					|| player.hasPermission("crazyfeet.crazyhelix") | player.hasPermission("crazyfeet.crazyheart")
+					|| player.hasPermission("crazyfeet.crazypearl")) {
 				if (cFireh.contains(player)) {
 					cFireh.remove(player);
 				}
@@ -147,10 +149,10 @@ public class CrazyDisableCmds implements CommandExecutor {
 			if (cPearl.contains(targ)) {
 				cPearl.remove(targ);
 			}
-			targ.sendMessage(LanguageUtils.getText("crazyFeetModesClearedByPlayer",
-					new Pair("%PLAYER%", sender.getName())));
-			sender.sendMessage(LanguageUtils.getText("crazyFeetModesClearedForPlayer",
-					new Pair("%PLAYER%", targ.getName())));
+			targ.sendMessage(
+					LanguageUtils.getText("crazyFeetModesClearedByPlayer", new Pair("%PLAYER%", sender.getName())));
+			sender.sendMessage(
+					LanguageUtils.getText("crazyFeetModesClearedForPlayer", new Pair("%PLAYER%", targ.getName())));
 		}
 		return CommandResult.success();
 

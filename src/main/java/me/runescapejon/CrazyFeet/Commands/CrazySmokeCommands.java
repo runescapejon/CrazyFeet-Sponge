@@ -26,13 +26,13 @@ public class CrazySmokeCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazysmoke")) {
 				if (cSmoke.contains(player.getUniqueId())) {
 					cSmoke.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazySmokeDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazySmokeDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cSmoke.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazySmokeEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazySmokeEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -41,17 +41,18 @@ public class CrazySmokeCommands implements CommandExecutor {
 
 			if (cSmoke.contains(targ.getUniqueId())) {
 				cSmoke.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazySmokeDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazySmokeDisabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazySmokeDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazySmokeDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cSmoke.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazySmokeEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazySmokeEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));				return CommandResult.success();
+				targ.sendMessage(
+						LanguageUtils.getText("crazySmokeEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazySmokeEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
+				return CommandResult.success();
 			}
 		}
 		return CommandResult.success();

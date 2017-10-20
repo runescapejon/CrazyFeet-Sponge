@@ -27,14 +27,14 @@ public class CrazyFireCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazyfire")) {
 				if (cFire.contains(player.getUniqueId())) {
 					cFire.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyFireDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyFireDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cFire.add(player.getUniqueId());
 					cbluehelix.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyFireEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyFireEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -43,17 +43,17 @@ public class CrazyFireCommands implements CommandExecutor {
 
 			if (cFire.contains(targ.getUniqueId())) {
 				cFire.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyFireDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyFireDisabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyFireDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyFireDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cFire.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyFireEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyFireEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyFireEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyFireEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

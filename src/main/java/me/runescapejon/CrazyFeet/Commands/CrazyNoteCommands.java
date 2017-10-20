@@ -26,13 +26,13 @@ public class CrazyNoteCommands implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazynote")) {
 				if (cNote.contains(player.getUniqueId())) {
 					cNote.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyNoteDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyNoteDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cNote.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyNoteEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyNoteEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -41,17 +41,17 @@ public class CrazyNoteCommands implements CommandExecutor {
 
 			if (cNote.contains(targ.getUniqueId())) {
 				cNote.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyNoteDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyNoteDisabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyNoteDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyNoteDisabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cNote.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyNoteEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
-				src.sendMessage(LanguageUtils.getText("crazyNoteEnabledForPlayer",
-						new Pair<>("%PLAYER%", targ.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyNoteEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
+				src.sendMessage(
+						LanguageUtils.getText("crazyNoteEnabledForPlayer", new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			}
 		}

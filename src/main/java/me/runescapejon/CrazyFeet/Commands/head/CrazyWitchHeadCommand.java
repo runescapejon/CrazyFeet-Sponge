@@ -27,13 +27,13 @@ public class CrazyWitchHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazywitchhead")) {
 				if (cWitchHead.contains(player.getUniqueId())) {
 					cWitchHead.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyWitchHeadDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyWitchHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cWitchHead.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyWitchHeadEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyWitchHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -42,15 +42,15 @@ public class CrazyWitchHeadCommand implements CommandExecutor {
 
 			if (cWitchHead.contains(targ.getUniqueId())) {
 				cWitchHead.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyWitchHeadDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyWitchHeadDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyWitchHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cWitchHead.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyWitchHeadEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyWitchHeadEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyWitchHeadEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();

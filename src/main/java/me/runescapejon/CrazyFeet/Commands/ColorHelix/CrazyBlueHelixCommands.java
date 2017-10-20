@@ -27,14 +27,14 @@ public class CrazyBlueHelixCommands implements CommandExecutor {
 			if (player.hasPermission("crazyFeet.crazybluehelix")) {
 				if (chelix.contains(player.getUniqueId())) {
 					chelix.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyBlueHelixDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyBlueHelixDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					chelix.add(player.getUniqueId());
 					cfire.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazyBlueHelixEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazyBlueHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -43,15 +43,15 @@ public class CrazyBlueHelixCommands implements CommandExecutor {
 
 			if (chelix.contains(targ.getUniqueId())) {
 				chelix.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyBlueHelixDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyBlueHelixDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyBlueHelixDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				chelix.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazyBlueHelixEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazyBlueHelixEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyBlueHelixEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();

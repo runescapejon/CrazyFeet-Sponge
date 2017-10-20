@@ -26,13 +26,13 @@ public class CrazySmokeHeadCommand implements CommandExecutor {
 			if (player.hasPermission("CrazyFeet.crazysmokehead")) {
 				if (cSmokeHead.contains(player.getUniqueId())) {
 					cSmokeHead.remove(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazySmokeHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
 					cSmokeHead.add(player.getUniqueId());
-					player.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabled",
-							new Pair<>("%PLAYER%", player.getName())));
+					player.sendMessage(
+							LanguageUtils.getText("crazySmokeHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
@@ -41,15 +41,15 @@ public class CrazySmokeHeadCommand implements CommandExecutor {
 
 			if (cSmokeHead.contains(targ.getUniqueId())) {
 				cSmokeHead.remove(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazySmokeHeadDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazySmokeHeadDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
 				cSmokeHead.add(targ.getUniqueId());
-				targ.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabledByPlayer",
-						new Pair<>("%PLAYER%", src.getName())));
+				targ.sendMessage(
+						LanguageUtils.getText("crazySmokeHeadEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazySmokeHeadEnabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
