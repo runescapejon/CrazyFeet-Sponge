@@ -10,6 +10,7 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.filter.cause.First;
 import me.runescapejon.CrazyFeet.CrazyFeet;
+
 import org.spongepowered.api.world.World;
 
 public class CrazyFeetListener {

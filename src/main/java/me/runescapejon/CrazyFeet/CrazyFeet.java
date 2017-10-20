@@ -5,10 +5,9 @@ import java.util.*;
 
 import com.google.inject.Inject;
 import me.runescapejon.CrazyFeet.Commands.*;
-import me.runescapejon.CrazyFeet.Commands.ColorHelix.CrazyBlueHelixCommands;
-import me.runescapejon.CrazyFeet.Commands.ColorHelix.CrazyGreenHelixCommands;
 import me.runescapejon.CrazyFeet.Commands.ColorHelix.*;
 import me.runescapejon.CrazyFeet.utils.Config;
+
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
@@ -45,15 +44,8 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 @Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {
-		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.9")
+		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.11")
 public class CrazyFeet {
-
-	private static CrazyFeet instance;
-
-	public static CrazyFeet getInstance() {
-		return instance;
-	}
-
 	private ArrayList<UUID> crazyFireHead = new ArrayList<>();
 	private ArrayList<UUID> crazyHeartHead = new ArrayList<>();
 	private ArrayList<UUID> crazyMagicHead = new ArrayList<>();
@@ -71,7 +63,17 @@ public class CrazyFeet {
 	private ArrayList<UUID> bluehelix = new ArrayList<>();
 	private ArrayList<UUID> whitehelix = new ArrayList<>();
 	private ArrayList<UUID> Greenhelix = new ArrayList<>();
+	private ArrayList<UUID> Redhelix = new ArrayList<>();
 	private ArrayList<UUID> globe = new ArrayList<>();
+	private ArrayList<UUID> Purplehelix = new ArrayList<>();
+	private ArrayList<UUID> Yellowhelix = new ArrayList<>();
+	private ArrayList<UUID> Orangehelix = new ArrayList<>();
+
+	private static CrazyFeet instance;
+
+	public static CrazyFeet getInstance() {
+		return instance;
+	}
 
 	@Inject
 	private Logger logger;
@@ -363,6 +365,46 @@ public class CrazyFeet {
 				.description(Text.of("crazyhelix to enable/disable Helix Particles")).executor(new GuiPage2Cmd())
 				.build();
 		Sponge.getCommandManager().register(this, CrazyGui2Spec, "crazymenu2");
+
+		CommandSpec CrazyRedHelixSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Helix Particles"))
+				.permission("crazyFeet.crazyredhelix")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags()
+						.buildWith(GenericArguments.firstParsing(
+								GenericArguments.optional(GenericArguments.player(Text.of("target"))),
+								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyRedHelixCommands()).build();
+		Sponge.getCommandManager().register(this, CrazyRedHelixSpec, "crazyredhelix");
+	
+		CommandSpec CrazypurpleHelixSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Helix Particles"))
+				.permission("crazyFeet.crazypurplehelix")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags()
+						.buildWith(GenericArguments.firstParsing(
+								GenericArguments.optional(GenericArguments.player(Text.of("target"))),
+								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyPurpleHelixCommand()).build();
+		Sponge.getCommandManager().register(this, CrazypurpleHelixSpec, "crazypurplehelix");
+		
+		CommandSpec CrazyyellowHelixSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Helix Particles"))
+				.permission("crazyFeet.crazyyellowhelix")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags()
+						.buildWith(GenericArguments.firstParsing(
+								GenericArguments.optional(GenericArguments.player(Text.of("target"))),
+								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyYellowHelixCommands()).build();
+		Sponge.getCommandManager().register(this, CrazyyellowHelixSpec, "crazyyellowhelix");
+
+		CommandSpec CrazyOrangeHelixSpec = CommandSpec.builder()
+				.description(Text.of("crazyhelix to enable/disable Helix Particles"))
+				.permission("crazyFeet.crazyorangehelix")
+				.arguments(GenericArguments.firstParsing(GenericArguments.flags()
+						.buildWith(GenericArguments.firstParsing(
+								GenericArguments.optional(GenericArguments.player(Text.of("target"))),
+								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
+				.executor(new CrazyOrangeHelixCommand()).build();
+		Sponge.getCommandManager().register(this, CrazyOrangeHelixSpec, "crazyorangehelix");
 	}
 
 	public Logger getLogger() {
@@ -431,6 +473,122 @@ public class CrazyFeet {
 
 	public ArrayList<UUID> getCrazyHeart() {
 		return crazyHeart;
+	}
+	
+	public ArrayList<UUID> getCrazyOrangeHelix() {
+		Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationOrange));
+		return Orangehelix;
+	}
+
+	public void playanimationOrange(Player player) {
+		Task.builder().intervalTicks(3).execute(() -> {
+			Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::OrangeHelix));
+		}).submit(CrazyFeet.getInstance());
+	}
+
+	public void OrangeHelix(Player player) {
+		phi = phi + Math.PI / 16;
+		double x, y, z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(
+						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
+								.option(ParticleOptions.COLOR, Color.ofRgb(249, 119, 7)).build(),
+						player.getLocation().getPosition().add(x, y, z));
+
+			}
+		}
+	}
+	
+	public ArrayList<UUID> getCrazyYellowHelix() {
+		Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationYellow));
+		return Yellowhelix;
+	}
+
+	public void playanimationYellow(Player player) {
+		Task.builder().intervalTicks(3).execute(() -> {
+			Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::YellowHelix));
+		}).submit(CrazyFeet.getInstance());
+	}
+
+	public void YellowHelix(Player player) {
+		phi = phi + Math.PI / 16;
+		double x, y, z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(
+						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
+								.option(ParticleOptions.COLOR, Color.ofRgb(249, 255, 48)).build(),
+						player.getLocation().getPosition().add(x, y, z));
+
+			}
+		}
+	}
+	
+	public ArrayList<UUID> getCrazyPurpleHelix() {
+		Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationPurple));
+		return Purplehelix;
+	}
+
+	public void playanimationPurple(Player player) {
+		Task.builder().intervalTicks(3).execute(() -> {
+			Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::purpleHelix));
+		}).submit(CrazyFeet.getInstance());
+	}
+
+	public void purpleHelix(Player player) {
+		phi = phi + Math.PI / 16;
+		double x, y, z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(
+						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
+								.option(ParticleOptions.COLOR, Color.ofRgb(255, 0, 255)).build(),
+						player.getLocation().getPosition().add(x, y, z));
+
+			}
+		}
+	}
+
+	public ArrayList<UUID> getCrazyRedHelix() {
+		Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationRed));
+		return Redhelix;
+	}
+
+	public void playanimationRed(Player player) {
+		Task.builder().intervalTicks(3).execute(() -> {
+			Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::RedHelix));
+		}).submit(CrazyFeet.getInstance());
+	}
+
+	public void RedHelix(Player player) {
+		phi = phi + Math.PI / 16;
+		double x, y, z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(
+						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
+								.option(ParticleOptions.COLOR, Color.ofRgb(255, 0, 0)).build(),
+						player.getLocation().getPosition().add(x, y, z));
+
+			}
+		}
 	}
 
 	public ArrayList<UUID> getCrazyGreenHelix() {

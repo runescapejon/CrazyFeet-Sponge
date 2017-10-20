@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
+import me.runescapejon.CrazyFeet.CrazyFeet;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
+
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
-import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyCheckCommands implements CommandExecutor {
 
@@ -56,60 +57,62 @@ public class CrazyCheckCommands implements CommandExecutor {
 			// System.out.println("It's being called crazycheck");
 			{
 				player.sendMessage(LanguageUtils.getText("crazyFeetModes"));
-				if (cGlobe.contains(player)) {
+				if (cGlobe.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyGlobe"));
 				}
-				if (cHelix.contains(player)) {
+				if (cHelix.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyHelix"));
 				}
-				if (cFireh.contains(player)) {
+				if (cFireh.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyFireHead"));
 				}
-				if (cSmokeh.contains(player)) {
+				if (cSmokeh.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazySmokeHead"));
 				}
-				if (cHearth.contains(player)) {
+				if (cHearth.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyHeartHead"));
 				}
-				if (cMagich.contains(player)) {
+				if (cMagich.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyMagicHead"));
 				}
-				if (cWitchh.contains(player)) {
+				if (cWitchh.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyWitchHead"));
 				}
-				if (cnoteh.contains(player)) {
+				if (cnoteh.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazynoteHead"));
 				}
-				if (cPearlh.contains(player)) {
+				if (cPearlh.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyPearlHead"));
 				}
-				if (cFire.contains(player)) {
+				if (cFire.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyFire"));
 				}
-				if (cSmoke.contains(player)) {
+				if (cSmoke.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazySmoke"));
 				}
-				if (cHeart.contains(player)) {
+				if (cHeart.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyHeart"));
 				}
-				if (cMagic.contains(player)) {
+				if (cMagic.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyMagic"));
 				}
-				if (cWitch.contains(player)) {
+				if (cWitch.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyWitch"));
 				}
-				if (cnote.contains(player)) {
+				if (cnote.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyNote"));
 				}
-				if (cPearl.contains(player)) {
+				if (cPearl.contains(player.getUniqueId())) {
 					player.sendMessage(Text.of("- CrazyPearl"));
 				}
-				if (!cFireh.contains(player) && !cHearth.contains(player) && !cnoteh.contains(player)
-						&& !cGlobe.contains(player) && !cHelix.contains(player) && !cWitchh.contains(player)
-						&& !cSmokeh.contains(player) && !cMagich.contains(player) && !cPearlh.contains(player)
-						&& !cFire.contains(player) && !cHeart.contains(player) && !cnote.contains(player)
-						&& !cWitch.contains(player) && !cSmoke.contains(player) && !cMagic.contains(player)
-						&& !cPearl.contains(player)) {
+				if (!cFireh.contains(player.getUniqueId()) && !cHearth.contains(player.getUniqueId())
+						&& !cnoteh.contains(player.getUniqueId()) && !cGlobe.contains(player.getUniqueId())
+						&& !cHelix.contains(player.getUniqueId()) && !cWitchh.contains(player.getUniqueId())
+						&& !cSmokeh.contains(player.getUniqueId()) && !cMagich.contains(player.getUniqueId())
+						&& !cPearlh.contains(player.getUniqueId()) && !cFire.contains(player.getUniqueId())
+						&& !cHeart.contains(player.getUniqueId()) && !cnote.contains(player.getUniqueId())
+						&& !cWitch.contains(player.getUniqueId()) && !cSmoke.contains(player.getUniqueId())
+						&& !cMagic.contains(player.getUniqueId()) && !cPearl.contains(player.getUniqueId())) {
 					player.sendMessage(LanguageUtils.getText("crazyFeetModesEmpty"));
 					// return CommandResult.success();
 				}
@@ -119,65 +122,67 @@ public class CrazyCheckCommands implements CommandExecutor {
 			sender.sendMessage(
 					LanguageUtils.getText("crazyFeetOtherPlayerModes", new Pair<>("%PLAYER%", targ.getName())));
 			// System.out.println("It's being called crazycheck other");
-			if (cGlobe.contains(targ)) {
+			if (cGlobe.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyGlobe"));
 			}
-			if (cHelix.contains(targ)) {
+			if (cHelix.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyHelix"));
 			}
-			if (cFireh.contains(targ)) {
+			if (cFireh.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyFireHead"));
 			}
-			if (cSmokeh.contains(targ)) {
+			if (cSmokeh.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazySmokeHead"));
 			}
-			if (cMagich.contains(targ)) {
+			if (cMagich.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyMagicHead"));
 			}
-			if (cWitchh.contains(targ)) {
+			if (cWitchh.contains(targ.getUniqueId())) {
 				targ.sendMessage(Text.of("- CrazyWitchHead"));
 			}
-			if (cnoteh.contains(targ)) {
+			if (cnoteh.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazynoteHead"));
 			}
-			if (cHearth.contains(targ)) {
+			if (cHearth.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyHeartHead"));
 			}
-			if (cPearlh.contains(targ)) {
+			if (cPearlh.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyPearlHead"));
 			}
-			if (cFire.contains(targ)) {
+			if (cFire.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyFire"));
 			}
-			if (cSmoke.contains(targ)) {
+			if (cSmoke.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazySmoke"));
 			}
-			if (cMagic.contains(targ)) {
+			if (cMagic.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyMagic"));
 			}
-			if (cWitch.contains(targ)) {
+			if (cWitch.contains(targ.getUniqueId())) {
 				targ.sendMessage(Text.of("- CrazyWitch"));
 			}
-			if (cnote.contains(targ)) {
+			if (cnote.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- Crazynote"));
 			}
-			if (cHeart.contains(targ)) {
+			if (cHeart.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyHeart"));
 			}
-			if (cPearl.contains(targ)) {
+			if (cPearl.contains(targ.getUniqueId())) {
 				sender.sendMessage(Text.of("- CrazyPearl"));
 			}
-			if (!cFireh.contains(targ) && !cSmokeh.contains(targ) && !cnoteh.contains(targ) && !cGlobe.contains(targ)
-					&& !cHelix.contains(targ) && !cWitchh.contains(targ) && !cHearth.contains(targ)
-					&& !cMagich.contains(targ) && !cPearlh.contains(targ) && !cFire.contains(targ)
-					&& !cSmoke.contains(targ) && !cnote.contains(targ) && !cWitch.contains(targ)
-					&& !cHeart.contains(targ) && !cMagic.contains(targ) && !cPearl.contains(targ)) {
+			if (!cFireh.contains(targ.getUniqueId()) && !cSmokeh.contains(targ.getUniqueId())
+					&& !cnoteh.contains(targ.getUniqueId()) && !cGlobe.contains(targ.getUniqueId())
+					&& !cHelix.contains(targ.getUniqueId()) && !cWitchh.contains(targ.getUniqueId())
+					&& !cHearth.contains(targ.getUniqueId()) && !cMagich.contains(targ.getUniqueId())
+					&& !cPearlh.contains(targ.getUniqueId()) && !cFire.contains(targ.getUniqueId())
+					&& !cSmoke.contains(targ.getUniqueId()) && !cnote.contains(targ.getUniqueId())
+					&& !cWitch.contains(targ.getUniqueId()) && !cHeart.contains(targ.getUniqueId())
+					&& !cMagic.contains(targ.getUniqueId()) && !cPearl.contains(targ.getUniqueId())) {
 				sender.sendMessage(LanguageUtils.getText("crazyFeetOtherPlayerModesEmpty",
 						new Pair<>("%PLAYER%", targ.getName())));
-				// return CommandResult.success();
 			}
 		}
-		// return CommandResult.success();
+
 		return CommandResult.success();
 	}
 }
