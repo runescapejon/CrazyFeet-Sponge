@@ -63,6 +63,13 @@ public class CrazyRedHelixCommands implements CommandExecutor {
 				return CommandResult.success();
 			} else {
 				credhelix.add(targ.getUniqueId());
+				cBrownhelix.remove(targ.getUniqueId());
+				cGreenhelix.remove(targ.getUniqueId());
+				corangehelix.remove(targ.getUniqueId());
+				cbluehelix.remove(targ.getUniqueId());
+		        cwhitehelix.remove(targ.getUniqueId());
+				cyellowhelix.remove(targ.getUniqueId());
+		        cPurplehelix.remove(targ.getUniqueId());
 				targ.sendMessage(
 						LanguageUtils.getText("crazyRedHelixEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(

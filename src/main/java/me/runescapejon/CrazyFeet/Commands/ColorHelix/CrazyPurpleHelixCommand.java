@@ -63,6 +63,13 @@ public class CrazyPurpleHelixCommand implements CommandExecutor {
 				return CommandResult.success();
 			} else {
 				cPurplehelix.add(targ.getUniqueId());
+				cBrownhelix.remove(targ.getUniqueId());
+				cGreenhelix.remove(targ.getUniqueId());
+				corangehelix.remove(targ.getUniqueId());
+				cbluehelix.remove(targ.getUniqueId());
+				credhelix.remove(targ.getUniqueId());
+				cwhitehelix.remove(targ.getUniqueId());
+				cyellowhelix.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyPurpleHelixEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyPurpleHelixEnabledForPlayer",

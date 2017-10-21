@@ -62,6 +62,13 @@ public class CrazyGreenHelixCommands implements CommandExecutor {
 				return CommandResult.success();
 			} else {
 				cGreenhelix.add(targ.getUniqueId());
+				cBrownhelix.remove(targ.getUniqueId());
+				cbluehelix.remove(targ.getUniqueId());
+				corangehelix.remove(targ.getUniqueId());
+				cpurplehelix.remove(targ.getUniqueId());
+				credhelix.remove(targ.getUniqueId());
+				cwhitehelix.remove(targ.getUniqueId());
+				cyellowhelix.remove(targ.getUniqueId());
 				targ.sendMessage(
 						LanguageUtils.getText("crazyGreenHelixEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyGreenHelixEnabledForPlayer",
