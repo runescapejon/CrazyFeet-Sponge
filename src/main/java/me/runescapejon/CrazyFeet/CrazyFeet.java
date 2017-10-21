@@ -2,6 +2,7 @@ package me.runescapejon.CrazyFeet;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import com.google.inject.Inject;
 import me.runescapejon.CrazyFeet.Commands.*;
@@ -364,6 +365,7 @@ public class CrazyFeet {
 
 		CommandSpec CrazyGui2Spec = CommandSpec.builder()
 				.description(Text.of("crazyhelix to enable/disable Helix Particles")).executor(new GuiPage2Cmd())
+				.permission("crazyfeet.crazygui")
 				.build();
 		Sponge.getCommandManager().register(this, CrazyGui2Spec, "crazymenu2");
 
@@ -374,7 +376,8 @@ public class CrazyFeet {
 						.buildWith(GenericArguments.firstParsing(
 								GenericArguments.optional(GenericArguments.player(Text.of("target"))),
 								GenericArguments.optional(GenericArguments.string(Text.of("targets")))))))
-				.executor(new CrazyRedHelixCommands()).build();
+				.executor(new CrazyRedHelixCommands())
+				.permission("crazyfeet.crazygui").build();
 		Sponge.getCommandManager().register(this, CrazyRedHelixSpec, "crazyredhelix");
 	
 		CommandSpec CrazypurpleHelixSpec = CommandSpec.builder()
@@ -502,7 +505,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationBrown(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -531,7 +534,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationOrange(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::OrangeHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -560,7 +563,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationYellow(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::YellowHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -589,7 +592,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationPurple(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::purpleHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -618,7 +621,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationRed(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::RedHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -647,7 +650,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationGreen(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Greenhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::GreenHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -676,7 +679,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationWhite(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			whitehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::WhiteHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -707,7 +710,7 @@ public class CrazyFeet {
 	Task task;
 
 	public void playanimation(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			bluehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BlueHelix));
 		}).submit(CrazyFeet.getInstance());
 	}
@@ -738,7 +741,7 @@ public class CrazyFeet {
 	}
 
 	public void playanimationglobe(Player player) {
-		Task.builder().intervalTicks(3).execute(() -> {
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			globe.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleGlobe));
 		}).submit(CrazyFeet.getInstance());
 
@@ -810,6 +813,8 @@ public class CrazyFeet {
 					ParticleEffect.builder().type(ParticleTypes.CLOUD).build(),
 					player.getLocation().getPosition().add(0.4, 2.5, 0));
 	}
+	
+
 
 	public void StyleYinYang(Player player) {
 		for (int degree = 90; degree < 360; degree++) {

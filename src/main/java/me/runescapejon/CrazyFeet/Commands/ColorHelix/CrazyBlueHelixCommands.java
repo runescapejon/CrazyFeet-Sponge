@@ -12,27 +12,45 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.scheduler.Task;
+
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 public class CrazyBlueHelixCommands implements CommandExecutor {
 	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<UUID> chelix = CrazyFeet.getInstance().getCrazyBlueHelix();
-		final ArrayList<UUID> cfire = CrazyFeet.getInstance().getCrazyFire();
+		final ArrayList<UUID> cbrownhelix = CrazyFeet.getInstance().getCrazyBrownHelix();
+		final ArrayList<UUID> cbluehelix = CrazyFeet.getInstance().getCrazyBlueHelix();
+		final ArrayList<UUID> cGreenhelix = CrazyFeet.getInstance().getCrazyGreenHelix();
+		final ArrayList<UUID> corangehelix = CrazyFeet.getInstance().getCrazyOrangeHelix();
+		final ArrayList<UUID> cpurplehelix = CrazyFeet.getInstance().getCrazyPurpleHelix();
+		final ArrayList<UUID> credhelix = CrazyFeet.getInstance().getCrazyRedHelix();
+		final ArrayList<UUID> cwhitehelix = CrazyFeet.getInstance().getCrazyWhiteHelix();
+		final ArrayList<UUID> cyellowhelix = CrazyFeet.getInstance().getCrazyYellowHelix();
 
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("crazyFeet.crazybluehelix")) {
-				if (chelix.contains(player.getUniqueId())) {
-					chelix.remove(player.getUniqueId());
+				if (cbluehelix.contains(player.getUniqueId())) {
+					cbluehelix.remove(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyBlueHelixDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
-					chelix.add(player.getUniqueId());
-					cfire.remove(player.getUniqueId());
+
+					cbluehelix.add(player.getUniqueId());
+					// add this to remove to some particle's effect that cause's
+					// lag issues cause you dont want too many of them all at
+					// once
+					cbrownhelix.remove(player.getUniqueId());
+					cGreenhelix.remove(player.getUniqueId());
+					corangehelix.remove(player.getUniqueId());
+					cpurplehelix.remove(player.getUniqueId());
+					credhelix.remove(player.getUniqueId());
+					cwhitehelix.remove(player.getUniqueId());
+					cyellowhelix.remove(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyBlueHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -41,15 +59,22 @@ public class CrazyBlueHelixCommands implements CommandExecutor {
 		} else if (src.hasPermission("crazyFeet.crazybluehelixother")) {
 			Player targ = target.get();
 
-			if (chelix.contains(targ.getUniqueId())) {
-				chelix.remove(targ.getUniqueId());
+			if (cbluehelix.contains(targ.getUniqueId())) {
+				cbluehelix.remove(targ.getUniqueId());
 				targ.sendMessage(
 						LanguageUtils.getText("crazyBlueHelixDisabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyBlueHelixDisabledForPlayer",
 						new Pair<>("%PLAYER%", targ.getName())));
 				return CommandResult.success();
 			} else {
-				chelix.add(targ.getUniqueId());
+				cbluehelix.add(targ.getUniqueId());
+				cbrownhelix.remove(targ.getUniqueId());
+				cGreenhelix.remove(targ.getUniqueId());
+				corangehelix.remove(targ.getUniqueId());
+				cpurplehelix.remove(targ.getUniqueId());
+				credhelix.remove(targ.getUniqueId());
+				cwhitehelix.remove(targ.getUniqueId());
+				cyellowhelix.remove(targ.getUniqueId());
 				targ.sendMessage(
 						LanguageUtils.getText("crazyBlueHelixEnabledByPlayer", new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyBlueHelixEnabledForPlayer",

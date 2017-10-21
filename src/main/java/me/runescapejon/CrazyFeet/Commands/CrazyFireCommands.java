@@ -19,7 +19,6 @@ public class CrazyFireCommands implements CommandExecutor {
 	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		final ArrayList<UUID> cFire = CrazyFeet.getInstance().getCrazyFire();
-		final ArrayList<UUID> cbluehelix = CrazyFeet.getInstance().getCrazyBlueHelix();
 		Optional<Player> target = args.getOne("target");
 
 		if (!target.isPresent()) {
@@ -32,7 +31,6 @@ public class CrazyFireCommands implements CommandExecutor {
 					return CommandResult.success();
 				} else {
 					cFire.add(player.getUniqueId());
-					cbluehelix.remove(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyFireEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
