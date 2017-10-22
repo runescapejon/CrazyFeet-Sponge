@@ -47,7 +47,7 @@ public class CrazyWhiteHelixCommands implements CommandExecutor {
 					cbluehelix.remove(player.getUniqueId());
 					cBrownhelix.remove(player.getUniqueId());
 					player.sendMessage(
-							LanguageUtils.getText("crazywhiteHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
+							LanguageUtils.getText("crazyWhiteHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}

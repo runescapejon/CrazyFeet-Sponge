@@ -3,7 +3,6 @@ package me.runescapejon.CrazyFeet.Commands.ColorHelix;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
-
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
@@ -56,7 +55,7 @@ public class CrazyBlueHelixCommands implements CommandExecutor {
 					return CommandResult.success();
 				}
 			}
-		} else if (src.hasPermission("crazyFeet.crazybluehelixother")) {
+		} else if (src.hasPermission("crazyFeet.crazyBluehelixother")) {
 			Player targ = target.get();
 
 			if (cbluehelix.contains(targ.getUniqueId())) {
