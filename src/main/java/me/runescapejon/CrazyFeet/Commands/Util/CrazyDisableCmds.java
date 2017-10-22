@@ -8,7 +8,6 @@ import me.runescapejon.CrazyFeet.CrazyFeet;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 
-
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
@@ -35,8 +34,16 @@ public class CrazyDisableCmds implements CommandExecutor {
 		final ArrayList<UUID> cnoteh = CrazyFeet.getInstance().getCrazyNoteHead();
 		final ArrayList<UUID> cHearth = CrazyFeet.getInstance().getCrazyHeartHead();
 		final ArrayList<UUID> cWitchh = CrazyFeet.getInstance().getCrazyWitchHead();
-		final ArrayList<UUID> chelix = CrazyFeet.getInstance().getCrazyBlueHelix();
 		final ArrayList<UUID> cglobe = CrazyFeet.getInstance().getCrazyGlobe();
+		final ArrayList<UUID> credhelix = CrazyFeet.getInstance().getCrazyRedHelix();
+		final ArrayList<UUID> cPurplehelix = CrazyFeet.getInstance().getCrazyPurpleHelix();
+		final ArrayList<UUID> corangehelix = CrazyFeet.getInstance().getCrazyOrangeHelix();
+		final ArrayList<UUID> cGreenhelix = CrazyFeet.getInstance().getCrazyGreenHelix();
+		final ArrayList<UUID> cBrownhelix = CrazyFeet.getInstance().getCrazyBrownHelix();
+		final ArrayList<UUID> cwhitehelix = CrazyFeet.getInstance().getCrazyWhiteHelix();
+		final ArrayList<UUID> cYellowhelix = CrazyFeet.getInstance().getCrazyYellowHelix();
+		final ArrayList<UUID> cbluehelix = CrazyFeet.getInstance().getCrazyBlueHelix();
+		final ArrayList<UUID> cstorm = CrazyFeet.getInstance().getCrazyStorm();
 
 		if (!target.isPresent()) {
 			// if (sender instanceof Player) {
@@ -45,6 +52,15 @@ public class CrazyDisableCmds implements CommandExecutor {
 					|| player.hasPermission("crazyfeet.crazymagichead")
 					|| player.hasPermission("crazyfeet.crazywitchhead")
 					|| player.hasPermission("crazyfeet.crazynotehead")
+					|| player.hasPermission("crazyfeet.crazystorm")
+					|| player.hasPermission("crazyfeet.crazyredhelix")
+					|| player.hasPermission("crazyfeet.crazybluehelix")
+					|| player.hasPermission("crazyfeet.crazybrownhelix")
+					|| player.hasPermission("crazyfeet.crazygreenhelix")
+					|| player.hasPermission("crazyfeet.crazyorangehelix")
+					|| player.hasPermission("crazyfeet.crazypurplehelix")
+					|| player.hasPermission("crazyfeet.crazywhitehelix")
+					|| player.hasPermission("crazyfeet.crazyyellowhelix")
 					|| player.hasPermission("crazyfeet.crazyhearthead")
 					|| player.hasPermission("crazyfeet.crazypearlhead") || player.hasPermission("crazyfeet.crazyfire")
 					|| player.hasPermission("crazyfeet.crazysmoke") || player.hasPermission("crazyfeet.crazymagic")
@@ -54,8 +70,32 @@ public class CrazyDisableCmds implements CommandExecutor {
 				if (cFireh.contains(player.getUniqueId())) {
 					cFireh.remove(player.getUniqueId());
 				}
-				if (chelix.contains(player.getUniqueId())) {
-					chelix.remove(player.getUniqueId());
+				if (cstorm.contains(player.getUniqueId())) {
+					cstorm.remove(player.getUniqueId());
+				}
+				if (cbluehelix.contains(player.getUniqueId())) {
+					cbluehelix.remove(player.getUniqueId());
+				}
+				if (credhelix.contains(player.getUniqueId())) {
+					credhelix.remove(player.getUniqueId());
+				}
+				if (corangehelix.contains(player.getUniqueId())) {
+					corangehelix.remove(player.getUniqueId());
+				}
+				if (cGreenhelix.contains(player.getUniqueId())) {
+					cGreenhelix.remove(player.getUniqueId());
+				}
+				if (cBrownhelix.contains(player.getUniqueId())) {
+					cBrownhelix.remove(player.getUniqueId());
+				}
+				if (cwhitehelix.contains(player.getUniqueId())) {
+					cwhitehelix.remove(player.getUniqueId());
+				}
+				if (cYellowhelix.contains(player.getUniqueId())) {
+					cYellowhelix.remove(player.getUniqueId());
+				}
+				if (cPurplehelix.contains(player.getUniqueId())) {
+					cPurplehelix.remove(player.getUniqueId());
 				}
 				if (cglobe.contains(player.getUniqueId())) {
 					cglobe.remove(player.getUniqueId());
@@ -106,8 +146,29 @@ public class CrazyDisableCmds implements CommandExecutor {
 			if (cglobe.contains(targ.getUniqueId())) {
 				cglobe.remove(targ.getUniqueId());
 			}
-			if (chelix.contains(targ.getUniqueId())) {
-				chelix.remove(targ.getUniqueId());
+			if (cstorm.contains(targ.getUniqueId())) {
+				cstorm.remove(targ.getUniqueId());
+			}
+			if (cbluehelix.contains(targ.getUniqueId())) {
+				cbluehelix.remove(targ.getUniqueId());
+			}
+			if (credhelix.contains(targ.getUniqueId())) {
+				credhelix.remove(targ.getUniqueId());
+			}
+			if (cYellowhelix.contains(targ.getUniqueId())) {
+				cYellowhelix.remove(targ.getUniqueId());
+			}
+			if (cGreenhelix.contains(targ.getUniqueId())) {
+				cGreenhelix.remove(targ.getUniqueId());
+			}
+			if (cBrownhelix.contains(targ.getUniqueId())) {
+				cBrownhelix.remove(targ.getUniqueId());
+			}
+			if (cwhitehelix.contains(targ.getUniqueId())) {
+				cwhitehelix.remove(targ.getUniqueId());
+			}
+			if (cPurplehelix.contains(targ.getUniqueId())) {
+				cPurplehelix.remove(targ.getUniqueId());
 			}
 			if (cFireh.contains(targ.getUniqueId())) {
 				cFireh.remove(targ.getUniqueId());
