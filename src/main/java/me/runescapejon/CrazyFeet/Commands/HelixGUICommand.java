@@ -27,8 +27,6 @@ import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.item.inventory.property.SlotPos;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.text.format.TextStyles;
-
 import me.runescapejon.CrazyFeet.CrazyFeet;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 

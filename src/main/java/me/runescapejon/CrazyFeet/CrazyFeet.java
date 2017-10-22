@@ -815,8 +815,9 @@ public class CrazyFeet {
 	}
 	
 
-
-	public void StyleYinYang(Player player) {
+// this here is basically so i can test and do a bit of math
+	//so i can add new particle animation and things like that you can ignore this
+	public void test(Player player) {
 		for (int degree = 90; degree < 360; degree++) {
 			double radians = Math.toRadians(degree);
 			double x = Math.cos(radians);
