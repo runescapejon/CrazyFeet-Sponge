@@ -52,11 +52,8 @@ public class CrazyHeadListener {
 		}
 		if (magich) {
 			world.spawnParticles(
-					ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-							.option(ParticleOptions.COLOR, Color.ofRgb(255, 255, 255)).build(),
-					player.getLocation().getPosition().add(0, 2.5, 0));
-			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.WATER_DROP).build(),
-					player.getLocation().getPosition().add(0, 2.5, 0));
+					ParticleEffect.builder().type(ParticleTypes.INSTANT_SPELL).build(),
+					player.getLocation().getPosition().add(0, 0.1, 0));
 		}
 		if (smokeh) {
 			world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.SMOKE).build(),
