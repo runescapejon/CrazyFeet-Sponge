@@ -24,9 +24,6 @@ import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.item.inventory.property.InventoryDimension;
 import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.item.inventory.property.SlotPos;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.text.format.TextStyles;
 
 public class GuiCommand implements CommandExecutor {
 	//this part is disabled due to creating null error making a better one 
@@ -34,7 +31,7 @@ public class GuiCommand implements CommandExecutor {
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
-					InventoryTitle.of(Text.builder("CrazyFeet").color(TextColors.DARK_RED).style(TextStyles.BOLD).build()))
+					InventoryTitle.of(LanguageUtils.getText("crazyYellowHelixEnabled")))
 			.build(CrazyFeet.getPlugin());
 
 	@Listener
@@ -156,40 +153,40 @@ public class GuiCommand implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext ctx) throws CommandException {
 		Player player = (Player) src;
 		ItemStack fire = ItemStack.of(ItemTypes.FIRE_CHARGE, 1);
-		fire.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyFire!"));
+		fire.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyFire"));
 		ItemStack heart = ItemStack.of(ItemTypes.REDSTONE_BLOCK, 1);
-		heart.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyHeart!"));
+		heart.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyHeart"));
 		ItemStack note = ItemStack.of(ItemTypes.NOTEBLOCK, 1);
-		note.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyNote!"));
+		note.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyNote"));
 		ItemStack magic = ItemStack.of(ItemTypes.EMERALD, 1);
-		magic.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyMagic!"));
+		magic.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyMagic"));
 		ItemStack witch = ItemStack.of(ItemTypes.NETHER_STAR, 1);
-		witch.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyWitch!"));
+		witch.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyWitch"));
 		ItemStack pearl = ItemStack.of(ItemTypes.ENDER_PEARL, 1);
-		pearl.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyPearl!"));
+		pearl.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyPearl"));
 		ItemStack smoke = ItemStack.of(ItemTypes.COAL_BLOCK, 1);
-		smoke.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "Crazysmoke!"));
+		smoke.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazySmoke"));
 		ItemStack border = ItemStack.of(ItemTypes.STAINED_GLASS_PANE, 1);
-		border.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("chooseParticleMode"));
+		border.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyChooseParticleMode"));
 		border.offer(Keys.DYE_COLOR, DyeColors.GRAY);
 		ItemStack smokeh = ItemStack.of(ItemTypes.TNT, 1);
-		smokeh.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazysmokeHead!"));
+		smokeh.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazySmokeHead"));
 		ItemStack fireH = ItemStack.of(ItemTypes.FLINT_AND_STEEL, 1);
-		fireH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyfireHead!"));
+		fireH.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyFireHead"));
 		ItemStack heartH = ItemStack.of(ItemTypes.REDSTONE, 1);
-		heartH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyHeartHead!"));
+		heartH.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyHeartHead"));
 		ItemStack noteH = ItemStack.of(ItemTypes.JUKEBOX, 1);
-		noteH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyNoteHead!"));
+		noteH.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyNoteHead"));
 		ItemStack magicH = ItemStack.of(ItemTypes.EMERALD_BLOCK, 1);
-		magicH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyMagicHead!"));
+		magicH.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyMagicHead"));
 		ItemStack witchH = ItemStack.of(ItemTypes.SOUL_SAND, 1);
-		witchH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyWitchHead!"));
+		witchH.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyWitchHead"));
 		ItemStack pearlH = ItemStack.of(ItemTypes.ENDER_EYE, 1);
-		pearlH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyPearlHead!"));
+		pearlH.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyPearlHead"));
 		ItemStack cdisable = ItemStack.of(ItemTypes.BARRIER, 1);
-		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("removeAllParticles"));
+		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyRemoveAllParticles"));
 		ItemStack nextpage = ItemStack.of(ItemTypes.PAPER, 2);
-		nextpage.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("NextPage"));
+		nextpage.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyNextPage"));
 		player.openInventory(invs);
 		invs.query(new SlotPos(0, 0)).set(border);
 		invs.query(new SlotPos(1, 0)).set(border);

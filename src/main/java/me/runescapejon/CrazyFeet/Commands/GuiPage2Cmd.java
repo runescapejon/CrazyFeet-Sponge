@@ -22,9 +22,6 @@ import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.item.inventory.property.InventoryDimension;
 import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.item.inventory.property.SlotPos;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.text.format.TextStyles;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
@@ -34,8 +31,7 @@ public class GuiPage2Cmd implements CommandExecutor {
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
-					InventoryTitle.of(
-							Text.builder("CrazyFeet Page 2").color(TextColors.DARK_RED).style(TextStyles.BOLD).build()))
+					InventoryTitle.of(LanguageUtils.getText("crazyYellowHelixEnabled")))
 			.build(CrazyFeet.getPlugin());
 
 	@Listener
@@ -88,18 +84,18 @@ public class GuiPage2Cmd implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext ctx) throws CommandException {
 		Player player = (Player) src;
 		ItemStack border = ItemStack.of(ItemTypes.STAINED_GLASS_PANE, 1);
-		border.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("chooseParticleMode"));
+		border.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyChooseParticleMode"));
 		border.offer(Keys.DYE_COLOR, DyeColors.ORANGE);
 		ItemStack cdisable = ItemStack.of(ItemTypes.BARRIER, 1);
-		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("removeAllParticles"));
+		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyRemoveAllParticles"));
 		ItemStack mhelix = ItemStack.of(ItemTypes.ENCHANTED_BOOK, 1);
-		mhelix.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("HelixColorPicker"));
+		mhelix.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyHelixColorPicker"));
 		ItemStack mainmenu = ItemStack.of(ItemTypes.BOOK, 1);
-		mainmenu.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("MainMenu"));
+		mainmenu.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyBackToMainMenu"));
 		ItemStack globe = ItemStack.of(ItemTypes.SLIME_BALL, 1);
-		globe.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("CrazyGlobe"));
+		globe.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyGlobe"));
 		ItemStack storm = ItemStack.of(ItemTypes.WATER_BUCKET, 1);
-		storm.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("CrazyStorm"));
+		storm.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("crazyStorm"));
 		player.openInventory(invs);
 		invs.query(new SlotPos(0, 0)).set(border);
 		invs.query(new SlotPos(1, 0)).set(border);
@@ -127,7 +123,7 @@ public class GuiPage2Cmd implements CommandExecutor {
 		invs.query(new SlotPos(1, 1)).set(mhelix);
 		invs.query(new SlotPos(2, 1)).set(globe);
 		invs.query(new SlotPos(3, 1)).set(storm);
-		player.sendMessage(LanguageUtils.getText("pleaseSelectCrazyParticle"));
+		player.sendMessage(LanguageUtils.getText("crazyPleaseSelectCrazyParticle"));
 		player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 		return CommandResult.success();
 	}
