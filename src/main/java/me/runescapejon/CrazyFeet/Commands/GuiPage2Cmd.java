@@ -31,7 +31,7 @@ public class GuiPage2Cmd implements CommandExecutor {
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
-					InventoryTitle.of(LanguageUtils.getText("crazyYellowHelixEnabled")))
+					InventoryTitle.of(LanguageUtils.getText("crazyMenuTitlePage2")))
 			.build(CrazyFeet.getPlugin());
 
 	@Listener

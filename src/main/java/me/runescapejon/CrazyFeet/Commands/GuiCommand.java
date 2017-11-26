@@ -31,7 +31,7 @@ public class GuiCommand implements CommandExecutor {
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
-					InventoryTitle.of(LanguageUtils.getText("crazyYellowHelixEnabled")))
+					InventoryTitle.of(LanguageUtils.getText("crazyMenuTitle")))
 			.build(CrazyFeet.getPlugin());
 
 	@Listener
@@ -227,7 +227,7 @@ public class GuiCommand implements CommandExecutor {
 		invs.query(new SlotPos(7, 2)).set(smokeh);
 		invs.query(new SlotPos(8, 1)).set(border);
 		invs.query(new SlotPos(0, 2)).set(border);
-		player.sendMessage(LanguageUtils.getText("pleaseSelectCrazyParticle"));
+		player.sendMessage(LanguageUtils.getText("crazyPleaseSelectCrazyParticle"));
 		player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 		return CommandResult.success();
 	}
