@@ -128,7 +128,7 @@ public class GuiCommand implements CommandExecutor {
 			if (item.getItem().equals(ItemTypes.TNT)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
-						execute(() -> Sponge.getCommandManager().process(player, "crazysmoke")).
+						execute(() -> Sponge.getCommandManager().process(player, "crazysmokehead")).
 						submit(CrazyFeet.getInstance());
 			}
 			if (item.getItem().equals(ItemTypes.BARRIER)) {
