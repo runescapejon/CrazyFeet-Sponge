@@ -499,16 +499,18 @@ public class CrazyFeet {
 		return crazyHeart;
 	}
 	
-	public ArrayList<UUID> getCrazyBrownHelix() {
-		Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationBrown));
-		return Brownhelix;
-	}
-
-	public void playanimationBrown(Player player) {
+public ArrayList<UUID> getCrazyBrownHelix() {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
 		}).submit(CrazyFeet.getInstance());
+		return Brownhelix;
 	}
+
+	//public void playanimationBrown(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	//		Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	public void BrownHelix(Player player) {
 		phi = phi + Math.PI / 16;
@@ -529,15 +531,18 @@ public class CrazyFeet {
 	}
 	
 	public ArrayList<UUID> getCrazyOrangeHelix() {
-		Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationOrange));
-		return Orangehelix;
-	}
-
-	public void playanimationOrange(Player player) {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::OrangeHelix));
 		}).submit(CrazyFeet.getInstance());
+		return Orangehelix;
 	}
+
+	//public void playanimationOrange(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	//		Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::OrangeHelix));
+	//		System.out.println("playanimationOrange calling......");
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	public void OrangeHelix(Player player) {
 		phi = phi + Math.PI / 16;
@@ -558,15 +563,17 @@ public class CrazyFeet {
 	}
 	
 	public ArrayList<UUID> getCrazyYellowHelix() {
-		Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationYellow));
-		return Yellowhelix;
-	}
-
-	public void playanimationYellow(Player player) {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::YellowHelix));
 		}).submit(CrazyFeet.getInstance());
+		return Yellowhelix;
 	}
+
+	//public void playanimationYellow(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	//		Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::YellowHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	public void YellowHelix(Player player) {
 		phi = phi + Math.PI / 16;
@@ -587,15 +594,17 @@ public class CrazyFeet {
 	}
 	
 	public ArrayList<UUID> getCrazyPurpleHelix() {
-		Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationPurple));
-		return Purplehelix;
-	}
-
-	public void playanimationPurple(Player player) {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::purpleHelix));
 		}).submit(CrazyFeet.getInstance());
+		return Purplehelix;
 	}
+
+	//public void playanimationPurple(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	///		Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::purpleHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	public void purpleHelix(Player player) {
 		phi = phi + Math.PI / 16;
@@ -616,15 +625,17 @@ public class CrazyFeet {
 	}
 
 	public ArrayList<UUID> getCrazyRedHelix() {
-		Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationRed));
-		return Redhelix;
-	}
-
-	public void playanimationRed(Player player) {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::RedHelix));
 		}).submit(CrazyFeet.getInstance());
+		return Redhelix;
 	}
+
+//	public void playanimationRed(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+		//	Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::RedHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	public void RedHelix(Player player) {
 		phi = phi + Math.PI / 16;
@@ -645,15 +656,17 @@ public class CrazyFeet {
 	}
 
 	public ArrayList<UUID> getCrazyGreenHelix() {
-		Greenhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationGreen));
-		return Greenhelix;
-	}
-
-	public void playanimationGreen(Player player) {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Greenhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::GreenHelix));
 		}).submit(CrazyFeet.getInstance());
+		return Greenhelix;
 	}
+
+//	public void playanimationGreen(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+		//	Greenhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::GreenHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	public void GreenHelix(Player player) {
 		phi = phi + Math.PI / 16;
@@ -674,15 +687,17 @@ public class CrazyFeet {
 	}
 
 	public ArrayList<UUID> getCrazyWhiteHelix() {
-		whitehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationWhite));
-		return whitehelix;
-	}
-
-	public void playanimationWhite(Player player) {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			whitehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::WhiteHelix));
 		}).submit(CrazyFeet.getInstance());
+		return whitehelix;
 	}
+
+	//public void playanimationWhite(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	//		whitehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::WhiteHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	public void WhiteHelix(Player player) {
 		phi = phi + Math.PI / 16;
@@ -703,17 +718,19 @@ public class CrazyFeet {
 	}
 
 	public ArrayList<UUID> getCrazyBlueHelix() {
-		bluehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimation));
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+			bluehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BlueHelix));
+		}).submit(CrazyFeet.getInstance());
 		return bluehelix;
 	}
 
 	Task task;
 
-	public void playanimation(Player player) {
-		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
-			bluehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BlueHelix));
-		}).submit(CrazyFeet.getInstance());
-	}
+	//public void playanimation(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	//		bluehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BlueHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	double phi = 0;
 
@@ -736,16 +753,17 @@ public class CrazyFeet {
 	}
 
 	public ArrayList<UUID> getCrazyGlobe() {
-		globe.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationglobe));
-		return globe;
-	}
-
-	public void playanimationglobe(Player player) {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			globe.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleGlobe));
 		}).submit(CrazyFeet.getInstance());
-
+		return globe;
 	}
+
+	//public void playanimationglobe(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	//		globe.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleGlobe));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 
 	double pi = 0;
 
@@ -770,24 +788,28 @@ public class CrazyFeet {
 
 	
 	public ArrayList<UUID> getCrazyStorm() {
-		Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationStorm));
-		Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationRain));
-		return Storm;
-	}
-
-	public void playanimationStorm(Player player) {
+	//	Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationStorm));
+	//	Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::playanimationRain));
 		Task.builder().intervalTicks(1).execute(() -> {
 			Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::Cloud));
 		}).submit(CrazyFeet.getInstance());
-
-	}
-	
-	public void playanimationRain(Player player) {
 		Task.builder().intervalTicks(1).execute(() -> {
 			Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::Rain));
 		}).submit(CrazyFeet.getInstance());
-
+		return Storm;
 	}
+
+	//public void playanimationStorm(Player player) {
+	//	Task.builder().intervalTicks(1).execute(() -> {
+	//		Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::Cloud));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
+	
+	//public void playanimationRain(Player player) {
+	//	Task.builder().intervalTicks(1).execute(() -> {
+	//		Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::Rain));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
 	
 	public void Rain(Player player) {
 		World world = player.getWorld();
