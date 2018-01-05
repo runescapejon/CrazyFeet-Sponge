@@ -68,9 +68,6 @@ public class GuiPage2Cmd implements CommandExecutor {
 						.execute(() -> Sponge.getCommandManager().process(player, "crazystorm"))
 						.submit(CrazyFeet.getInstance());
 			}
-			if (item.getType().equals(ItemTypes.GOLDEN_APPLE)) {
-
-			}
 			event.setCancelled(true);
 		}
 	}
