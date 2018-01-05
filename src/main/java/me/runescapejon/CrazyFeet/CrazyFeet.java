@@ -45,7 +45,7 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 @Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {
-		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.12")
+		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.13")
 public class CrazyFeet {
 	private ArrayList<UUID> crazyFireHead = new ArrayList<>();
 	private ArrayList<UUID> crazyHeartHead = new ArrayList<>();
