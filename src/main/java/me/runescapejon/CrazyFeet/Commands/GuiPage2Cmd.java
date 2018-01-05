@@ -30,8 +30,7 @@ public class GuiPage2Cmd implements CommandExecutor {
 
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
-			.property(InventoryTitle.PROPERTY_NAME,
-					InventoryTitle.of(LanguageUtils.getText("crazyMenuTitlePage2")))
+			.property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(LanguageUtils.getText("crazyMenuTitlePage2")))
 			.build(CrazyFeet.getPlugin());
 
 	@Listener
@@ -68,6 +67,9 @@ public class GuiPage2Cmd implements CommandExecutor {
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1)
 						.execute(() -> Sponge.getCommandManager().process(player, "crazystorm"))
 						.submit(CrazyFeet.getInstance());
+			}
+			if (item.getType().equals(ItemTypes.GOLDEN_APPLE)) {
+
 			}
 			event.setCancelled(true);
 		}
@@ -111,6 +113,7 @@ public class GuiPage2Cmd implements CommandExecutor {
 		invs.query(SlotPos.of(3, 3)).set(border);
 		invs.query(SlotPos.of(4, 3)).set(border);
 		invs.query(SlotPos.of(5, 3)).set(border);
+		invs.query(SlotPos.of(6, 3)).set(border);
 		invs.query(SlotPos.of(0, 3)).set(cdisable);
 		invs.query(SlotPos.of(8, 3)).set(mainmenu);
 		invs.query(SlotPos.of(7, 3)).set(border);
