@@ -14,6 +14,7 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
+import org.spongepowered.api.data.manipulator.DataManipulator;
 import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.effect.particle.ParticleOptions;
 import org.spongepowered.api.effect.particle.ParticleTypes;
@@ -45,7 +46,7 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
 import me.runescapejon.CrazyFeet.CrazyFeet;
 
 @Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {
-		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.13")
+		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.14")
 public class CrazyFeet {
 	private ArrayList<UUID> crazyFireHead = new ArrayList<>();
 	private ArrayList<UUID> crazyHeartHead = new ArrayList<>();
@@ -499,7 +500,7 @@ public class CrazyFeet {
 		return crazyHeart;
 	}
 	
-public ArrayList<UUID> getCrazyBrownHelix() {
+	public ArrayList<UUID> getCrazyBrownHelix() {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
 		}).submit(CrazyFeet.getInstance());

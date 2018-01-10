@@ -25,8 +25,10 @@ import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.item.inventory.property.InventoryDimension;
 import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.item.inventory.property.SlotPos;
+import org.spongepowered.api.item.inventory.query.QueryOperationTypes;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+
 import me.runescapejon.CrazyFeet.CrazyFeet;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 
@@ -34,7 +36,7 @@ public class HelixGUICommand implements CommandExecutor {
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
 			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
-					InventoryTitle.of(Text.builder("Â§bHÂ§eeÂ§alÂ§ciÂ§2x Â§cCÂ§aoÂ§elÂ§eoÂ§cr Â§ePÂ§2iÂ§dcÂ§bkÂ§2eÂ§ar").build()))
+					InventoryTitle.of(Text.builder("§bH§ee§al§ci§2x §cC§ao§el§eo§cr §eP§2i§dc§bk§2e§ar").build()))
 			.build(CrazyFeet.getPlugin());
 
 	@Listener
@@ -203,45 +205,45 @@ public class HelixGUICommand implements CommandExecutor {
 		menu.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("MainMenu"));
 
 		player.openInventory(invs);
-		invs.query(SlotPos.of(0, 0)).set(bordergreen);
-		invs.query(SlotPos.of(1, 0)).set(borderred);
-		invs.query(SlotPos.of(2, 0)).set(borderwhite);
-		invs.query(SlotPos.of(3, 0)).set(borderpurple);
-		invs.query(SlotPos.of(4, 0)).set(borderpink);
-		invs.query(SlotPos.of(5, 0)).set(bordergray);
-		invs.query(SlotPos.of(6, 0)).set(borderpink);
-		invs.query(SlotPos.of(7, 0)).set(bordergreen);
-		invs.query(SlotPos.of(8, 0)).set(borderred);
-		invs.query(SlotPos.of(0, 3)).set(borderpurple);
-		invs.query(SlotPos.of(1, 3)).set(borderwhite);
-		invs.query(SlotPos.of(2, 3)).set(bordergreen);
-		invs.query(SlotPos.of(3, 3)).set(borderred);
-		invs.query(SlotPos.of(4, 3)).set(borderblue);
-		invs.query(SlotPos.of(5, 3)).set(borderpurple);
-		invs.query(SlotPos.of(6, 3)).set(borderwhite);
-		invs.query(SlotPos.of(7, 3)).set(borderblue);
-		invs.query(SlotPos.of(8, 1)).set(bordergray);
-		invs.query(SlotPos.of(0, 1)).set(borderpink);
-		invs.query(SlotPos.of(8, 1)).set(borderblue);
-		invs.query(SlotPos.of(0, 2)).set(borderred);
-		invs.query(SlotPos.of(8, 2)).set(borderpink);
-		invs.query(SlotPos.of(0, 3)).set(cdisable);
-		invs.query(SlotPos.of(8, 3)).set(menu);
-		invs.query(SlotPos.of(1, 1)).set(helixblue);
-		invs.query(SlotPos.of(2, 1)).set(white);
-		invs.query(SlotPos.of(3, 1)).set(green);
-		invs.query(SlotPos.of(4, 1)).set(red);
-		invs.query(SlotPos.of(5, 1)).set(purple);
-		invs.query(SlotPos.of(6, 1)).set(yellow);
-		invs.query(SlotPos.of(7, 1)).set(orange);
-		invs.query(SlotPos.of(1, 2)).set(brown);
-		// invs.query(SlotPos.of(1, 2)).set(fireH);
-		// invs.query(SlotPos.of(2, 2)).set(heartH);
-		// invs.query(SlotPos.of(3, 2)).set(noteH);
-		// invs.query(SlotPos.of(4, 2)).set(magicH);
-		// invs.query(SlotPos.of(5, 2)).set(witchH);
-		// invs.query(SlotPos.of(6, 2)).set(pearlH);
-		// invs.query(SlotPos.of(7, 2)).set(smokeh);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(0, 0))).set(bordergreen);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(1, 0))).set(borderred);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(2, 0))).set(borderwhite);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(3, 0))).set(borderpurple);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(4, 0))).set(borderpink);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(5, 0))).set(bordergray);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(6, 0))).set(borderpink);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(7, 0))).set(bordergreen);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(8, 0))).set(borderred);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(0, 3))).set(borderpurple);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(1, 3))).set(borderwhite);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(2, 3))).set(bordergreen);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(3, 3))).set(borderred);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(4, 3))).set(borderblue);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(5, 3))).set(borderpurple);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(6, 3))).set(borderwhite);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(7, 3))).set(borderblue);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(8, 1))).set(bordergray);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(0, 1))).set(borderpink);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(8, 1))).set(borderblue);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(0, 2))).set(borderred);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(8, 2))).set(borderpink);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(0, 3))).set(cdisable);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(8, 3))).set(menu);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(1, 1))).set(helixblue);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(2, 1))).set(white);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(3, 1))).set(green);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(4, 1))).set(red);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(5, 1))).set(purple);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(6, 1))).set(yellow);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(7, 1))).set(orange);
+		invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(1, 2))).set(brown);
+		// invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(1, 2)).set(fireH);
+		// invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(2, 2)).set(heartH);
+		// invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(3, 2)).set(noteH);
+		// invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(4, 2)).set(magicH);
+		// invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(5, 2)).set(witchH);
+		// invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(6, 2)).set(pearlH);
+		// invs.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(7, 2)).set(smokeh);
 		player.sendMessage(LanguageUtils.getText("pleaseSelectCrazyParticle"));
 		player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 		return CommandResult.success();
