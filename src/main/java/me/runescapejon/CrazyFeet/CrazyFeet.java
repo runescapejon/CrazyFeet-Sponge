@@ -62,7 +62,7 @@ public class CrazyFeet {
 	private ArrayList<UUID> crazyNote = new ArrayList<>();
 	private ArrayList<UUID> crazyWitch = new ArrayList<>();
 	private ArrayList<UUID> crazyHeart = new ArrayList<>();
-	private ArrayList<UUID> bluehelix = new ArrayList<>();
+	private ArrayList<UUID> blue= new ArrayList<>();
 	private ArrayList<UUID> whitehelix = new ArrayList<>();
 	private ArrayList<UUID> Greenhelix = new ArrayList<>();
 	private ArrayList<UUID> Redhelix = new ArrayList<>();
@@ -513,28 +513,27 @@ public class CrazyFeet {
 	//	}).submit(CrazyFeet.getInstance());
 	//}
 
-	public void BrownHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(127, 85, 42)).build(),
-						player.getLocation().getPosition().add(x, y, z));
-
-			}
-		}
-	}
-	
-	public ArrayList<UUID> getCrazyOrangeHelix() {
+	public ArrayList<UUID> getCrazyBrownHelix() {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
-			Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::OrangeHelix));
+			Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
 		}).submit(CrazyFeet.getInstance());
+		return Brownhelix;
+	}
+
+	//public void playanimationBrown(Player player) {
+	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
+	//		Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
+	//	}).submit(CrazyFeet.getInstance());
+	//}
+
+	public void BrownHelix(Player player) {
+		helixMath(player,Color.ofRgb(127,85,42));
+	}
+
+	public ArrayList<UUID> getCrazyOrangeHelix() {
+		Task.builder().async().delay(10,TimeUnit.MILLISECONDS).interval(63, TimeUnit.MILLISECONDS).execute(() ->
+				Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::OrangeHelix)))
+				.submit(CrazyFeet.getInstance());
 		return Orangehelix;
 	}
 
@@ -545,24 +544,11 @@ public class CrazyFeet {
 	//	}).submit(CrazyFeet.getInstance());
 	//}
 
-	public void OrangeHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(249, 119, 7)).build(),
-						player.getLocation().getPosition().add(x, y, z));
 
-			}
-		}
+	public void OrangeHelix(Player player) {
+		helixMath(player,Color.ofRgb(249, 119, 7));
 	}
-	
+
 	public ArrayList<UUID> getCrazyYellowHelix() {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::YellowHelix));
@@ -577,23 +563,9 @@ public class CrazyFeet {
 	//}
 
 	public void YellowHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(249, 255, 48)).build(),
-						player.getLocation().getPosition().add(x, y, z));
-
-			}
-		}
+		helixMath(player,Color.ofRgb(249, 255, 48));
 	}
-	
+
 	public ArrayList<UUID> getCrazyPurpleHelix() {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::purpleHelix));
@@ -608,21 +580,7 @@ public class CrazyFeet {
 	//}
 
 	public void purpleHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(255, 0, 255)).build(),
-						player.getLocation().getPosition().add(x, y, z));
-
-			}
-		}
+		helixMath(player,Color.ofRgb(255,0,255));
 	}
 
 	public ArrayList<UUID> getCrazyRedHelix() {
@@ -634,26 +592,12 @@ public class CrazyFeet {
 
 //	public void playanimationRed(Player player) {
 	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
-		//	Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::RedHelix));
+	//	Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::RedHelix));
 	//	}).submit(CrazyFeet.getInstance());
 	//}
 
 	public void RedHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(255, 0, 0)).build(),
-						player.getLocation().getPosition().add(x, y, z));
-
-			}
-		}
+		helixMath(player,Color.ofRgb(255,0,0));
 	}
 
 	public ArrayList<UUID> getCrazyGreenHelix() {
@@ -665,26 +609,12 @@ public class CrazyFeet {
 
 //	public void playanimationGreen(Player player) {
 	//	Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
-		//	Greenhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::GreenHelix));
+	//	Greenhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::GreenHelix));
 	//	}).submit(CrazyFeet.getInstance());
 	//}
 
 	public void GreenHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(2, 255, 15)).build(),
-						player.getLocation().getPosition().add(x, y, z));
-
-			}
-		}
+		helixMath(player,Color.ofRgb(2, 255, 15));
 	}
 
 	public ArrayList<UUID> getCrazyWhiteHelix() {
@@ -701,23 +631,8 @@ public class CrazyFeet {
 	//}
 
 	public void WhiteHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(255, 255, 255)).build(),
-						player.getLocation().getPosition().add(x, y, z));
-
-			}
-		}
+		helixMath(player,Color.ofRgb(255, 255, 255));
 	}
-
 	public ArrayList<UUID> getCrazyBlueHelix() {
 		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
 			bluehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BlueHelix));
@@ -736,27 +651,13 @@ public class CrazyFeet {
 	double phi = 0;
 
 	public void BlueHelix(Player player) {
-		phi = phi + Math.PI / 16;
-		double x, y, z;
-		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
-			for (double i = 0; i <= 1; i = i + 1) {
-				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
-				y = 0.5 * t;
-				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
-				World world = player.getWorld();
-				world.spawnParticles(
-						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
-								.option(ParticleOptions.COLOR, Color.ofRgb(15, 86, 253)).build(),
-						player.getLocation().getPosition().add(x, y, z));
-
-			}
-		}
+		helixMath(player,Color.ofRgb(15, 86, 253));
 	}
 
 	public ArrayList<UUID> getCrazyGlobe() {
-		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() -> {
-			globe.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleGlobe));
-		}).submit(CrazyFeet.getInstance());
+		Task.builder().interval(63, TimeUnit.MILLISECONDS).execute(() ->
+				globe.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleGlobe)))
+				.submit(CrazyFeet.getInstance());
 		return globe;
 	}
 
@@ -765,6 +666,23 @@ public class CrazyFeet {
 	//		globe.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::StyleGlobe));
 	//	}).submit(CrazyFeet.getInstance());
 	//}
+
+	public void helixMath(Player player, Color c) {
+		phi = phi + Math.PI / 16;
+		double x,y,z;
+		for (double t = 0; t <= 2 * Math.PI; t = t + Math.PI / 16) {
+			for (double i = 0; i <= 1; i = i + 1) {
+				x = 0.15 * (2 * Math.PI - t) * Math.cos(t + phi + i * Math.PI);
+				y = 0.5 * t;
+				z = 0.15 * (2 * Math.PI - t) * Math.sin(t + phi + i * Math.PI);
+				World world = player.getWorld();
+				world.spawnParticles(
+						ParticleEffect.builder().type(ParticleTypes.REDSTONE_DUST)
+								.option(ParticleOptions.COLOR, c).build(),
+						player.getLocation().getPosition().add(x, y, z));
+			}
+		}
+	}
 
 	double pi = 0;
 
