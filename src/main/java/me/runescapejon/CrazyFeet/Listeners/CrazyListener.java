@@ -20,7 +20,7 @@ import org.spongepowered.api.world.World;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CrazyHeadListener {
+public class CrazyListener {
 	// It's seem getPosition().add(0, 3, 0,) seem the right location for the
 	// Head
 	// - tested 2.5 is right
@@ -29,10 +29,8 @@ public class CrazyHeadListener {
 		if (player.get(Keys.INVISIBLE).get()) {
 			return;
 		}
-		//Heights
 		double head = 2.5;
 		double feet = 0.1;
-				//Booleans for feet
 		boolean fire = CrazyFeet.getInstance().getCrazyFire().contains(player.getUniqueId()),
 				note = CrazyFeet.getInstance().getCrazyNote().contains(player.getUniqueId()),
 				magic = CrazyFeet.getInstance().getCrazyMagic().contains(player.getUniqueId()),
@@ -40,7 +38,6 @@ public class CrazyHeadListener {
 				heart = CrazyFeet.getInstance().getCrazyHeart().contains(player.getUniqueId()),
 				pearl = CrazyFeet.getInstance().getCrazyPearl().contains(player.getUniqueId()),
 				witch = CrazyFeet.getInstance().getCrazyWitch().contains(player.getUniqueId()),
-				//Booleans for head
 				fireHead = CrazyFeet.getInstance().getCrazyFireHead().contains(player.getUniqueId()),
 				noteHead = CrazyFeet.getInstance().getCrazyNoteHead().contains(player.getUniqueId()),
 				magicHead = CrazyFeet.getInstance().getCrazyMagicHead().contains(player.getUniqueId()),
@@ -50,7 +47,6 @@ public class CrazyHeadListener {
 				witchHead = CrazyFeet.getInstance().getCrazyWitchHead().contains(player.getUniqueId());
 
 		World world = player.getWorld();
-		//Checks for feet
 		if (note) {
 			// Thanks to @Cybermaxke for telling me how to change colors
 			applyParticle(world,player,ParticleTypes.NOTE,true,feet);
@@ -73,8 +69,6 @@ public class CrazyHeadListener {
 		if (witch) {
 			applyParticle(world,player,ParticleTypes.WITCH_SPELL,false,feet);
 		}
-		
-		//Checks for Heads
 		if (noteHead) {
 			applyParticle(world,player,ParticleTypes.NOTE,true,head);
 		}
