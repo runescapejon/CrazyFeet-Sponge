@@ -62,7 +62,7 @@ public class CrazyFeet {
 	private ArrayList<UUID> crazyNote = new ArrayList<>();
 	private ArrayList<UUID> crazyWitch = new ArrayList<>();
 	private ArrayList<UUID> crazyHeart = new ArrayList<>();
-	private ArrayList<UUID> blue= new ArrayList<>();
+	private ArrayList<UUID> bluehelix= new ArrayList<>();
 	private ArrayList<UUID> whitehelix = new ArrayList<>();
 	private ArrayList<UUID> Greenhelix = new ArrayList<>();
 	private ArrayList<UUID> Redhelix = new ArrayList<>();
