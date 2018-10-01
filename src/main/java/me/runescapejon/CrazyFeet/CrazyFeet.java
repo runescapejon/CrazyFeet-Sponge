@@ -647,7 +647,7 @@ public class CrazyFeet {
                         bluehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BlueHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .interval(63,TimeUnit.MILLISECONDS)
@@ -657,7 +657,7 @@ public class CrazyFeet {
                         Brownhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::BrownHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .interval(63,TimeUnit.MILLISECONDS)
@@ -667,7 +667,7 @@ public class CrazyFeet {
                         Greenhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::GreenHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .interval(63,TimeUnit.MILLISECONDS)
@@ -677,7 +677,7 @@ public class CrazyFeet {
                         Yellowhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::YellowHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .interval(63,TimeUnit.MILLISECONDS)
@@ -687,7 +687,7 @@ public class CrazyFeet {
                         Orangehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::OrangeHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .interval(63,TimeUnit.MILLISECONDS)
@@ -697,7 +697,7 @@ public class CrazyFeet {
                         Purplehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::purpleHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .interval(63,TimeUnit.MILLISECONDS)
@@ -707,7 +707,7 @@ public class CrazyFeet {
                         whitehelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::WhiteHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .interval(63,TimeUnit.MILLISECONDS)
@@ -717,7 +717,7 @@ public class CrazyFeet {
                         Redhelix.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::RedHelix));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
 
         Task.builder()
                 .intervalTicks(1)
@@ -727,7 +727,7 @@ public class CrazyFeet {
                         Storm.forEach(uuid -> Sponge.getServer().getPlayer(uuid).ifPresent(this::Rain));
                     }
                 })
-                .submit(CrazyFeet.getInstance());
+                .submit(this);
     }
 
 	// this here is basically so i can test and do a bit of math
