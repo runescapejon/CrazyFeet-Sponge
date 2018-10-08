@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CrazyListener {
+	private GameRegistry gameRegistry = Sponge.getRegistry();
 	// It's seem getPosition().add(0, 3, 0,) seem the right location for the
 	// Head
 	// - tested 2.5 is right
@@ -94,33 +95,7 @@ public class CrazyListener {
 
 	private void applyParticle (World world,Player player,ParticleType pType,boolean isNote,double bodyType) {
 		Random randomGenerator = new Random();
-		ArrayList<NotePitch> noteTypes = new ArrayList<>();
-		noteTypes.add(NotePitches.A1);
-		noteTypes.add(NotePitches.A2);
-		noteTypes.add(NotePitches.A_SHARP1);
-		noteTypes.add(NotePitches.A_SHARP2);
-		noteTypes.add(NotePitches.B1);
-		noteTypes.add(NotePitches.B2);
-		noteTypes.add(NotePitches.C1);
-		noteTypes.add(NotePitches.C2);
-		noteTypes.add(NotePitches.C_SHARP1);
-		noteTypes.add(NotePitches.C_SHARP2);
-		noteTypes.add(NotePitches.D1);
-		noteTypes.add(NotePitches.D2);
-		noteTypes.add(NotePitches.D_SHARP1);
-		noteTypes.add(NotePitches.D_SHARP2);
-		noteTypes.add(NotePitches.E1);
-		noteTypes.add(NotePitches.E2);
-		noteTypes.add(NotePitches.F1);
-		noteTypes.add(NotePitches.F2);
-		noteTypes.add(NotePitches.F_SHARP0);
-		noteTypes.add(NotePitches.F_SHARP1);
-		noteTypes.add(NotePitches.F_SHARP2);
-		noteTypes.add(NotePitches.D_SHARP2);
-		noteTypes.add(NotePitches.G0);
-		noteTypes.add(NotePitches.G1);
-		noteTypes.add(NotePitches.G_SHARP0);
-		noteTypes.add(NotePitches.G_SHARP1);
+		ArrayList<NotePitch> noteTypes = new ArrayList<>(getGameRegistry().getAllOf(NotePitch.class));
 		if (isNote) {
 			int index = randomGenerator.nextInt(noteTypes.size());
 			world.spawnParticles(ParticleEffect.builder().type(pType)
@@ -130,5 +105,8 @@ public class CrazyListener {
 			world.spawnParticles(ParticleEffect.builder().type(pType).build(),
 					player.getLocation().getPosition().add(0,bodyType,0));
 		}
+	}
+		private GameRegistry getGameRegistry () {
+		return gameRegistry;
 	}
 }
