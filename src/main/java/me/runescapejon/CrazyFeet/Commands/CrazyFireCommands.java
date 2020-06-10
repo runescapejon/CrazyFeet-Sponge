@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
+import me.runescapejon.CrazyFeet.utils.ConfigUtils;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
@@ -24,17 +25,34 @@ public class CrazyFireCommands implements CommandExecutor {
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazyfire")) {
-				if (cFire.contains(player.getUniqueId())) {
-					cFire.remove(player.getUniqueId());
-					player.sendMessage(
-							LanguageUtils.getText("crazyFireDisabled", new Pair<>("%PLAYER%", player.getName())));
-					return CommandResult.success();
-				} else {
-					cFire.add(player.getUniqueId());
-					player.sendMessage(
-							LanguageUtils.getText("crazyFireEnabled", new Pair<>("%PLAYER%", player.getName())));
-					return CommandResult.success();
+				if (ConfigUtils.onetimeparticle) {
+						if (cFire.contains(player.getUniqueId())) {
+							cFire.remove(player.getUniqueId());
+							player.sendMessage(LanguageUtils.getText("crazyFireDisabled",
+									new Pair<>("%PLAYER%", player.getName())));
+							return CommandResult.success();
+						} else {
+							CrazyFeet.clearPlayer(player);
+							cFire.add(player.getUniqueId());
+							player.sendMessage(LanguageUtils.getText("crazyFireEnabled",
+									new Pair<>("%PLAYER%", player.getName())));
+							return CommandResult.success();
+						}
 				}
+				if (ConfigUtils.onetimeparticle == false) {
+					if (cFire.contains(player.getUniqueId())) {
+						cFire.remove(player.getUniqueId());
+						player.sendMessage(
+								LanguageUtils.getText("crazyFireDisabled", new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					} else {
+						cFire.add(player.getUniqueId());
+						player.sendMessage(
+								LanguageUtils.getText("crazyFireEnabled", new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					}
+				}
+
 			}
 		} else if (src.hasPermission("CrazyFeet.crazyfireother")) {
 			Player targ = target.get();

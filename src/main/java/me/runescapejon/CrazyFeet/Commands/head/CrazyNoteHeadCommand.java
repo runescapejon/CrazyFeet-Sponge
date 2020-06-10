@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
+import me.runescapejon.CrazyFeet.utils.ConfigUtils;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
@@ -31,12 +32,26 @@ public class CrazyNoteHeadCommand implements CommandExecutor {
 							LanguageUtils.getText("crazyNoteHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
+					CrazyFeet.clearPlayer(player);
 					cNoteHead.add(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyNoteHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
+				if (ConfigUtils.onetimeparticle == false) {
+					if (cNoteHead.contains(player.getUniqueId())) {
+						cNoteHead.remove(player.getUniqueId());
+						player.sendMessage(
+								LanguageUtils.getText("crazyNoteHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					} else {
+						cNoteHead.add(player.getUniqueId());
+						player.sendMessage(
+								LanguageUtils.getText("crazyNoteHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					}
+		}
 		} else if (src.hasPermission("CrazyFeet.crazynoteheadother")) {
 			Player targ = target.get();
 

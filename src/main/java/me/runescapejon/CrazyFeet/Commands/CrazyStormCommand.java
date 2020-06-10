@@ -12,6 +12,7 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
+import me.runescapejon.CrazyFeet.utils.ConfigUtils;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 
@@ -25,6 +26,21 @@ public class CrazyStormCommand  implements CommandExecutor {
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazystorm")) {
+				if (ConfigUtils.onetimeparticle) {
+					if (cStorm.contains(player.getUniqueId())) {
+						cStorm.remove(player.getUniqueId());
+						player.sendMessage(LanguageUtils.getText("crazyStormDisabled",
+								new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					} else {
+						CrazyFeet.clearPlayer(player);
+						cStorm.add(player.getUniqueId());
+						player.sendMessage(LanguageUtils.getText("crazyStormEnabled",
+								new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					}
+			}
+			if (ConfigUtils.onetimeparticle == false) {
 				if (cStorm.contains(player.getUniqueId())) {
 					cStorm.remove(player.getUniqueId());
 					player.sendMessage(
@@ -37,6 +53,8 @@ public class CrazyStormCommand  implements CommandExecutor {
 					return CommandResult.success();
 				}
 			}
+
+		}
 		} else if (src.hasPermission("CrazyFeet.crazystormother")) {
 			Player targ = target.get();
 

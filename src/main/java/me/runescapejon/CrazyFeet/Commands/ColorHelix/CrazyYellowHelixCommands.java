@@ -18,14 +18,7 @@ import me.runescapejon.CrazyFeet.utils.Pair;
 public class CrazyYellowHelixCommands implements CommandExecutor {
 	@SuppressWarnings("unchecked")
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		final ArrayList<UUID> credhelix = CrazyFeet.getInstance().getCrazyRedHelix();
-		final ArrayList<UUID> cPurplehelix = CrazyFeet.getInstance().getCrazyPurpleHelix();
-		final ArrayList<UUID> corangehelix = CrazyFeet.getInstance().getCrazyOrangeHelix();
-		final ArrayList<UUID> cGreenhelix = CrazyFeet.getInstance().getCrazyGreenHelix();
-		final ArrayList<UUID> cBrownhelix = CrazyFeet.getInstance().getCrazyBrownHelix();
-		final ArrayList<UUID> cwhitehelix = CrazyFeet.getInstance().getCrazyWhiteHelix();
 		final ArrayList<UUID> cYellowhelix = CrazyFeet.getInstance().getCrazyYellowHelix();
-		final ArrayList<UUID> cbluehelix = CrazyFeet.getInstance().getCrazyBlueHelix();
 
 		Optional<Player> target = args.getOne("target");
 
@@ -38,14 +31,8 @@ public class CrazyYellowHelixCommands implements CommandExecutor {
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
+					CrazyFeet.clearPlayer(player);
 					cYellowhelix.add(player.getUniqueId());
-					cGreenhelix.remove(player.getUniqueId());
-					corangehelix.remove(player.getUniqueId());
-					credhelix.remove(player.getUniqueId());
-					cPurplehelix.remove(player.getUniqueId());
-					cbluehelix.remove(player.getUniqueId());
-					cBrownhelix.remove(player.getUniqueId());
-					cwhitehelix.remove(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyYellowHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
@@ -63,12 +50,6 @@ public class CrazyYellowHelixCommands implements CommandExecutor {
 				return CommandResult.success();
 			} else {
 				cYellowhelix.add(targ.getUniqueId());
-				cBrownhelix.remove(targ.getUniqueId());
-				cGreenhelix.remove(targ.getUniqueId());
-				corangehelix.remove(targ.getUniqueId());
-				cPurplehelix.remove(targ.getUniqueId());
-				credhelix.remove(targ.getUniqueId());
-				cwhitehelix.remove(targ.getUniqueId());
 				targ.sendMessage(LanguageUtils.getText("crazyYellowHelixEnabledByPlayer",
 						new Pair<>("%PLAYER%", src.getName())));
 				src.sendMessage(LanguageUtils.getText("crazyYellowHelixEnabledForPlayer",

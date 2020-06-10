@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
+import me.runescapejon.CrazyFeet.utils.ConfigUtils;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
@@ -24,6 +25,21 @@ public class CrazyPearlCommands implements CommandExecutor {
 		if (!target.isPresent()) {
 			Player player = (Player) src;
 			if (player.hasPermission("CrazyFeet.crazypearl")) {
+				if (ConfigUtils.onetimeparticle) {
+					if (cPearl.contains(player.getUniqueId())) {
+						cPearl.remove(player.getUniqueId());
+						player.sendMessage(LanguageUtils.getText("crazyPearlDisabled",
+								new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					} else {
+						CrazyFeet.clearPlayer(player);
+						cPearl.add(player.getUniqueId());
+						player.sendMessage(LanguageUtils.getText("crazyPearlEnabled",
+								new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					}
+			}
+			if (ConfigUtils.onetimeparticle == false) {
 				if (cPearl.contains(player.getUniqueId())) {
 					cPearl.remove(player.getUniqueId());
 					player.sendMessage(
@@ -36,6 +52,8 @@ public class CrazyPearlCommands implements CommandExecutor {
 					return CommandResult.success();
 				}
 			}
+
+		}
 		} else if (src.hasPermission("CrazyFeet.crazypearlother")) {
 			Player targ = target.get();
 

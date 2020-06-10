@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
+import me.runescapejon.CrazyFeet.utils.ConfigUtils;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
@@ -31,15 +32,27 @@ public class CrazyHeartHeadCommand implements CommandExecutor {
 							LanguageUtils.getText("crazyHeartHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
+					CrazyFeet.clearPlayer(player);
 					cHeartHead.add(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyHeartHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				}
 			}
+				if (ConfigUtils.onetimeparticle == false) {
+					if (cHeartHead.contains(player.getUniqueId())) {
+						cHeartHead.remove(player.getUniqueId());
+						player.sendMessage(
+								LanguageUtils.getText("crazyHeartHeadDisabled", new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					} else {
+						cHeartHead.add(player.getUniqueId());
+						player.sendMessage(
+								LanguageUtils.getText("crazyHeartHeadEnabled", new Pair<>("%PLAYER%", player.getName())));
+						return CommandResult.success();
+					}
 		}
-
-		else if (src.hasPermission("CrazyFeet.crazyheartheadother")) {
+		} else if (src.hasPermission("CrazyFeet.crazyheartheadother")) {
 			Player targ = target.get();
 
 			if (cHeartHead.contains(targ.getUniqueId())) {
