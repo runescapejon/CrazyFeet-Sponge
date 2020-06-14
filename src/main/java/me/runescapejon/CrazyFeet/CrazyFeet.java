@@ -79,18 +79,17 @@ public class CrazyFeet {
 	private static ArrayList<UUID> Storm = new ArrayList<>();
 	private static CrazyFeet instance;
 	@SuppressWarnings("unused")
-	private ConfigUtils  configoptions;
+	private ConfigUtils configoptions;
 	private CrazyFeet pl;
-	private GuiceObjectMapperFactory factory; 
-	
- 
+	private GuiceObjectMapperFactory factory;
+
 	@Inject
 	public CrazyFeet(Logger logger, @ConfigDir(sharedRoot = false) File configDir, GuiceObjectMapperFactory factory) {
 		this.logger = logger;
 		this.configDirectory = configDir;
 		this.factory = factory;
 	}
-	
+
 	public static CrazyFeet getInstance() {
 		return instance;
 	}
@@ -103,7 +102,6 @@ public class CrazyFeet {
 	private File configDirectory;
 
 	private Config languageConfig = new Config("language.conf", false);
- 
 
 	@Listener
 	public void onConstruct(GameConstructionEvent event) {
@@ -125,7 +123,7 @@ public class CrazyFeet {
 
 	@Listener
 	public void onGamePreInitialization(GamePreInitializationEvent event) {
- 
+
 		loadConfig();
 	}
 
@@ -443,6 +441,7 @@ public class CrazyFeet {
 				.executor(new CrazyStormCommand()).build();
 		Sponge.getCommandManager().register(this, CrazystormSpec, "crazystorm");
 	}
+
 	public boolean loadConfig() {
 		if (!configDirectory.exists()) {
 			configDirectory.mkdirs();
@@ -466,10 +465,11 @@ public class CrazyFeet {
 			return false;
 		}
 	}
- 	public GuiceObjectMapperFactory getFactory() {
+
+	public GuiceObjectMapperFactory getFactory() {
 		return factory;
 	}
-	
+
 	public Logger getLogger() {
 		return logger;
 	}
@@ -608,6 +608,34 @@ public class CrazyFeet {
 
 	public ArrayList<UUID> getCrazyStorm() {
 		return Storm;
+
+	}
+
+	public static void clearHelixPlayer(Player player) {
+		if (Brownhelix.contains(player.getUniqueId())) {
+			Brownhelix.remove(player.getUniqueId());
+		}
+		if (Yellowhelix.contains(player.getUniqueId())) {
+			Yellowhelix.remove(player.getUniqueId());
+		}
+		if (Orangehelix.contains(player.getUniqueId())) {
+			Orangehelix.remove(player.getUniqueId());
+		}
+		if (Purplehelix.contains(player.getUniqueId())) {
+			Purplehelix.remove(player.getUniqueId());
+		}
+		if (Redhelix.contains(player.getUniqueId())) {
+			Redhelix.remove(player.getUniqueId());
+		}
+		if (Greenhelix.contains(player.getUniqueId())) {
+			Greenhelix.remove(player.getUniqueId());
+		}
+		if (whitehelix.contains(player.getUniqueId())) {
+			whitehelix.remove(player.getUniqueId());
+		}
+		if (bluehelix.contains(player.getUniqueId())) {
+			bluehelix.remove(player.getUniqueId());
+		}
 	}
 
 	public static void clearPlayer(Player player) {

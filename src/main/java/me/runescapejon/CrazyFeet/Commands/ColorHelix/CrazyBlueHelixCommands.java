@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
+import me.runescapejon.CrazyFeet.utils.ConfigUtils;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 import org.spongepowered.api.command.CommandException;
@@ -31,7 +32,12 @@ public class CrazyBlueHelixCommands implements CommandExecutor {
 							LanguageUtils.getText("crazyBlueHelixDisabled", new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
+					if (ConfigUtils.onetimeparticle) {
 					CrazyFeet.clearPlayer(player);
+					}
+					if (ConfigUtils.onetimeparticle == false) {
+					CrazyFeet.clearHelixPlayer(player);
+					}
 					cbluehelix.add(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyBlueHelixEnabled", new Pair<>("%PLAYER%", player.getName())));

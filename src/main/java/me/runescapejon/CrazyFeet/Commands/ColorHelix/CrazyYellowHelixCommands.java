@@ -12,6 +12,7 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 
 import me.runescapejon.CrazyFeet.CrazyFeet;
+import me.runescapejon.CrazyFeet.utils.ConfigUtils;
 import me.runescapejon.CrazyFeet.utils.LanguageUtils;
 import me.runescapejon.CrazyFeet.utils.Pair;
 
@@ -31,7 +32,12 @@ public class CrazyYellowHelixCommands implements CommandExecutor {
 							new Pair<>("%PLAYER%", player.getName())));
 					return CommandResult.success();
 				} else {
+					if (ConfigUtils.onetimeparticle) {
 					CrazyFeet.clearPlayer(player);
+					}
+					if (ConfigUtils.onetimeparticle == false) {
+					CrazyFeet.clearHelixPlayer(player);
+					}
 					cYellowhelix.add(player.getUniqueId());
 					player.sendMessage(
 							LanguageUtils.getText("crazyYellowHelixEnabled", new Pair<>("%PLAYER%", player.getName())));
