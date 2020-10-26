@@ -51,7 +51,7 @@ import me.runescapejon.CrazyFeet.Commands.head.CrazySmokeHeadCommand;
 import me.runescapejon.CrazyFeet.Commands.head.CrazyWitchHeadCommand;
 
 @Plugin(id = "crazyfeetsponge", name = "CrazyFeetSponge", authors = {
-		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.16")
+		"runescapejon" }, description = "CrazyFeet Ported over to Sponge", version = "1.17")
 public class CrazyFeet {
 	private static ArrayList<UUID> crazyFireHead = new ArrayList<>();
 	private static ArrayList<UUID> crazyHeartHead = new ArrayList<>();
@@ -121,15 +121,11 @@ public class CrazyFeet {
 		return plugin;
 	}
 
-	@Listener
-	public void onGamePreInitialization(GamePreInitializationEvent event) {
-
-		loadConfig();
-	}
 
 	@Listener
 	public void onGameInitlization(GameInitializationEvent event) {
 		pl = this;
+		loadConfig();
 		// CrazyFeet Register
 		HashMap<List<String>, CommandSpec> subcommands = new HashMap<>();
 		subcommands.put(Collections.singletonList("admin"),
